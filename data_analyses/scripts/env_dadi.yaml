@@ -1,0 +1,9 @@
+name: env_dadi
+channels:
+    - conda-forge
+dependencies:
+    - numpy
+    - scipy
+    - nlopt
+    - matplotlib
+    - dadi

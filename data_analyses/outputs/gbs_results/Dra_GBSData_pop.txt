@@ -1,0 +1,5 @@
+Species	Pop	Fis	SelfRate
+D_fladnizensis	Oppdal	1	1
+D_nivalis	Dovre	0.47477773	0.643863438
+D_nivalis	Svalbard_Pernille	0.983336897	0.991598451
+D_subcapitata	Svalbard_Pernille	1	1

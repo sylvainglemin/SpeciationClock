@@ -1,0 +1,1000 @@
+Species	ID	MaternalPOP	PaternalPOP	Maternal_popPollenfertility 	Paternal_popPollenfertilty 	Maternal_SeedGermination	Paternal_SeedGermination	Mean_FsT	Mean_Dxy	New_Mean_Dxy	HO-MatPop	He-MatPop	Fis-MatPop	Selfing-MatPop	HO-PatPop	He-PatPop	Fis-PatPop	Selfing-PatPop	FertilePollen	TotalPollen	GerminatedSeed	TotalSownSeed
+Arabis alpina	ES116 X GR176-2	Spain	Greece					0.668	0.440	0.00178	0.059	0.082	0.278	0.435	0.179	0.236	0.242	0.390	218	236	512	54
+Arabis alpina	ES116 X GR176-3	Spain	Greece					0.668	0.440	0.00178	0.059	0.082	0.278	0.435	0.179	0.236	0.242	0.390	1461	1486	512	54
+Arabis alpina	ES116 X GR176-4	Spain	Greece					0.668	0.440	0.00178	0.059	0.082	0.278	0.435	0.179	0.236	0.242	0.390	371	389	512	54
+Arabis alpina	ES116 X GR176-7	Spain	Greece					0.668	0.440	0.00178	0.059	0.082	0.278	0.435	0.179	0.236	0.242	0.390	967	1005	512	54
+Arabis alpina	ES116 X GR176-9	Spain	Greece					0.668	0.440	0.00178	0.059	0.082	0.278	0.435	0.179	0.236	0.242	0.390	381	383	512	54
+Arabis alpina	ES116 X GR176-10	Spain	Greece					0.668	0.440	0.00178	0.059	0.082	0.278	0.435	0.179	0.236	0.242	0.390	95	118	512	54
+Arabis alpina	ES116 X GR176-15	Spain	Greece					0.668	0.440	0.00178	0.059	0.082	0.278	0.435	0.179	0.236	0.242	0.390	225	227	512	54
+Arabis alpina	ES116 X GR176-16	Spain	Greece					0.668	0.440	0.00178	0.059	0.082	0.278	0.435	0.179	0.236	0.242	0.390	189	206	512	54
+Arabis alpina	ES116 X GR176-21	Spain	Greece					0.668	0.440	0.00178	0.059	0.082	0.278	0.435	0.179	0.236	0.242	0.390	175	176	512	54
+Arabis alpina	ES116 X GR176-22	Spain	Greece					0.668	0.440	0.00178	0.059	0.082	0.278	0.435	0.179	0.236	0.242	0.390	300	302	512	54
+Arabis alpina	ES116 X GR176-28	Spain	Greece					0.668	0.440	0.00178	0.059	0.082	0.278	0.435	0.179	0.236	0.242	0.390	636	649	512	54
+Arabis alpina	ES116 X GR176-33	Spain	Greece					0.668	0.440	0.00178	0.059	0.082	0.278	0.435	0.179	0.236	0.242	0.390	650	709	512	54
+Arabis alpina	ES116 X GR176-36	Spain	Greece					0.668	0.440	0.00178	0.059	0.082	0.278	0.435	0.179	0.236	0.242	0.390	275	277	512	54
+Arabis alpina	ES116 X GR176-37	Spain	Greece					0.668	0.440	0.00178	0.059	0.082	0.278	0.435	0.179	0.236	0.242	0.390	1301	1308	512	54
+Arabis alpina	ES116 X GR176-40	Spain	Greece					0.668	0.440	0.00178	0.059	0.082	0.278	0.435	0.179	0.236	0.242	0.390	337	346	512	54
+Arabis alpina	ES116 X GR176-41	Spain	Greece					0.668	0.440	0.00178	0.059	0.082	0.278	0.435	0.179	0.236	0.242	0.390	156	159	512	54
+Arabis alpina	ES116 X GR176-44	Spain	Greece					0.668	0.440	0.00178	0.059	0.082	0.278	0.435	0.179	0.236	0.242	0.390	714	1152	512	54
+Arabis alpina	ES116 X GR176-46	Spain	Greece					0.668	0.440	0.00178	0.059	0.082	0.278	0.435	0.179	0.236	0.242	0.390	708	749	512	54
+Arabis alpina	ES116 X GR176-48	Spain	Greece					0.668	0.440	0.00178	0.059	0.082	0.278	0.435	0.179	0.236	0.242	0.390	654	675	512	54
+Arabis alpina	GR176 X ES116-2	Greece	Spain					0.668	0.440	0.00178	0.179	0.236	0.242	0.390	0.059	0.082	0.278	0.435	408	426	260	22
+Arabis alpina	GR176 X ES116-4	Greece	Spain					0.668	0.440	0.00178	0.179	0.236	0.242	0.390	0.059	0.082	0.278	0.435	154	158	270	22
+Arabis alpina	GR176 X ES116-6	Greece	Spain					0.668	0.440	0.00178	0.179	0.236	0.242	0.390	0.059	0.082	0.278	0.435	212	224	270	22
+Arabis alpina	GR176 X ES116-15	Greece	Spain					0.668	0.440	0.00178	0.179	0.236	0.242	0.390	0.059	0.082	0.278	0.435	191	196	270	22
+Arabis alpina	GR176 X ES116-18	Greece	Spain					0.668	0.440	0.00178	0.179	0.236	0.242	0.390	0.059	0.082	0.278	0.435	101	108	270	22
+Arabis alpina	GR176 X ES116-21	Greece	Spain					0.668	0.440	0.00178	0.179	0.236	0.242	0.390	0.059	0.082	0.278	0.435	469	486	270	22
+Arabis auriculata	SpArc-GR-158-02xSpArc-ES-118	Greece	Spain					0.951	0.828	0.00282	0.003	0.041	0.923	0.960	0.005	0.045	0.893	0.943	81	172	NA	NA
+Arabis auriculata	SpArc-GR-158-02xSpArc-ES-118	Greece	Spain					0.951	0.828	0.00282	0.003	0.041	0.923	0.960	0.005	0.045	0.893	0.943	134	197	NA	NA
+Arabis auriculata	SpArc-GR-158-02xSpArc-ES-118	Greece	Spain					0.951	0.828	0.00282	0.003	0.041	0.923	0.960	0.005	0.045	0.893	0.943	25	128	NA	NA
+Arabis auriculata	SpArc-GR-158-02xSpArc-ES-118	Greece	Spain					0.951	0.828	0.00282	0.003	0.041	0.923	0.960	0.005	0.045	0.893	0.943	98	144	NA	NA
+Arabis auriculata	SpArc-GR-158-02xSpArc-ES-118	Greece	Spain					0.951	0.828	0.00282	0.003	0.041	0.923	0.960	0.005	0.045	0.893	0.943	67	121	NA	NA
+Arabis auriculata	SpArc-GR-158-02xSpArc-ES-118	Greece	Spain					0.951	0.828	0.00282	0.003	0.041	0.923	0.960	0.005	0.045	0.893	0.943	21	112	NA	NA
+Arabis auriculata	SpArc-GR-158-02xSpArc-ES-118	Greece	Spain					0.951	0.828	0.00282	0.003	0.041	0.923	0.960	0.005	0.045	0.893	0.943	28	126	NA	NA
+Arabis auriculata	SpArc-GR-158-02xSpArc-ES-118	Greece	Spain					0.951	0.828	0.00282	0.003	0.041	0.923	0.960	0.005	0.045	0.893	0.943	50	115	NA	NA
+Arabis auriculata	SpArc-GR-158-02xSpArc-ES-118	Greece	Spain					0.951	0.828	0.00282	0.003	0.041	0.923	0.960	0.005	0.045	0.893	0.943	61	110	NA	NA
+Arabis auriculata	SpArc-GR-158-02xSpArc-ES-118	Greece	Spain					0.951	0.828	0.00282	0.003	0.041	0.923	0.960	0.005	0.045	0.893	0.943	64	112	NA	NA
+Arabis auriculata	SpArc-ES-118-12xSpArc-GR-158	Spain	Greece					0.951	0.828	0.00282	0.005	0.045	0.893	0.943	0.003	0.041	0.923	0.960	67	120	33	4
+Arabis auriculata	SpArc-ES-118-12xSpArc-GR-158	Spain	Greece					0.951	0.828	0.00282	0.005	0.045	0.893	0.943	0.003	0.041	0.923	0.960	67	128	33	4
+Arabis auriculata	SpArc-ES-118-12xSpArc-GR-158	Spain	Greece					0.951	0.828	0.00282	0.005	0.045	0.893	0.943	0.003	0.041	0.923	0.960	42	109	33	4
+Arabis auriculata	SpArc-ES-118-12xSpArc-GR-158	Spain	Greece					0.951	0.828	0.00282	0.005	0.045	0.893	0.943	0.003	0.041	0.923	0.960	51	118	33	4
+Arabis auriculata	SpArc-ES-118-08xSpArc-GR-158	Spain	Greece					0.951	0.828	0.00282	0.005	0.045	0.893	0.943	0.003	0.041	0.923	0.960	59	115	NA	NA
+Arabis auriculata	SpArc-ES-118-08xSpArc-GR-158	Spain	Greece					0.951	0.828	0.00282	0.005	0.045	0.893	0.943	0.003	0.041	0.923	0.960	47	105	NA	NA
+Arabis auriculata	SpArc-ES-118-08xSpArc-GR-158	Spain	Greece					0.951	0.828	0.00282	0.005	0.045	0.893	0.943	0.003	0.041	0.923	0.960	31	118	NA	NA
+Arabis auriculata	SpArc-ES-118-08xSpArc-GR-158	Spain	Greece					0.951	0.828	0.00282	0.005	0.045	0.893	0.943	0.003	0.041	0.923	0.960	81	131	NA	NA
+Arabis turrita	ES083 x GR187-02	Spain	Greece					0.944	0.799	0.00310	0.002	0.009	0.831	0.908	0.014	0.086	0.836	0.911	268	355	560	74
+Arabis turrita	ES083 x GR187-04	Spain	Greece					0.944	0.799	0.00310	0.002	0.009	0.831	0.908	0.014	0.086	0.836	0.911	1328	1594	560	74
+Arabis turrita	ES083 x GR187-05	Spain	Greece					0.944	0.799	0.00310	0.002	0.009	0.831	0.908	0.014	0.086	0.836	0.911	352	441	560	74
+Arabis turrita	ES083 x GR187-07	Spain	Greece					0.944	0.799	0.00310	0.002	0.009	0.831	0.908	0.014	0.086	0.836	0.911	1034	1350	560	74
+Arabis turrita	ES083 x GR187-08	Spain	Greece					0.944	0.799	0.00310	0.002	0.009	0.831	0.908	0.014	0.086	0.836	0.911	183	247	560	74
+Arabis turrita	ES083 x GR187-09	Spain	Greece					0.944	0.799	0.00310	0.002	0.009	0.831	0.908	0.014	0.086	0.836	0.911	1170	1454	560	74
+Arabis turrita	ES083 x GR187-10	Spain	Greece					0.944	0.799	0.00310	0.002	0.009	0.831	0.908	0.014	0.086	0.836	0.911	307	375	560	74
+Arabis turrita	ES083 x GR187-11	Spain	Greece					0.944	0.799	0.00310	0.002	0.009	0.831	0.908	0.014	0.086	0.836	0.911	1244	1519	560	74
+Arabis turrita	ES083 x GR187-13	Spain	Greece					0.944	0.799	0.00310	0.002	0.009	0.831	0.908	0.014	0.086	0.836	0.911	1242	1518	560	74
+Arabis turrita	ES083 x GR187-15	Spain	Greece					0.944	0.799	0.00310	0.002	0.009	0.831	0.908	0.014	0.086	0.836	0.911	23	143	560	74
+Arabis turrita	ES083 x GR187-17	Spain	Greece					0.944	0.799	0.00310	0.002	0.009	0.831	0.908	0.014	0.086	0.836	0.911	1141	1391	560	74
+Arabis turrita	ES083 x GR187-18	Spain	Greece					0.944	0.799	0.00310	0.002	0.009	0.831	0.908	0.014	0.086	0.836	0.911	648	878	560	74
+Arabis turrita	ES083 x GR187-19	Spain	Greece					0.944	0.799	0.00310	0.002	0.009	0.831	0.908	0.014	0.086	0.836	0.911	921	1204	560	74
+Arabis turrita	ES083 x GR187-20	Spain	Greece					0.944	0.799	0.00310	0.002	0.009	0.831	0.908	0.014	0.086	0.836	0.911	328	438	560	74
+Arabis turrita	ES083 x GR187-21	Spain	Greece					0.944	0.799	0.00310	0.002	0.009	0.831	0.908	0.014	0.086	0.836	0.911	1317	1660	560	74
+Arabis turrita	ES083 x GR187-22	Spain	Greece					0.944	0.799	0.00310	0.002	0.009	0.831	0.908	0.014	0.086	0.836	0.911	1362	1673	560	74
+Arabis turrita	ES083 x GR187-24	Spain	Greece					0.944	0.799	0.00310	0.002	0.009	0.831	0.908	0.014	0.086	0.836	0.911	432	554	560	74
+Arabis turrita	ES083 x GR187-25	Spain	Greece					0.944	0.799	0.00310	0.002	0.009	0.831	0.908	0.014	0.086	0.836	0.911	232	296	560	74
+Arabis turrita	ES083 x GR187-27	Spain	Greece					0.944	0.799	0.00310	0.002	0.009	0.831	0.908	0.014	0.086	0.836	0.911	370	455	560	74
+Arabis turrita	ES083 x GR187-28	Spain	Greece					0.944	0.799	0.00310	0.002	0.009	0.831	0.908	0.014	0.086	0.836	0.911	248	326	560	74
+Arabis turrita	ES083 x GR187-29	Spain	Greece					0.944	0.799	0.00310	0.002	0.009	0.831	0.908	0.014	0.086	0.836	0.911	921	1204	560	74
+Arabis turrita	ES083 x GR187-31	Spain	Greece					0.944	0.799	0.00310	0.002	0.009	0.831	0.908	0.014	0.086	0.836	0.911	577	775	560	74
+Bunias erucago	SpArc-ES-078-20xSpArc-KT-232-01	Spain	Greece					0.208	0.310	0.00133	0.214	0.257	0.169	0.289	0.246	0.242	-0.017	-0.035	588	654	18	2
+Bunias erucago	SpArc-ES-078-20xSpArc-KT-232-01	Spain	Greece					0.208	0.310	0.00133	0.214	0.257	0.169	0.289	0.246	0.242	-0.017	-0.035	686	866	18	2
+Cakile maritima ssp. maritima	ES079 x GR195-1	Spain	Greece					0.247	0.288	0.00116	0.1701	0.2183	0.2207	0.3616	0.1938	0.2235	0.1330	0.2347	86	124	10	6
+Cakile maritima ssp. maritima	ES079 x GR195-2	Spain	Greece					0.247	0.288	0.00116	0.1701	0.2183	0.2207	0.3616	0.1938	0.2235	0.1330	0.2347	1024	1050	10	6
+Cakile maritima ssp. maritima	ES079 x GR195-3	Spain	Greece					0.247	0.288	0.00116	0.1701	0.2183	0.2207	0.3616	0.1938	0.2235	0.1330	0.2347	298	310	10	6
+Cakile maritima ssp. maritima	ES079 x GR195-4	Spain	Greece					0.247	0.288	0.00116	0.1701	0.2183	0.2207	0.3616	0.1938	0.2235	0.1330	0.2347	454	464	10	6
+Cakile maritima ssp. maritima	ES079 x GR195-5	Spain	Greece					0.247	0.288	0.00116	0.1701	0.2183	0.2207	0.3616	0.1938	0.2235	0.1330	0.2347	314	330	10	6
+Cakile maritima ssp. maritima	GR195 x ES079-1	Greece	Spain					0.247	0.288	0.00116	0.1938	0.2235	0.1330	0.2347	0.1701	0.2183	0.2207	0.3616	515	523	4	1
+Cardamine hirsuta	SpArc-ES-008-03xSpArc-GR-156	Spain	Greece					0.755	0.577	0.00232	0.0109	0.1056	0.8969	0.9456	0.0030	0.1837	0.9838	0.9918	200	205	NA	NA
+Cardamine hirsuta	SpArc-ES-008-03xSpArc-GR-156	Spain	Greece					0.755	0.577	0.00232	0.0109	0.1056	0.8969	0.9456	0.0030	0.1837	0.9838	0.9918	200	201	NA	NA
+Cardamine hirsuta	SpArc-ES-008-03xSpArc-GR-156	Spain	Greece					0.755	0.577	0.00232	0.0109	0.1056	0.8969	0.9456	0.0030	0.1837	0.9838	0.9918	200	208	NA	NA
+Cardamine hirsuta	SpArc-ES-008-03xSpArc-GR-156	Spain	Greece					0.755	0.577	0.00232	0.0109	0.1056	0.8969	0.9456	0.0030	0.1837	0.9838	0.9918	200	203	NA	NA
+Cardamine hirsuta	SpArc-ES-008-06xSpArc-GR-156	Spain	Greece					0.755	0.577	0.00232	0.0109	0.1056	0.8969	0.9456	0.0030	0.1837	0.9838	0.9918	204	211	NA	NA
+Cardamine hirsuta	SpArc-ES-008-06xSpArc-GR-156	Spain	Greece					0.755	0.577	0.00232	0.0109	0.1056	0.8969	0.9456	0.0030	0.1837	0.9838	0.9918	63	103	NA	NA
+Cardamine hirsuta	SpArc-ES-008-06xSpArc-GR-156	Spain	Greece					0.755	0.577	0.00232	0.0109	0.1056	0.8969	0.9456	0.0030	0.1837	0.9838	0.9918	200	200	NA	NA
+Cardamine hirsuta	SpArc-ES-008-06xSpArc-GR-156	Spain	Greece					0.755	0.577	0.00232	0.0109	0.1056	0.8969	0.9456	0.0030	0.1837	0.9838	0.9918	214	247	NA	NA
+Cardamine hirsuta	SpArc-ES-008-06xSpArc-GR-156	Spain	Greece					0.755	0.577	0.00232	0.0109	0.1056	0.8969	0.9456	0.0030	0.1837	0.9838	0.9918	229	252	NA	NA
+Cardamine hirsuta	SpArc-ES-008-06xSpArc-GR-156	Spain	Greece					0.755	0.577	0.00232	0.0109	0.1056	0.8969	0.9456	0.0030	0.1837	0.9838	0.9918	200	206	NA	NA
+Cardamine hirsuta	SpArc-ES-008-13xSpArc-GR-156	Spain	Greece					0.755	0.577	0.00232	0.0109	0.1056	0.8969	0.9456	0.0030	0.1837	0.9838	0.9918	250	273	NA	NA
+Cardamine hirsuta	SpArc-ES-008-13xSpArc-GR-156	Spain	Greece					0.755	0.577	0.00232	0.0109	0.1056	0.8969	0.9456	0.0030	0.1837	0.9838	0.9918	248	275	NA	NA
+Cardamine hirsuta	SpArc-ES-008-13xSpArc-GR-156	Spain	Greece					0.755	0.577	0.00232	0.0109	0.1056	0.8969	0.9456	0.0030	0.1837	0.9838	0.9918	220	241	NA	NA
+Cardamine hirsuta	SpArc-ES-008-13xSpArc-GR-156	Spain	Greece					0.755	0.577	0.00232	0.0109	0.1056	0.8969	0.9456	0.0030	0.1837	0.9838	0.9918	220	240	NA	NA
+Cardamine hirsuta	SpArc-ES-008-13xSpArc-GR-156	Spain	Greece					0.755	0.577	0.00232	0.0109	0.1056	0.8969	0.9456	0.0030	0.1837	0.9838	0.9918	197	216	NA	NA
+Cardamine hirsuta	SpArc-GR-156-04xSpArc-ES-008	Greece	Spain					0.755	0.577	0.00232	0.0030	0.1837	0.9838	0.9918	0.0109	0.1056	0.8969	0.9456	198	206	NA	NA
+Cardamine hirsuta	SpArc-GR-156-04xSpArc-ES-008	Greece	Spain					0.755	0.577	0.00232	0.0030	0.1837	0.9838	0.9918	0.0109	0.1056	0.8969	0.9456	129	137	NA	NA
+Cardamine hirsuta	SpArc-GR-156-04xSpArc-ES-008	Greece	Spain					0.755	0.577	0.00232	0.0030	0.1837	0.9838	0.9918	0.0109	0.1056	0.8969	0.9456	208	224	NA	NA
+Cardamine hirsuta	SpArc-GR-156-04xSpArc-ES-008	Greece	Spain					0.755	0.577	0.00232	0.0030	0.1837	0.9838	0.9918	0.0109	0.1056	0.8969	0.9456	212	226	NA	NA
+Cardamine hirsuta	SpArc-ES-008-06xSpArc-GR-156	Spain	Greece					0.755	0.577	0.00232	0.0109	0.1056	0.8969	0.9456	0.0030	0.1837	0.9838	0.9918	167	168	NA	NA
+Cardamine hirsuta	SpArc-ES-008-06xSpArc-GR-156	Spain	Greece					0.755	0.577	0.00232	0.0109	0.1056	0.8969	0.9456	0.0030	0.1837	0.9838	0.9918	47	48	NA	NA
+Cardamine hirsuta	SpArc-ES-008-06xSpArc-GR-156	Spain	Greece					0.755	0.577	0.00232	0.0109	0.1056	0.8969	0.9456	0.0030	0.1837	0.9838	0.9918	114	120	NA	NA
+Cardamine hirsuta	SpArc-ES-008-06xSpArc-GR-156	Spain	Greece					0.755	0.577	0.00232	0.0109	0.1056	0.8969	0.9456	0.0030	0.1837	0.9838	0.9918	200	204	NA	NA
+Eruca vesicaria	ES121xGR169-1	Spain	Greece					0.255	0.284	0.00112	0.159	0.200	0.206	0.342	0.178	0.230	0.225	0.368	133	238	130	121
+Eruca vesicaria	ES121xGR169-2	Spain	Greece					0.255	0.284	0.00112	0.159	0.200	0.206	0.342	0.178	0.230	0.225	0.368	229	366	130	121
+Eruca vesicaria	ES121xGR169-3	Spain	Greece					0.255	0.284	0.00112	0.159	0.200	0.206	0.342	0.178	0.230	0.225	0.368	119	119	130	121
+Eruca vesicaria	ES121xGR169-4	Spain	Greece					0.255	0.284	0.00112	0.159	0.200	0.206	0.342	0.178	0.230	0.225	0.368	236	270	130	121
+Eruca vesicaria	ES121xGR169-5	Spain	Greece					0.255	0.284	0.00112	0.159	0.200	0.206	0.342	0.178	0.230	0.225	0.368	46	224	130	121
+Eruca vesicaria	ES121xGR169-6	Spain	Greece					0.255	0.284	0.00112	0.159	0.200	0.206	0.342	0.178	0.230	0.225	0.368	58	106	130	121
+Eruca vesicaria	ES121xGR169-7	Spain	Greece					0.255	0.284	0.00112	0.159	0.200	0.206	0.342	0.178	0.230	0.225	0.368	296	347	130	121
+Eruca vesicaria	ES121xGR169-8	Spain	Greece					0.255	0.284	0.00112	0.159	0.200	0.206	0.342	0.178	0.230	0.225	0.368	715	742	130	121
+Eruca vesicaria	ES121xGR169-9	Spain	Greece					0.255	0.284	0.00112	0.159	0.200	0.206	0.342	0.178	0.230	0.225	0.368	339	488	130	121
+Eruca vesicaria	ES121xGR169-10	Spain	Greece					0.255	0.284	0.00112	0.159	0.200	0.206	0.342	0.178	0.230	0.225	0.368	360	366	130	121
+Eruca vesicaria	ES121xGR169-11	Spain	Greece					0.255	0.284	0.00112	0.159	0.200	0.206	0.342	0.178	0.230	0.225	0.368	1033	1046	130	121
+Eruca vesicaria	ES121xGR169-12	Spain	Greece					0.255	0.284	0.00112	0.159	0.200	0.206	0.342	0.178	0.230	0.225	0.368	305	466	130	121
+Eruca vesicaria	ES121xGR169-13	Spain	Greece					0.255	0.284	0.00112	0.159	0.200	0.206	0.342	0.178	0.230	0.225	0.368	132	191	130	121
+Eruca vesicaria	ES121xGR169-14	Spain	Greece					0.255	0.284	0.00112	0.159	0.200	0.206	0.342	0.178	0.230	0.225	0.368	212	532	130	121
+Eruca vesicaria	ES121xGR169-15	Spain	Greece					0.255	0.284	0.00112	0.159	0.200	0.206	0.342	0.178	0.230	0.225	0.368	88	108	130	121
+Eruca vesicaria	ES121xGR169-16	Spain	Greece					0.255	0.284	0.00112	0.159	0.200	0.206	0.342	0.178	0.230	0.225	0.368	120	132	130	121
+Eruca vesicaria	ES121xGR169-17	Spain	Greece					0.255	0.284	0.00112	0.159	0.200	0.206	0.342	0.178	0.230	0.225	0.368	599	680	130	121
+Eruca vesicaria	ES121xGR169-18	Spain	Greece					0.255	0.284	0.00112	0.159	0.200	0.206	0.342	0.178	0.230	0.225	0.368	784	794	130	121
+Eruca vesicaria	ES121xGR169-19	Spain	Greece					0.255	0.284	0.00112	0.159	0.200	0.206	0.342	0.178	0.230	0.225	0.368	227	231	130	121
+Eruca vesicaria	ES121xGR169-20	Spain	Greece					0.255	0.284	0.00112	0.159	0.200	0.206	0.342	0.178	0.230	0.225	0.368	271	275	130	121
+Eruca vesicaria	GR169xES121-1	Greece	Spain					0.255	0.284	0.00112	0.178	0.230	0.225	0.368	0.159	0.200	0.206	0.342	455	590	70	65
+Eruca vesicaria	GR169xES121-2	Greece	Spain					0.255	0.284	0.00112	0.178	0.230	0.225	0.368	0.159	0.200	0.206	0.342	585	594	70	65
+Eruca vesicaria	GR169xES121-3	Greece	Spain					0.255	0.284	0.00112	0.178	0.230	0.225	0.368	0.159	0.200	0.206	0.342	319	367	70	65
+Eruca vesicaria	GR169xES121-4	Greece	Spain					0.255	0.284	0.00112	0.178	0.230	0.225	0.368	0.159	0.200	0.206	0.342	572	624	70	65
+Eruca vesicaria	GR169xES121-5	Greece	Spain					0.255	0.284	0.00112	0.178	0.230	0.225	0.368	0.159	0.200	0.206	0.342	373	428	70	65
+Eruca vesicaria	GR169xES121-6	Greece	Spain					0.255	0.284	0.00112	0.178	0.230	0.225	0.368	0.159	0.200	0.206	0.342	959	985	70	65
+Eruca vesicaria	GR169xES121-7	Greece	Spain					0.255	0.284	0.00112	0.178	0.230	0.225	0.368	0.159	0.200	0.206	0.342	436	573	70	65
+Eruca vesicaria	GR169xES121-8	Greece	Spain					0.255	0.284	0.00112	0.178	0.230	0.225	0.368	0.159	0.200	0.206	0.342	779	808	70	65
+Eruca vesicaria	GR169xES121-9	Greece	Spain					0.255	0.284	0.00112	0.178	0.230	0.225	0.368	0.159	0.200	0.206	0.342	831	859	70	65
+Eruca vesicaria	GR169xES121-10	Greece	Spain					0.255	0.284	0.00112	0.178	0.230	0.225	0.368	0.159	0.200	0.206	0.342	645	790	70	65
+Eruca vesicaria	GR169xES121-11	Greece	Spain					0.255	0.284	0.00112	0.178	0.230	0.225	0.368	0.159	0.200	0.206	0.342	1322	1378	70	65
+Eruca vesicaria	GR169xES121-12	Greece	Spain					0.255	0.284	0.00112	0.178	0.230	0.225	0.368	0.159	0.200	0.206	0.342	171	289	70	65
+Eruca vesicaria	GR169xES121-13	Greece	Spain					0.255	0.284	0.00112	0.178	0.230	0.225	0.368	0.159	0.200	0.206	0.342	183	188	70	65
+Eruca vesicaria	GR169xES121-14	Greece	Spain					0.255	0.284	0.00112	0.178	0.230	0.225	0.368	0.159	0.200	0.206	0.342	1084	1104	70	65
+Eruca vesicaria	GR169xES121-15	Greece	Spain					0.255	0.284	0.00112	0.178	0.230	0.225	0.368	0.159	0.200	0.206	0.342	355	551	70	65
+Eruca vesicaria	GR169xES121-16	Greece	Spain					0.255	0.284	0.00112	0.178	0.230	0.225	0.368	0.159	0.200	0.206	0.342	336	353	70	65
+Eruca vesicaria	GR169xES121-17	Greece	Spain					0.255	0.284	0.00112	0.178	0.230	0.225	0.368	0.159	0.200	0.206	0.342	183	202	70	65
+Eruca vesicaria	GR169xES121-18	Greece	Spain					0.255	0.284	0.00112	0.178	0.230	0.225	0.368	0.159	0.200	0.206	0.342	323	647	70	65
+Eruca vesicaria	GR169xES121-19	Greece	Spain					0.255	0.284	0.00112	0.178	0.230	0.225	0.368	0.159	0.200	0.206	0.342	315	338	70	65
+Eruca vesicaria	GR169xES121-20	Greece	Spain					0.255	0.284	0.00112	0.178	0.230	0.225	0.368	0.159	0.200	0.206	0.342	814	834	70	65
+Hirschfeldia incana	ES021 x GR160-2	Spain	Greece					0.650	0.435	0.00174	0.133	0.163	0.184	0.311	0.118	0.153	0.229	0.373	66	274	71	43
+Hirschfeldia incana	ES021 x GR160-3	Spain	Greece					0.650	0.435	0.00174	0.133	0.163	0.184	0.311	0.118	0.153	0.229	0.373	77	214	71	43
+Hirschfeldia incana	ES021 x GR160-4	Spain	Greece					0.650	0.435	0.00174	0.133	0.163	0.184	0.311	0.118	0.153	0.229	0.373	144	355	71	43
+Hirschfeldia incana	ES021 x GR160-5	Spain	Greece					0.650	0.435	0.00174	0.133	0.163	0.184	0.311	0.118	0.153	0.229	0.373	98	384	71	43
+Hirschfeldia incana	ES021 x GR160-7	Spain	Greece					0.650	0.435	0.00174	0.133	0.163	0.184	0.311	0.118	0.153	0.229	0.373	28	177	71	43
+Hirschfeldia incana	ES021 x GR160-10	Spain	Greece					0.650	0.435	0.00174	0.133	0.163	0.184	0.311	0.118	0.153	0.229	0.373	113	322	71	43
+Hirschfeldia incana	ES021 x GR160-11	Spain	Greece					0.650	0.435	0.00174	0.133	0.163	0.184	0.311	0.118	0.153	0.229	0.373	189	504	71	43
+Hirschfeldia incana	ES021 x GR160-12	Spain	Greece					0.650	0.435	0.00174	0.133	0.163	0.184	0.311	0.118	0.153	0.229	0.373	67	264	71	43
+Hirschfeldia incana	ES021 x GR160-13	Spain	Greece					0.650	0.435	0.00174	0.133	0.163	0.184	0.311	0.118	0.153	0.229	0.373	17	110	71	43
+Hirschfeldia incana	ES021 x GR160-14	Spain	Greece					0.650	0.435	0.00174	0.133	0.163	0.184	0.311	0.118	0.153	0.229	0.373	19	160	71	43
+Hirschfeldia incana	ES021 x GR160-15	Spain	Greece					0.650	0.435	0.00174	0.133	0.163	0.184	0.311	0.118	0.153	0.229	0.373	53	183	71	43
+Hirschfeldia incana	ES021 x GR160-16	Spain	Greece					0.650	0.435	0.00174	0.133	0.163	0.184	0.311	0.118	0.153	0.229	0.373	227	643	71	43
+Hirschfeldia incana	ES021 x GR160-17	Spain	Greece					0.650	0.435	0.00174	0.133	0.163	0.184	0.311	0.118	0.153	0.229	0.373	39	208	71	43
+Hirschfeldia incana	ES021 x GR160-19	Spain	Greece					0.650	0.435	0.00174	0.133	0.163	0.184	0.311	0.118	0.153	0.229	0.373	94	192	71	43
+Hirschfeldia incana	ES021 x GR160-20	Spain	Greece					0.650	0.435	0.00174	0.133	0.163	0.184	0.311	0.118	0.153	0.229	0.373	35	236	71	43
+Hirschfeldia incana	GR160 x ES021-1	Greece	Spain					0.650	0.435	0.00174	0.118	0.153	0.229	0.373	0.133	0.163	0.184	0.311	141	320	13	2
+Hirschfeldia incana	GR160 x ES021-2	Greece	Spain					0.650	0.435	0.00174	0.118	0.153	0.229	0.373	0.133	0.163	0.184	0.311	190	307	13	2
+Hornungia petraea	SpArc-ES-004-04-A1	Spain	Greece					0.804	0.627	0.00231	0.001	0.194	0.997	0.998	0.016	0.069	0.772	0.871	453	599	NA	NA
+Hornungia petraea	SpArc-ES-004-04-A2	Spain	Greece					0.804	0.627	0.00231	0.001	0.194	0.997	0.998	0.016	0.069	0.772	0.871	85	93	NA	NA
+Hornungia petraea	SpArc-ES-004-01-C2	Spain	Greece					0.804	0.627	0.00231	0.001	0.194	0.997	0.998	0.016	0.069	0.772	0.871	84	92	NA	NA
+Hornungia petraea	SpArc-ES-004-01-C1	Spain	Greece					0.804	0.627	0.00231	0.001	0.194	0.997	0.998	0.016	0.069	0.772	0.871	107	115	NA	NA
+Hornungia petraea	SpArc-ES-004-02-C1	Spain	Greece					0.804	0.627	0.00231	0.001	0.194	0.997	0.998	0.016	0.069	0.772	0.871	247	265	NA	NA
+Hornungia petraea	SpArc-ES-004-02-C4	Spain	Greece					0.804	0.627	0.00231	0.001	0.194	0.997	0.998	0.016	0.069	0.772	0.871	263	288	NA	NA
+Hornungia petraea	SpArc-ES-004-07-A	Spain	Greece					0.804	0.627	0.00231	0.001	0.194	0.997	0.998	0.016	0.069	0.772	0.871	27	32	NA	NA
+Hornungia petraea	SpArc-GR-174-07-B	Greece	Spain					0.804	0.627	0.00231	0.016	0.069	0.772	0.871	0.001	0.194	0.997	0.998	183	193	NA	NA
+Hornungia petraea	SpArc-GR-174-06-F1	Greece	Spain					0.804	0.627	0.00231	0.016	0.069	0.772	0.871	0.001	0.194	0.997	0.998	196	211	NA	NA
+Hornungia petraea	SpArc-GR-174-08-F	Greece	Spain					0.804	0.627	0.00231	0.016	0.069	0.772	0.871	0.001	0.194	0.997	0.998	164	166	NA	NA
+Hornungia petraea	SpArc-GR-174-02-A	Greece	Spain					0.804	0.627	0.00231	0.016	0.069	0.772	0.871	0.001	0.194	0.997	0.998	78	81	NA	NA
+Hornungia petraea	SpArc-GR-174-10-A	Greece	Spain					0.804	0.627	0.00231	0.016	0.069	0.772	0.871	0.001	0.194	0.997	0.998	50	54	NA	NA
+Hornungia petraea	SpArc-GR-174-13-B1	Greece	Spain					0.804	0.627	0.00231	0.016	0.069	0.772	0.871	0.001	0.194	0.997	0.998	208	222	NA	NA
+Hornungia petraea	SpArc-GR-174-12-B1	Greece	Spain					0.804	0.627	0.00231	0.016	0.069	0.772	0.871	0.001	0.194	0.997	0.998	205	216	NA	NA
+Lepidium campestre	NA	Spain	Czech_Republic					0.881	0.642	0.00189	0.009	0.152	0.944	0.971	0.010	0.010	-0.038	-0.079	NA	NA	NA	NA
+Lepidium hirtum	NA	Spain	Greece					0.811	0.617	0.00244	0.219	0.236	0.074	0.139	0.005	0.029	0.827	0.905	NA	NA	NA	NA
+Matthiola sinuata	ES043 x GR245-11	Spain	Greece					0.917	0.705	0.00264	0.011	0.012	0.097	0.177	0.109	0.113	0.031	0.060	434	670	177	143
+Matthiola sinuata	ES043 x GR245-18	Spain	Greece					0.917	0.705	0.00264	0.011	0.012	0.097	0.177	0.109	0.113	0.031	0.060	553	991	177	143
+Matthiola sinuata	ES043 x GR245-24	Spain	Greece					0.917	0.705	0.00264	0.011	0.012	0.097	0.177	0.109	0.113	0.031	0.060	316	617	177	143
+Matthiola sinuata	ES043 x GR245-03	Spain	Greece					0.917	0.705	0.00264	0.011	0.012	0.097	0.177	0.109	0.113	0.031	0.060	464	825	177	143
+Matthiola sinuata	ES043 x GR245-04	Spain	Greece					0.917	0.705	0.00264	0.011	0.012	0.097	0.177	0.109	0.113	0.031	0.060	683	1108	177	143
+Matthiola sinuata	ES043 x GR245-09	Spain	Greece					0.917	0.705	0.00264	0.011	0.012	0.097	0.177	0.109	0.113	0.031	0.060	570	834	177	143
+Matthiola sinuata	ES043 x GR245-10	Spain	Greece					0.917	0.705	0.00264	0.011	0.012	0.097	0.177	0.109	0.113	0.031	0.060	622	925	177	143
+Matthiola sinuata	ES043 x GR245-05	Spain	Greece					0.917	0.705	0.00264	0.011	0.012	0.097	0.177	0.109	0.113	0.031	0.060	559	1047	177	143
+Matthiola sinuata	ES043 x GR245-14	Spain	Greece					0.917	0.705	0.00264	0.011	0.012	0.097	0.177	0.109	0.113	0.031	0.060	643	910	177	143
+Matthiola sinuata	ES043 x GR245-15	Spain	Greece					0.917	0.705	0.00264	0.011	0.012	0.097	0.177	0.109	0.113	0.031	0.060	650	1010	177	143
+Matthiola sinuata	ES043 x GR245-13	Spain	Greece					0.917	0.705	0.00264	0.011	0.012	0.097	0.177	0.109	0.113	0.031	0.060	378	667	177	143
+Matthiola sinuata	ES043 x GR245-17	Spain	Greece					0.917	0.705	0.00264	0.011	0.012	0.097	0.177	0.109	0.113	0.031	0.060	573	962	177	143
+Matthiola sinuata	ES043 x GR245-23	Spain	Greece					0.917	0.705	0.00264	0.011	0.012	0.097	0.177	0.109	0.113	0.031	0.060	638	1151	177	143
+Matthiola sinuata	ES043 x GR245-19	Spain	Greece					0.917	0.705	0.00264	0.011	0.012	0.097	0.177	0.109	0.113	0.031	0.060	583	1017	177	143
+Matthiola sinuata	ES043 x GR245-20	Spain	Greece					0.917	0.705	0.00264	0.011	0.012	0.097	0.177	0.109	0.113	0.031	0.060	617	840	177	143
+Matthiola sinuata	ES043 x GR245-21	Spain	Greece					0.917	0.705	0.00264	0.011	0.012	0.097	0.177	0.109	0.113	0.031	0.060	683	977	177	143
+Matthiola sinuata	ES043 x GR245-22	Spain	Greece					0.917	0.705	0.00264	0.011	0.012	0.097	0.177	0.109	0.113	0.031	0.060	460	744	177	143
+Matthiola sinuata	ES043 x GR245-16	Spain	Greece					0.917	0.705	0.00264	0.011	0.012	0.097	0.177	0.109	0.113	0.031	0.060	672	960	177	143
+Matthiola sinuata	ES043 x GR245-25	Spain	Greece					0.917	0.705	0.00264	0.011	0.012	0.097	0.177	0.109	0.113	0.031	0.060	629	987	177	143
+Matthiola sinuata	ES043 x GR245-12	Spain	Greece					0.917	0.705	0.00264	0.011	0.012	0.097	0.177	0.109	0.113	0.031	0.060	515	1025	177	143
+Matthiola sinuata	ES043 x GR245-02	Spain	Greece					0.917	0.705	0.00264	0.011	0.012	0.097	0.177	0.109	0.113	0.031	0.060	489	651	177	143
+Matthiola sinuata	ES043 x GR245-06	Spain	Greece					0.917	0.705	0.00264	0.011	0.012	0.097	0.177	0.109	0.113	0.031	0.060	796	1120	177	143
+Matthiola sinuata	ES043 x GR245-07	Spain	Greece					0.917	0.705	0.00264	0.011	0.012	0.097	0.177	0.109	0.113	0.031	0.060	591	884	177	143
+Matthiola sinuata	ES043 x GR245-01	Spain	Greece					0.917	0.705	0.00264	0.011	0.012	0.097	0.177	0.109	0.113	0.031	0.060	471	798	177	143
+Matthiola tricuspidata	ES026 x KT224-1	Spain	Greece					0.676	0.451	0.00185	0.159	0.175	0.092	0.169	0.138	0.131	-0.047	-0.099	253	268	46	8
+Matthiola tricuspidata	ES026 x KT224-2	Spain	Greece					0.676	0.451	0.00185	0.159	0.175	0.092	0.169	0.138	0.131	-0.047	-0.099	319	345	46	8
+Matthiola tricuspidata	ES026 x KT224-3	Spain	Greece					0.676	0.451	0.00185	0.159	0.175	0.092	0.169	0.138	0.131	-0.047	-0.099	215	228	46	8
+Matthiola tricuspidata	ES026 x KT224-4	Spain	Greece					0.676	0.451	0.00185	0.159	0.175	0.092	0.169	0.138	0.131	-0.047	-0.099	127	134	46	8
+Matthiola tricuspidata	ES026 x KT224-5	Spain	Greece					0.676	0.451	0.00185	0.159	0.175	0.092	0.169	0.138	0.131	-0.047	-0.099	137	147	46	8
+Matthiola tricuspidata	ES026 x KT224-6	Spain	Greece					0.676	0.451	0.00185	0.159	0.175	0.092	0.169	0.138	0.131	-0.047	-0.099	103	114	46	8
+Matthiola tricuspidata	ES026 x KT224-7	Spain	Greece					0.676	0.451	0.00185	0.159	0.175	0.092	0.169	0.138	0.131	-0.047	-0.099	228	284	46	8
+Matthiola tricuspidata	ES026 x KT224-8	Spain	Greece					0.676	0.451	0.00185	0.159	0.175	0.092	0.169	0.138	0.131	-0.047	-0.099	402	435	46	8
+Matthiola tricuspidata	KT224 x ES026-1	Greece	Spain					0.676	0.451	0.00185	0.138	0.131	-0.047	-0.099	0.159	0.175	0.092	0.169	796	819	40	25
+Matthiola tricuspidata	KT224 x ES026-2	Greece	Spain					0.676	0.451	0.00185	0.138	0.131	-0.047	-0.099	0.159	0.175	0.092	0.169	931	933	40	25
+Matthiola tricuspidata	KT224 x ES026-3	Greece	Spain					0.676	0.451	0.00185	0.138	0.131	-0.047	-0.099	0.159	0.175	0.092	0.169	329	334	40	25
+Matthiola tricuspidata	KT224 x ES026-4	Greece	Spain					0.676	0.451	0.00185	0.138	0.131	-0.047	-0.099	0.159	0.175	0.092	0.169	347	360	40	25
+Matthiola tricuspidata	KT224 x ES026-5	Greece	Spain					0.676	0.451	0.00185	0.138	0.131	-0.047	-0.099	0.159	0.175	0.092	0.169	195	202	40	25
+Matthiola tricuspidata	KT224 x ES026-6	Greece	Spain					0.676	0.451	0.00185	0.138	0.131	-0.047	-0.099	0.159	0.175	0.092	0.169	97	124	40	25
+Matthiola tricuspidata	KT224 x ES026-7	Greece	Spain					0.676	0.451	0.00185	0.138	0.131	-0.047	-0.099	0.159	0.175	0.092	0.169	174	188	40	25
+Matthiola tricuspidata	KT224 x ES026-9	Greece	Spain					0.676	0.451	0.00185	0.138	0.131	-0.047	-0.099	0.159	0.175	0.092	0.169	184	220	40	25
+Matthiola tricuspidata	KT224 x ES026-10	Greece	Spain					0.676	0.451	0.00185	0.138	0.131	-0.047	-0.099	0.159	0.175	0.092	0.169	294	349	40	25
+Matthiola tricuspidata	KT224 x ES026-11	Greece	Spain					0.676	0.451	0.00185	0.138	0.131	-0.047	-0.099	0.159	0.175	0.092	0.169	610	703	40	25
+Matthiola tricuspidata	KT224 x ES026-13	Greece	Spain					0.676	0.451	0.00185	0.138	0.131	-0.047	-0.099	0.159	0.175	0.092	0.169	115	135	40	25
+Matthiola tricuspidata	KT224 x ES026-14	Greece	Spain					0.676	0.451	0.00185	0.138	0.131	-0.047	-0.099	0.159	0.175	0.092	0.169	300	340	40	25
+Matthiola tricuspidata	KT224 x ES026-15	Greece	Spain					0.676	0.451	0.00185	0.138	0.131	-0.047	-0.099	0.159	0.175	0.092	0.169	296	309	40	25
+Matthiola tricuspidata	KT224 x ES026-16	Greece	Spain					0.676	0.451	0.00185	0.138	0.131	-0.047	-0.099	0.159	0.175	0.092	0.169	103	113	40	25
+Matthiola tricuspidata	KT224 x ES026-17	Greece	Spain					0.676	0.451	0.00185	0.138	0.131	-0.047	-0.099	0.159	0.175	0.092	0.169	168	237	40	25
+Matthiola tricuspidata	KT224 x ES026-18	Greece	Spain					0.676	0.451	0.00185	0.138	0.131	-0.047	-0.099	0.159	0.175	0.092	0.169	204	217	40	25
+Matthiola tricuspidata	KT224 x ES026-19	Greece	Spain					0.676	0.451	0.00185	0.138	0.131	-0.047	-0.099	0.159	0.175	0.092	0.169	119	120	40	25
+Matthiola tricuspidata	KT224 x ES026-20	Greece	Spain					0.676	0.451	0.00185	0.138	0.131	-0.047	-0.099	0.159	0.175	0.092	0.169	154	191	40	25
+Rapistrum rugosum	ES022 x GR188-2	Spain	Greece					0.086	0.206	0.00069	0.143	0.194	0.266	0.420	0.136	0.185	0.265	0.419	388	432	7	3
+Rapistrum rugosum	ES022 x GR188-3	Spain	Greece					0.086	0.206	0.00069	0.143	0.194	0.266	0.420	0.136	0.185	0.265	0.419	273	287	7	3
+Rapistrum rugosum	GR188 x ES022-1	Greece	Spain					0.086	0.206	0.00069	0.136	0.185	0.265	0.419	0.143	0.194	0.266	0.420	158	163	6	5
+Rapistrum rugosum	GR188 x ES022-3	Greece	Spain					0.086	0.206	0.00069	0.136	0.185	0.265	0.419	0.143	0.194	0.266	0.420	226	230	6	5
+Rapistrum rugosum	GR188 x ES022-4	Greece	Spain					0.086	0.206	0.00069	0.136	0.185	0.265	0.419	0.143	0.194	0.266	0.420	262	310	6	5
+Rapistrum rugosum	GR188 x ES022-5	Greece	Spain					0.086	0.206	0.00069	0.136	0.185	0.265	0.419	0.143	0.194	0.266	0.420	120	127	6	5
+Sinapis arvensis	KT230xES119-1	Greece	Spain					0.269	0.256	0.00103	0.114	0.122	0.062	0.116	0.187	0.270	0.309	0.472	707	716	67	63
+Sinapis arvensis	KT230xES119-2	Greece	Spain					0.269	0.256	0.00103	0.114	0.122	0.062	0.116	0.187	0.270	0.309	0.472	782	791	67	63
+Sinapis arvensis	KT230xES119-3	Greece	Spain					0.269	0.256	0.00103	0.114	0.122	0.062	0.116	0.187	0.270	0.309	0.472	459	462	67	63
+Sinapis arvensis	KT230xES119-4	Greece	Spain					0.269	0.256	0.00103	0.114	0.122	0.062	0.116	0.187	0.270	0.309	0.472	433	433	67	63
+Sinapis arvensis	KT230xES119-5	Greece	Spain					0.269	0.256	0.00103	0.114	0.122	0.062	0.116	0.187	0.270	0.309	0.472	675	688	67	63
+Sinapis arvensis	KT230xES119-6	Greece	Spain					0.269	0.256	0.00103	0.114	0.122	0.062	0.116	0.187	0.270	0.309	0.472	729	737	67	63
+Sinapis arvensis	KT230xES119-7	Greece	Spain					0.269	0.256	0.00103	0.114	0.122	0.062	0.116	0.187	0.270	0.309	0.472	668	670	67	63
+Sinapis arvensis	KT230xES119-8	Greece	Spain					0.269	0.256	0.00103	0.114	0.122	0.062	0.116	0.187	0.270	0.309	0.472	689	696	67	63
+Sinapis arvensis	KT230xES119-9	Greece	Spain					0.269	0.256	0.00103	0.114	0.122	0.062	0.116	0.187	0.270	0.309	0.472	647	655	67	63
+Sinapis arvensis	KT230xES119-10	Greece	Spain					0.269	0.256	0.00103	0.114	0.122	0.062	0.116	0.187	0.270	0.309	0.472	977	992	67	63
+Sinapis arvensis	KT230xES119-11	Greece	Spain					0.269	0.256	0.00103	0.114	0.122	0.062	0.116	0.187	0.270	0.309	0.472	816	818	67	63
+Sinapis arvensis	KT230xES119-12	Greece	Spain					0.269	0.256	0.00103	0.114	0.122	0.062	0.116	0.187	0.270	0.309	0.472	760	763	67	63
+Sinapis arvensis	KT230xES119-13	Greece	Spain					0.269	0.256	0.00103	0.114	0.122	0.062	0.116	0.187	0.270	0.309	0.472	717	717	67	63
+Sinapis arvensis	KT230xES119-14	Greece	Spain					0.269	0.256	0.00103	0.114	0.122	0.062	0.116	0.187	0.270	0.309	0.472	616	620	67	63
+Sinapis arvensis	KT230xES119-15	Greece	Spain					0.269	0.256	0.00103	0.114	0.122	0.062	0.116	0.187	0.270	0.309	0.472	1150	1164	67	63
+Sinapis arvensis	KT230xES119-16	Greece	Spain					0.269	0.256	0.00103	0.114	0.122	0.062	0.116	0.187	0.270	0.309	0.472	474	480	67	63
+Sinapis arvensis	KT230xES119-17	Greece	Spain					0.269	0.256	0.00103	0.114	0.122	0.062	0.116	0.187	0.270	0.309	0.472	931	944	67	63
+Sinapis arvensis	KT230xES119-18	Greece	Spain					0.269	0.256	0.00103	0.114	0.122	0.062	0.116	0.187	0.270	0.309	0.472	796	800	67	63
+Sinapis arvensis	KT230xES119-19	Greece	Spain					0.269	0.256	0.00103	0.114	0.122	0.062	0.116	0.187	0.270	0.309	0.472	726	729	67	63
+Sinapis arvensis	KT230xES119-20	Greece	Spain					0.269	0.256	0.00103	0.114	0.122	0.062	0.116	0.187	0.270	0.309	0.472	852	863	67	63
+Sinapis arvensis	ES119xKT230-1	Spain	Greece					0.269	0.256	0.00103	0.187	0.270	0.309	0.472	0.114	0.122	0.062	0.116	623	627	101	70
+Sinapis arvensis	ES119xKT230-2	Spain	Greece					0.269	0.256	0.00103	0.187	0.270	0.309	0.472	0.114	0.122	0.062	0.116	850	855	101	70
+Sinapis arvensis	ES119xKT230-3	Spain	Greece					0.269	0.256	0.00103	0.187	0.270	0.309	0.472	0.114	0.122	0.062	0.116	681	698	101	70
+Sinapis arvensis	ES119xKT230-4	Spain	Greece					0.269	0.256	0.00103	0.187	0.270	0.309	0.472	0.114	0.122	0.062	0.116	421	424	101	70
+Sinapis arvensis	ES119xKT230-5	Spain	Greece					0.269	0.256	0.00103	0.187	0.270	0.309	0.472	0.114	0.122	0.062	0.116	982	986	101	70
+Sinapis arvensis	ES119xKT230-6	Spain	Greece					0.269	0.256	0.00103	0.187	0.270	0.309	0.472	0.114	0.122	0.062	0.116	571	576	101	70
+Sinapis arvensis	ES119xKT230-7	Spain	Greece					0.269	0.256	0.00103	0.187	0.270	0.309	0.472	0.114	0.122	0.062	0.116	613	613	101	70
+Sinapis arvensis	ES119xKT230-8	Spain	Greece					0.269	0.256	0.00103	0.187	0.270	0.309	0.472	0.114	0.122	0.062	0.116	668	673	101	70
+Sinapis arvensis	ES119xKT230-9	Spain	Greece					0.269	0.256	0.00103	0.187	0.270	0.309	0.472	0.114	0.122	0.062	0.116	864	878	101	70
+Sinapis arvensis	ES119xKT230-10	Spain	Greece					0.269	0.256	0.00103	0.187	0.270	0.309	0.472	0.114	0.122	0.062	0.116	584	590	101	70
+Sinapis arvensis	ES119xKT230-11	Spain	Greece					0.269	0.256	0.00103	0.187	0.270	0.309	0.472	0.114	0.122	0.062	0.116	827	832	101	70
+Sinapis arvensis	ES119xKT230-12	Spain	Greece					0.269	0.256	0.00103	0.187	0.270	0.309	0.472	0.114	0.122	0.062	0.116	552	558	101	70
+Sinapis arvensis	ES119xKT230-13	Spain	Greece					0.269	0.256	0.00103	0.187	0.270	0.309	0.472	0.114	0.122	0.062	0.116	520	524	101	70
+Sinapis arvensis	ES119xKT230-14	Spain	Greece					0.269	0.256	0.00103	0.187	0.270	0.309	0.472	0.114	0.122	0.062	0.116	639	642	101	70
+Sinapis arvensis	ES119xKT230-15	Spain	Greece					0.269	0.256	0.00103	0.187	0.270	0.309	0.472	0.114	0.122	0.062	0.116	680	680	101	70
+Sinapis arvensis	ES119xKT230-16	Spain	Greece					0.269	0.256	0.00103	0.187	0.270	0.309	0.472	0.114	0.122	0.062	0.116	430	430	101	70
+Sinapis arvensis	ES119xKT230-17	Spain	Greece					0.269	0.256	0.00103	0.187	0.270	0.309	0.472	0.114	0.122	0.062	0.116	678	681	101	70
+Sinapis arvensis	ES119xKT230-18	Spain	Greece					0.269	0.256	0.00103	0.187	0.270	0.309	0.472	0.114	0.122	0.062	0.116	880	887	101	70
+Sinapis arvensis	ES119xKT230-19	Spain	Greece					0.269	0.256	0.00103	0.187	0.270	0.309	0.472	0.114	0.122	0.062	0.116	606	615	101	70
+Sinapis arvensis	ES119xKT230-20	Spain	Greece					0.269	0.256	0.00103	0.187	0.270	0.309	0.472	0.114	0.122	0.062	0.116	832	840	101	70
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						
+																						

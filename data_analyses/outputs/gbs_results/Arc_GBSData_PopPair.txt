@@ -1,0 +1,65 @@
+Species	Cross	New_Mean_Dxy	Fst	Comments				
+A_alpina	SxG	0.00178	0.66824					
+A_alpina	GxS	0.00178	0.66824					
+A_auriculata	SxG	0.002816	0.95118					
+A_auriculata	GxS	0.002816	0.95118					
+A_turita	SxG	0.003104	0.94399					
+A_turita	GxS	0.003104	0.94399					
+B_erucago	SxG	0.001329	0.20848					
+B_erucago	GxS	0.001329	0.20848					
+C_bellidifolia	SxN	0.001950	0.79918	Oppdal				
+C_bellidifolia	NxS	0.001950	0.79918	Oppdal				
+C_bellidifolia	NxN	0.001670	0.21468	Oppdal_Norway				
+C_bellidifolia	SxN	0.001826	0.75938	Norway				
+C_bellidifolia	NxS	0.001826	0.75938	Norway				
+C_groenlandica	SxS	0.001469	0.42847	Lovisa_Pernille				
+C_hirsuta	SxG	0.002323	0.75501					
+C_hirsuta	GxS	0.002323	0.75501					
+C_maritima	SxG	0.001164	0.24722					
+C_maritima	GxS	0.001164	0.24722					
+D_fladnizensis	NA	NA	NA					
+D_nivalis	NxS	0.001330	0.36327	Dovre_Pernille				
+D_nivalis	SxN	0.001330	0.36327	Dovre_Pernille				
+D_subcapitata	NA	NA	NA					
+E_vesicaria	SxG	0.001121	0.25506					
+E_vesicaria	GxS	0.001121	0.25506					
+H_incana	SxG	0.001735	0.64987					
+H_incana	GxS	0.001735	0.64987					
+H_petraea	SxG	0.002312	0.80448					
+H_petraea	GxS	0.002312	0.80448					
+L_campestre	CxS	0.001892	0.88144					
+L_campestre	SxC	0.001892	0.88144					
+L_hirtum	SxG	0.002440	0.81073					
+L_hirtum	GxS	0.002440	0.81073					
+M_sinuata	SxG	0.002638	0.91732					
+M_sinuata	GxS	0.002638	0.91732					
+M_tricuspidata	SxG	0.001855	0.67631					
+M_tricuspidata	GxS	0.001855	0.67631					
+R_pygmaeus	AxS	0.001623	0.59465					
+R_pygmaeus	SxA	0.001623	0.59465					
+R_pygmaeus	NxS	0.001588	0.07257					
+R_pygmaeus	SxN	0.001588	0.07257					
+R_pygmaeus	AxN	0.001646	0.59481					
+R_pygmaeus	NxA	0.001646	0.59481					
+R_rugosum	SxG	0.000687	0.08606					
+R_rugosum	GxS	0.000687	0.08606					
+S_arvensis	SxG	0.001035	0.26895					
+S_arvensis	GxS	0.001035	0.26895					
+S_acaulis	SxA	0.001320	0.57532	Lovisa				
+S_acaulis	AxS	0.001320	0.57532	Lovisa				
+S_acaulis	SxN	0.001025	0.14713	Lovisa_Oppdal				
+S_acaulis	NxS	0.001025	0.14713	Oppdal_Lovisa				
+S_acaulis	SxS	0.001074	0.05175	Lovisa_Pernille							
+S_acaulis	AxN	0.001172	0.52595	Oppdal				
+S_acaulis	NxA	0.001172	0.52595	Oppdal				
+S_acaulis	AxS	0.001281	0.56645	Pernille				
+S_acaulis	SxA	0.001281	0.56645	Pernille				
+S_acaulis	NxS	0.000970	0.15062	Oppdal_Pernille				
+S_acaulis	SxN	0.000970	0.15062	Pernille_Oppdal				
+S_hyperborea	AxS	0.000970	0.15062	Pernille				
+S_hyperborea	SxA	0.000970	0.15062	Pernille				
+S_uralensis	SxA	0.003769	0.90479	Lovisa				
+S_uralensis	AxS	0.003769	0.90479	Lovisa				
+S_uralensis	SxS	0.000406	0.32180	Lovisa_Pernille				
+S_uralensis	AxS	0.003392	0.96946	Pernille				
+S_uralensis	SxA	0.003392	0.96946	Pernille				
