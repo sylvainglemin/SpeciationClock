@@ -1,10 +1,10 @@
 # Script supporting the data analysis presented in Gizaw et al.
 # Author: Lucas Marie-Orleach / modified by Sylvain Glémin
-# Date: April 2024 / September 2024
+# Date: April 2024 / September 2024 / November 2025
 
-###################
-## LOAD PACKAGES ##
-###################
+#################### #
+## LOAD PACKAGES ####
+################## #
 library(readr) # for read.delim
 library(lme4) # for GLMM
 library(car) # for Anova
@@ -68,9 +68,9 @@ multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
 
 
 
-###################
-## LOAD DATASETS ##
-###################
+#################### #
+## LOAD DATASETS ####
+################## #
 HybData <- read_delim("data/experiment_data/SpArc_HybData.txt")
 HybData$Species <- as.factor(HybData$Species)
 HybData$MS <- ifelse(HybData$MeanSelfRate>0.5,"self","out")
@@ -114,9 +114,9 @@ sum(Summary_HybData$NbPollen)
 # With seed data
 summary(HybData[HybData$nSeed>0,]$Dataset)
 
-#####################################
-## ANALYSE THE DATA - FULL DATASET ##
-#####################################
+###################################### #
+## ANALYSE THE DATA - FULL DATASET ####
+##################################### #
 
 # Pollen Fertility
 
@@ -150,9 +150,9 @@ Anova(m3, type=3)
 
 
 
-##############################################
-## ANALYSE THE DATA - SUBSET WITH DADI DATA ##
-##############################################
+############################################### #
+## ANALYSE THE DATA - SUBSET WITH DADI DATA ####
+############################################# #
 
 # Load Datasets
 HybData_dadi <- read_delim("outputs/synthetized_data/SpArc_HybData_dadi.txt")
@@ -330,9 +330,9 @@ m6Med_sum$coefficients$Estimate
 m6Arc_sum$coefficients$Estimate
 
 
-##############
-## GRAPHICS ##
-##############
+############### #
+## GRAPHICS ####
+############# #
 
 
 # FIGURE 1

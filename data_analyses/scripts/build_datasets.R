@@ -2,11 +2,11 @@
 # Author: Lucas Marie-Orleach / modified Sylvain Glémin
 # Date: April 2024 / September 2024
 
-## PACKAGES
+## PACKAGES ####
 library(readr) #for read.delim
 library(dplyr) #for left_join
 
-## LOADINGS 
+## LOADINGS ####
 
 # Parental Dataset
 Med_ParData <- read_delim("data/experiment_data/Med_ParentalData.txt","\t")
@@ -235,9 +235,9 @@ write.table(HybData, file="outputs/synthetized_data/SpArc_HybData.txt", row.name
 write.table(Summary_HybData, file="outputs/synthetized_data/SpArc_Summary_HybData.txt", row.names = FALSE)
 
 
-##################
-## DADI DATASET ##
-##################
+################### #
+## DADI DATASET ####
+################# #
 
 list.results <- list.files(path = "outputs/dadi_results/", pattern = ".out$")
 
