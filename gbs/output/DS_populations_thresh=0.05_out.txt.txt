@@ -1,0 +1,2 @@
+dataset	Ho_PBE21_4	He_PBE21_4	Fis_PBE21_4	Self_PBE21_4
+data/vcf/DS_populations.snps.vcf	0	0.37547654028436	1	1

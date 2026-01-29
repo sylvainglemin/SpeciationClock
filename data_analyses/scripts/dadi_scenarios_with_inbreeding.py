@@ -367,14 +367,14 @@ for f in list_file:
     a = f'{FILENAME} {pi0} {pi1} {D0} {D1} {fst} split_mig {lnL_splitmig} {theta} '
     b = f'{popt_splitmig[0]} {popt_splitmig[1]} {popt_splitmig[2]} NA {popt_splitmig[3]} {popt_splitmig[3]} '
     c = f'{se_splitmig[4]} {se_splitmig[0]} {se_splitmig[1]} {se_splitmig[2]} NA {se_splitmig[3]} {se_splitmig[3]}\n'
-    output = open(FILENAME+'.out','a')
+    output = open(FILENAME+'_inbreeding.out','a')
     output.write(a+b+c)
     output.close()
 
     # Saving plot
     fs_opt = optim[4]
     dadi.Plotting.plot_2d_comp_multinom(optim[4], fs,vmin=fs_opt.min()+ 0.01,vmax=fs_opt.max(),show = False)
-    plt.savefig(FILENAME+'_splitmig.png',dpi=200)
+    plt.savefig(FILENAME+'_inbreeding_splitmig.png',dpi=200)
     
     del(optim,theta,a,b,c)
     
@@ -410,14 +410,14 @@ for f in list_file:
     a = f'{FILENAME} {pi0} {pi1} {D0} {D1} {fst} split_ancmig {lnL_splitancmig} {theta} '
     b = f'{popt_splitancmig[0]} {popt_splitancmig[1]} {popt_splitancmig[2]} {popt_splitancmig[3]} {popt_splitancmig[4]} 0 '
     c = f'{se_splitancmig[5]} {se_splitancmig[0]} {se_splitancmig[1]} {se_splitancmig[2]} {se_splitancmig[3]} {se_splitancmig[4]} 0\n'
-    output = open(FILENAME+'.out','a')
+    output = open(FILENAME+'_inbreeding.out','a')
     output.write(a+b+c)
     output.close()
 
     # Saving plot
     fs_opt = optim[4]
     dadi.Plotting.plot_2d_comp_multinom(optim[4], fs,vmin=fs_opt.min()+ 0.01,vmax=fs_opt.max(),show = False)
-    plt.savefig(FILENAME+'_splitancmig.png',dpi=200)
+    plt.savefig(FILENAME+'_inbreeding_splitancmig.png',dpi=200)
     
     del(optim,theta,a,b,c)
 
@@ -453,14 +453,14 @@ for f in list_file:
     a = f'{FILENAME} {pi0} {pi1} {D0} {D1} {fst} sec_contact {lnL_seccontact} {theta} '
     b = f'{popt_seccontact[0]} {popt_seccontact[1]} {popt_seccontact[2]} {popt_seccontact[3]} 0 {popt_seccontact[4]} '
     c = f'{se_seccontact[5]} {se_seccontact[0]} {se_seccontact[1]} {se_seccontact[2]} {se_seccontact[3]} 0 {se_seccontact[4]}\n'
-    output = open(FILENAME+'.out','a')
+    output = open(FILENAME+'_inbreeding.out','a')
     output.write(a+b+c)
     output.close()
 
     # Saving plot
     fs_opt = optim[4]
     dadi.Plotting.plot_2d_comp_multinom(optim[4], fs,vmin=fs_opt.min()+ 0.01,vmax=fs_opt.max(),show = False)
-    plt.savefig(FILENAME+'_seccontact.png',dpi=200)
+    plt.savefig(FILENAME+'_inbreeding_seccontact.png',dpi=200)
     
     del(optim,theta,a,b,c)
 
@@ -496,14 +496,14 @@ for f in list_file:
     a = f'{FILENAME} {pi0} {pi1} {D0} {D1} {fst} two_epoch {lnL_twoepoch} {theta} '
     b = f'{popt_twoepoch[0]} {popt_twoepoch[1]} {popt_twoepoch[2]} {popt_twoepoch[3]} {popt_twoepoch[4]} {popt_twoepoch[5]} '
     c = f'{se_twoepoch[6]} {se_twoepoch[0]} {se_twoepoch[1]} {se_twoepoch[2]} {se_twoepoch[3]} {se_twoepoch[4]} {se_twoepoch[5]}\n'
-    output = open(FILENAME+'.out','a')
+    output = open(FILENAME+'_inbreeding.out','a')
     output.write(a+b+c)
     output.close()
 
     # Saving plot
     fs_opt = optim[4]
     dadi.Plotting.plot_2d_comp_multinom(optim[4], fs,vmin=fs_opt.min()+ 0.01,vmax=fs_opt.max(),show = False)
-    plt.savefig(FILENAME+'_twoepoch.png',dpi=200)
+    plt.savefig(FILENAME+'_inbreeding_twoepoch.png',dpi=200)
     
     del(optim,theta,a,b,c)
 

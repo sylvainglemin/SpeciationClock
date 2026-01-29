@@ -1,0 +1,2 @@
+dataset	Ho_SC2021_ND_002	He_SC2021_ND_002	Fis_SC2021_ND_002	Self_SC2021_ND_002
+data/vcf/DF_populations.snps.vcf	0	0.318961139289895	1	1
