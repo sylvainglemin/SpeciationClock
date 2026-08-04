@@ -1,0 +1,50 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: 
+cbind(FertilePollen, UnFertilePollen) ~ (1 | Species_Fst) + Region +  
+    (STDFst * STDMeanSelfRate) + STDMeanParentalFertility
+   Data: HybData
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+  20624.8   20653.5  -10305.4   20610.8       437 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-42.939  -3.673  -0.059   2.360  33.122 
+
+Random effects:
+ Groups      Name        Variance Std.Dev.
+ Species_Fst (Intercept) 2.543    1.595   
+Number of obs: 444, groups:  Species_Fst, 30
+
+Fixed effects:
+                         Estimate Std. Error z value Pr(>|z|)    
+(Intercept)               -1.5290     0.4102  -3.727 0.000194 ***
+RegionMediterranean        2.4188     0.7221   3.349 0.000810 ***
+STDFst                    -0.1315     0.3697  -0.356 0.722060    
+STDMeanSelfRate           -1.0226     0.3112  -3.286 0.001017 ** 
+STDMeanParentalFertility   0.5099     0.2758   1.849 0.064530 .  
+STDFst:STDMeanSelfRate     0.5011     0.2843   1.762 0.078033 .  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Correlation of Fixed Effects:
+            (Intr) RgnMdt STDFst STDMSR STDMPF
+RegnMdtrrnn -0.621                            
+STDFst       0.123 -0.394                     
+STDMenSlfRt -0.164  0.517 -0.468              
+STDMnPrntlF -0.173  0.113 -0.145 -0.023       
+STDF:STDMSR -0.035 -0.336  0.386 -0.308 -0.080
+Analysis of Deviance Table (Type III Wald chisquare tests)
+
+Response: cbind(FertilePollen, UnFertilePollen)
+                           Chisq Df Pr(>Chisq)    
+(Intercept)              13.8920  1  0.0001936 ***
+Region                   11.2191  1  0.0008096 ***
+STDFst                    0.1265  1  0.7220598    
+STDMeanSelfRate          10.7961  1  0.0010171 ** 
+STDMeanParentalFertility  3.4170  1  0.0645298 .  
+STDFst:STDMeanSelfRate    3.1054  1  0.0780333 .  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1

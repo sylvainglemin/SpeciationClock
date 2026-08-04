@@ -1,0 +1,63 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace
+  Approximation) [glmerMod]
+ Family: binomial  ( logit )
+Formula: 
+cbind(GerminatedSeed, NonGerminatedSeed) ~ (1 | Species_Fst) +  
+    Region + (STDFst * Classification) + STDMeanParentalGermination
+   Data: HybData
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+   1823.1    1855.9    -902.6    1805.1       272 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-5.9265 -0.0361  0.0109  0.2333  2.9959 
+
+Random effects:
+ Groups      Name        Variance Std.Dev.
+ Species_Fst (Intercept) 0.6001   0.7746  
+Number of obs: 281, groups:  Species_Fst, 24
+
+Fixed effects:
+                                             Estimate Std. Error
+(Intercept)                                   0.60334    0.50996
+RegionMediterranean                           0.20035    0.57716
+STDFst                                       -0.03534    0.26036
+Classification2_Mixed                        -0.27586    0.54538
+Classification3_Predominantly_selfing        -1.45567    0.67334
+STDMeanParentalGermination                    0.71534    0.23301
+STDFst:Classification2_Mixed                 -1.25781    0.96640
+STDFst:Classification3_Predominantly_selfing -0.24206    0.54478
+                                             z value Pr(>|z|)   
+(Intercept)                                    1.183  0.23677   
+RegionMediterranean                            0.347  0.72849   
+STDFst                                        -0.136  0.89203   
+Classification2_Mixed                         -0.506  0.61299   
+Classification3_Predominantly_selfing         -2.162  0.03063 * 
+STDMeanParentalGermination                     3.070  0.00214 **
+STDFst:Classification2_Mixed                  -1.302  0.19307   
+STDFst:Classification3_Predominantly_selfing  -0.444  0.65681   
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Correlation of Fixed Effects:
+            (Intr) RgnMdt STDFst Cls2_M Cl3_P_ STDMPG STDF:C2
+RegnMdtrrnn -0.826                                           
+STDFst       0.149  0.093                                    
+Clssfctn2_M -0.719  0.508 -0.166                             
+Clssfct3_P_ -0.484  0.305 -0.134  0.314                      
+STDMnPrntlG -0.440  0.515  0.032  0.397 -0.196               
+STDFst:C2_M  0.317 -0.460 -0.313 -0.262 -0.170 -0.080        
+STDFs:C3_P_  0.097 -0.255 -0.505  0.033 -0.535  0.209  0.318 
+Analysis of Deviance Table (Type III Wald chisquare tests)
+
+Response: cbind(GerminatedSeed, NonGerminatedSeed)
+                            Chisq Df Pr(>Chisq)   
+(Intercept)                1.3997  1    0.23677   
+Region                     0.1205  1    0.72849   
+STDFst                     0.0184  1    0.89203   
+Classification             4.7070  2    0.09503 . 
+STDMeanParentalGermination 9.4251  1    0.00214 **
+STDFst:Classification      1.6950  2    0.42848   
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1

@@ -1,0 +1,53 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) [
+glmerMod]
+ Family: binomial  ( logit )
+Formula: cbind(FertilePollen, UnFertilePollen) ~ (1 | Species) + Region +  
+    log10(MtotalAbs) + log10(TsplitAbs) + log10(AbsoluteRecentSize) +  
+    STDMeanSelfRate + STDMeanParentalFertility
+   Data: HybData_dadi_average
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+  17304.3   17335.8   -8644.1   17288.3       374 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-42.934  -2.976   0.400   2.439  26.373 
+
+Random effects:
+ Groups  Name        Variance Std.Dev.
+ Species (Intercept) 0.7132   0.8445  
+Number of obs: 382, groups:  Species, 20
+
+Fixed effects:
+                          Estimate Std. Error z value Pr(>|z|)    
+(Intercept)               -1.13890    1.76991  -0.643 0.519914    
+RegionMediterranean        1.22937    0.54498   2.256 0.024082 *  
+log10(MtotalAbs)          -0.05246    0.24206  -0.217 0.828423    
+log10(TsplitAbs)          -1.64973    0.46022  -3.585 0.000338 ***
+log10(AbsoluteRecentSize)  2.10524    0.63958   3.292 0.000996 ***
+STDMeanSelfRate           -0.35087    0.22986  -1.526 0.126900    
+STDMeanParentalFertility   0.43405    0.15432   2.813 0.004913 ** 
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Correlation of Fixed Effects:
+            (Intr) RgnMdt l10(MA l10(TA l10(AR STDMSR
+RegnMdtrrnn  0.486                                   
+lg10(MttlA) -0.118  0.138                            
+lg10(TsplA) -0.539 -0.394  0.152                     
+lg10(AbsRS) -0.630 -0.235  0.534 -0.118              
+STDMenSlfRt -0.632 -0.250  0.319  0.288  0.607       
+STDMnPrntlF -0.073  0.105 -0.044 -0.031  0.028 -0.024
+Analysis of Deviance Table (Type III Wald chisquare tests)
+
+Response: cbind(FertilePollen, UnFertilePollen)
+                            Chisq Df Pr(>Chisq)    
+(Intercept)                0.4141  1  0.5199137    
+Region                     5.0887  1  0.0240820 *  
+log10(MtotalAbs)           0.0470  1  0.8284226    
+log10(TsplitAbs)          12.8498  1  0.0003375 ***
+log10(AbsoluteRecentSize) 10.8345  1  0.0009962 ***
+STDMeanSelfRate            2.3300  1  0.1269002    
+STDMeanParentalFertility   7.9113  1  0.0049126 ** 
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1

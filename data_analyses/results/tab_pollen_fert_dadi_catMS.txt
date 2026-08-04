@@ -1,0 +1,58 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) [
+glmerMod]
+ Family: binomial  ( logit )
+Formula: cbind(FertilePollen, UnFertilePollen) ~ (1 | Species) + Region +  
+    log10(MtotalAbs) + log10(TsplitAbs) + log10(AbsoluteRecentSize) +  
+    Classification + STDMeanParentalFertility
+   Data: HybData_dadi_average
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+  17304.0   17339.5   -8643.0   17286.0       373 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-42.918  -2.976   0.399   2.437  26.372 
+
+Random effects:
+ Groups  Name        Variance Std.Dev.
+ Species (Intercept) 0.6394   0.7996  
+Number of obs: 382, groups:  Species, 20
+
+Fixed effects:
+                                      Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                             1.7816     2.5263   0.705 0.480681    
+RegionMediterranean                     1.4095     0.5304   2.658 0.007868 ** 
+log10(MtotalAbs)                       -0.2187     0.2560  -0.854 0.392879    
+log10(TsplitAbs)                       -1.6904     0.4432  -3.814 0.000137 ***
+log10(AbsoluteRecentSize)               1.2599     0.8096   1.556 0.119683    
+Classification2_Mixed                  -0.8836     0.7569  -1.167 0.243076    
+Classification3_Predominantly_selfing  -1.6379     0.7520  -2.178 0.029404 *  
+STDMeanParentalFertility                0.4171     0.1559   2.675 0.007475 ** 
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Correlation of Fixed Effects:
+            (Intr) RgnMdt l10(MA l10(TA l10(AR Cls2_M Cl3_P_
+RegnMdtrrnn  0.496                                          
+lg10(MttlA) -0.334  0.030                                   
+lg10(TsplA) -0.488 -0.401  0.142                            
+lg10(AbsRS) -0.793 -0.327  0.630 -0.012                     
+Clssfctn2_M -0.288 -0.148  0.412 -0.044  0.433              
+Clssfct3_P_ -0.855 -0.333  0.466  0.286  0.793  0.401       
+STDMnPrntlF -0.020  0.090  0.048 -0.087  0.060  0.313 -0.017
+optimizer (Nelder_Mead) convergence code: 0 (OK)
+Model failed to converge with max|grad| = 0.00537595 (tol = 0.002, component 1)
+
+Analysis of Deviance Table (Type III Wald chisquare tests)
+
+Response: cbind(FertilePollen, UnFertilePollen)
+                            Chisq Df Pr(>Chisq)    
+(Intercept)                0.4973  1  0.4806808    
+Region                     7.0632  1  0.0078683 ** 
+log10(MtotalAbs)           0.7300  1  0.3928787    
+log10(TsplitAbs)          14.5458  1  0.0001368 ***
+log10(AbsoluteRecentSize)  2.4215  1  0.1196829    
+Classification             4.8473  2  0.0885984 .  
+STDMeanParentalFertility   7.1551  1  0.0074752 ** 
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1

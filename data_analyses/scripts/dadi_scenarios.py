@@ -220,7 +220,8 @@ def perturbation(demo_model_ex,params,lower_bound,upper_bound,ll_max,popt_max,re
 #####################
 
 
-os.chdir('/Users/sglemin/Documents/Boulot/Recherche/Thematiques/SystRepro/SPECIATIONCLOCK/Abel/Data/2022_09_30_SFS_SpCl_GBS')
+# os.chdir('/Users/sglemin/Documents/Boulot/Recherche/Thematiques/SystRepro/SPECIATIONCLOCK/Abel/Data/2022_09_30_SFS_SpCl_GBS')
+os.chdir('/scratch/sglemin/speciation_clock')
 
 
 MIN = 1e-3 #Minimum boundary for parameters

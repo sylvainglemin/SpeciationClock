@@ -8,6 +8,15 @@ library(dplyr) #for left_join
 
 ## LOADINGS ####
 
+
+# Correspondence table for the different ways of naming species
+cortable <- cbind(
+  c("AAU","AT","Aal","BE","CB","CG","CH","CM","DN","EV","HI","HP","LC","LH","MS","MT","RP","RR","SA","SAC","SH","SU"),
+  c("Arabis_auriculata","Arabis_turrita","Arabis_alpina","Bunias_erucago","Cardamine_bellidifolia","Cochlearia_groenlandica","Cardamine_hirsuta","Cakile_maritima","Draba_nivalis","Eruca_vesicaria","Hirschfeldia_incana","Hornungia_petraea","Lepidium_campestre","Lepidium_hirtum","Matthiola_sinuata","Matthiola_tricuspidata","Ranunculus_pygmaeus","Rapistrum_rugosum","Sinapis_arvensis","Silene_acaulis","Saxifraga_hyperborea","Silene_uralensis"),
+  c("Med","Med","Med","Med","Arc","Arc","Med","Med","Arc","Med","Med","Med","Med","Med","Med","Med","Arc","Med","Med","Arc","Arc","Arc")
+)
+
+
 # Parental Dataset
 Med_ParData <- read_delim("data/experiment_data/Med_ParentalData.txt","\t")
 Med_ParData$Species <- gsub("[()]","",Med_ParData$Species)
@@ -267,15 +276,9 @@ for (input in list.results) {
 }
 
 # dataset with average parameters (model averaging procedure based on AIC)
-dadi_average <- dadi[dadi$model=="average",]
-#dadi_average <- dadi[dadi$model=="split_mig",]
+# including also the pure allopatry model as a control
+dadi_average <- dadi[dadi$model=="average" | dadi$model=="split",]
 
-# Correspondence table
-cortable <- cbind(
-  c("AAU","AT","Aal","BE","CB","CG","CH","CM","DN","EV","HI","HP","LC","LH","MS","MT","RP","RR","SA","SAC","SH","SU"),
-  c("Arabis_auriculata","Arabis_turrita","Arabis_alpina","Bunias_erucago","Cardamine_bellidifolia","Cochlearia_groenlandica","Cardamine_hirsuta","Cakile_maritima","Draba_nivalis","Eruca_vesicaria","Hirschfeldia_incana","Hornungia_petraea","Lepidium_campestre","Lepidium_hirtum","Matthiola_sinuata","Matthiola_tricuspidata","Ranunculus_pygmaeus","Rapistrum_rugosum","Sinapis_arvensis","Silene_acaulis","Saxifraga_hyperborea","Silene_uralensis"),
-  c("Med","Med","Med","Med","Arc","Arc","Med","Med","Arc","Med","Med","Med","Med","Med","Med","Med","Arc","Med","Med","Arc","Arc","Arc")
-)
 
 # Add the variable species to the dadi datasets
 for (i in 1:nrow(dadi_average)) (dadi_average$Species[i] <- cortable[match(strsplit(dadi_average$dataset[i],"_")[[1]][1],cortable[,1]),2])
@@ -321,7 +324,7 @@ HybData_dadi <- merge(HybData,dadi_average,by="Species")
 HybData_dadi <- subset(HybData_dadi,!is.na(Fst)&!is.na(PollenFert)&!is.na(MeanSelfRate)) #remove rows with missing data
 
 Summary_HybData_dadi <- HybData_dadi %>% 
-  dplyr::group_by(Dataset.y,Species,Fst) %>% 
+  dplyr::group_by(Dataset.y,Species,Fst,model) %>% 
   dplyr::summarise(
     PollenFert=mean(PollenFert, na.rm=T),
     nPollenFert=mean(nPollenFert, na.rm=T),

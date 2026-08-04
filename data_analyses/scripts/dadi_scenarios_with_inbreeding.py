@@ -8,8 +8,8 @@
 """
 
 import os
-# Pickle is used to save variables as files for future use --> Maybe note usefull for me
-# import pickle
+import sys
+
 # NLopt is the optimization libary dadi uses
 import nlopt
 # MatPlotLib is a libary dadi uses for plotting frequency spectrum
@@ -23,6 +23,9 @@ from dadi.Spectrum_mod import Spectrum
 import glob
 
 import random
+
+# To read and manipulate csv files
+import csv
 
 
 
@@ -59,6 +62,7 @@ def split(params, ns, pts):
     phi = Integration.two_pops(phi, xx, T, nu1, nu2, m12=0, m21=0)
 
     fs = dadi.Spectrum.from_phi_inbreeding(phi, ns, (xx,xx), (F1,F2), (2,2))
+
     return fs
 
 
@@ -87,7 +91,8 @@ def split_mig(params, ns, pts):
 
     phi = Integration.two_pops(phi, xx, T, nu1, nu2, m12=m, m21=m)
 
-    fs = Spectrum.from_phi(phi, ns, (xx,xx))
+    fs = dadi.Spectrum.from_phi_inbreeding(phi, ns, (xx,xx), (F1,F2), (2,2))
+
     return fs
 
 
@@ -118,6 +123,7 @@ def split_ancmig(params, ns, pts):
     phi = Integration.two_pops(phi, xx, T1, nu1, nu2, m12=0, m21=0)
 
     fs = dadi.Spectrum.from_phi_inbreeding(phi, ns, (xx,xx), (F1,F2), (2,2))
+
     return fs
 
 def sec_contact(params, ns, pts):
@@ -129,7 +135,7 @@ def sec_contact(params, ns, pts):
 
 	F1: Inbreeding coefficient of population 1
 	F2: Inbreeding coefficient of population 2   nu1: Size of population 1 after split.
-    nu2: Size of population 2 after split.
+    nu2: Size of population 2 after split."
     T0: Time between the split and the arrest of migration (in units of 2*Na generations) 
     T1: Time between the arrest of migration and present
     The Time of the split before present is T = T0+T1
@@ -147,6 +153,7 @@ def sec_contact(params, ns, pts):
     phi = Integration.two_pops(phi, xx, T1, nu1, nu2, m12=m, m21=m)
 
     fs = dadi.Spectrum.from_phi_inbreeding(phi, ns, (xx,xx), (F1,F2), (2,2))
+
     return fs
 
 def mig_twoepoch(params, ns, pts):
@@ -176,18 +183,21 @@ def mig_twoepoch(params, ns, pts):
     phi = Integration.two_pops(phi, xx, T1, nu1, nu2, m12=m1, m21=m1)
     
     fs = dadi.Spectrum.from_phi_inbreeding(phi, ns, (xx,xx), (F1,F2), (2,2))
+    
     return fs
 
 
-def perturbation(demo_model_ex,params,lower_bound,upper_bound,ll_max,popt_max,rep1=2,rep2=2,rep3=1,rep4=1,MAXEVAL=20):
+def perturbation(demo_model_ex,params,lower_bound,upper_bound,ll_max,popt_max,rep1=30,rep2=20,rep3=10,rep4=10,MAXEVAL=100000,FTOL=1e-5,XTOL=1e-5):
+    n_param = len(params) - 2
+    FIXEDPARAM = [F1,F2] + [None for _ in range(n_param)]
     # First round of perturbation - strong perturbation
     random.seed(1975)
     for i in range(rep1):
         p0 = dadi.Misc.perturb_params(params, fold=3, upper_bound=upper_bound,lower_bound=lower_bound)
         popt, ll_model = dadi.Inference.opt(p0, fs, demo_model_ex, pts_l,
         									lower_bound=lower_bound, upper_bound=upper_bound,
-        									fixed_params = [F1,F2,None,None,None],
-        									algorithm=nlopt.LN_BOBYQA, maxeval=MAXEVAL, verbose=100)
+        									fixed_params = FIXEDPARAM, ftol_abs=FTOL, xtol_abs=XTOL,
+        									algorithm=nlopt.LN_BOBYQA, maxeval=MAXEVAL, verbose=1)
         if ll_model > ll_max:
             ll_max = ll_model
             popt_max = popt
@@ -198,8 +208,8 @@ def perturbation(demo_model_ex,params,lower_bound,upper_bound,ll_max,popt_max,re
         p0 = dadi.Misc.perturb_params(params, fold=2, upper_bound=upper_bound,lower_bound=lower_bound)
         popt, ll_model = dadi.Inference.opt(p0, fs, demo_model_ex, pts_l,
         									lower_bound=lower_bound, upper_bound=upper_bound,
-        									fixed_params = [F1,F2,None,None,None],
-        									algorithm=nlopt.LN_BOBYQA, maxeval=MAXEVAL, verbose=100)
+        									fixed_params = FIXEDPARAM, ftol_abs=FTOL, xtol_abs=XTOL,
+        									algorithm=nlopt.LN_BOBYQA, maxeval=MAXEVAL, verbose=1)
         if ll_model > ll_max:
             ll_max = ll_model
             popt_max = popt
@@ -210,8 +220,8 @@ def perturbation(demo_model_ex,params,lower_bound,upper_bound,ll_max,popt_max,re
         p0 = dadi.Misc.perturb_params(popt_max, fold=2, upper_bound=upper_bound,lower_bound=lower_bound)
         popt, ll_model = dadi.Inference.opt(p0, fs, demo_model_ex, pts_l,
         									lower_bound=lower_bound, upper_bound=upper_bound,
-        									fixed_params = [F1,F2,None,None,None],
-        									algorithm=nlopt.LN_BOBYQA, maxeval=MAXEVAL, verbose=100)
+        									fixed_params = FIXEDPARAM, ftol_abs=FTOL, xtol_abs=XTOL,
+        									algorithm=nlopt.LN_BOBYQA, maxeval=MAXEVAL, verbose=1)
         if ll_model > ll_max:
             ll_max = ll_model
             popt_max = popt
@@ -222,8 +232,8 @@ def perturbation(demo_model_ex,params,lower_bound,upper_bound,ll_max,popt_max,re
         p0 = dadi.Misc.perturb_params(popt_max, fold=1, upper_bound=upper_bound,lower_bound=lower_bound)
         popt, ll_model = dadi.Inference.opt(p0, fs, demo_model_ex, pts_l,
         									lower_bound=lower_bound, upper_bound=upper_bound,
-        									fixed_params = [F1,F2,None,None,None],
-        									algorithm=nlopt.LN_BOBYQA, maxeval=MAXEVAL, verbose=100)
+        									fixed_params = FIXEDPARAM, ftol_abs=FTOL, xtol_abs=XTOL,
+        									algorithm=nlopt.LN_BOBYQA, maxeval=MAXEVAL, verbose=1)
         if ll_model > ll_max:
             ll_max = ll_model
             popt_max = popt
@@ -241,23 +251,43 @@ def perturbation(demo_model_ex,params,lower_bound,upper_bound,ll_max,popt_max,re
 
 
 
-#####################
-# RUNING THE MODELS #
-#####################
+############################
+# MAIN - RUNING THE MODELS #
+############################
 
 
-os.chdir('/Users/sglemin/Documents/Boulot/Recherche/Thematiques/SystRepro/SPECIATIONCLOCK/Abel/Data/2022_09_30_SFS_SpCl_GBS')
-
+#os.chdir('/Users/sglemin/Documents/Boulot/Recherche/Thematiques/SystRepro/SPECIATIONCLOCK/ArticleData/SpeciationClock/data_analyses/data/sfs')
+os.chdir('/scratch/sglemin/speciation_clock/sfs')
 
 MIN = 1e-3 #Minimum boundary for parameters
 MAX = 100 #Maximum boundary for parameters
+MAXEVAL = 100000
+FTOL = 1e-5
+XTOL = 1e-5
 
-list_file = glob.glob('*.sfs')
-list_file.sort(reverse=True)
+# To send file in argument and to the loop outside the python program
+list_file = sys.argv[1:]
+
+# To do the loop within the Python program
+# list_file = glob.glob('*.sfs')
+# list_file.sort()
+
 #list_file = list_file[5:len(list_file)]
 #list_file = list_file[26:len(list_file)]
 
-list_file = list_file[0:1]
+# read the csv file with inbreeding coefficients
+
+# Create a dictionary to store the data from the CSV file for quick lookup
+file_data = {}
+# Open the CSV file and read all rows
+with open('F_per_sfs_file.csv', mode='r', encoding='utf-8') as file:
+    csv_reader = csv.DictReader(file, delimiter=';')
+    # Store each row's data in the dictionary with File as the key
+    for row in csv_reader:
+        file_name = row['File']
+        f1_value = float(row['F1'])
+        f2_value = float(row['F2'])
+        file_data[file_name] = {'F1': f1_value, 'F2': f2_value}
 
 for f in list_file:
 
@@ -266,9 +296,26 @@ for f in list_file:
     # Loading the dataset
     fs = dadi.Spectrum.from_file(FILENAME+'.sfs')
     ns = fs.sample_sizes
+    print(ns)
     # Loading the Fis values
-    F1 = 0.001
-    F2 = 0.001
+    if ns[0] % 2 > 0:
+        n0 = ns[0] - 1
+        if ns[1] % 2 > 0:
+            n1 = ns[1] - 1
+            fs = fs.project([n0, n1])
+        else:
+            n1 = ns[1]
+            fs = fs.project([n0, n1])
+    else:
+        if ns[1] % 2 > 0:
+            n0 = ns[0]
+            n1 = ns[1] - 1
+            fs = fs.project([n0,n1])
+
+    ns = fs.sample_sizes
+
+    F1 = min(file_data[f]['F1'],0.9) # To avoid to high F values that may leads to numerical issues
+    F2 = min(file_data[f]['F2'],0.9)
     
     # Define the grid points based on the sample size.
     # For smaller data (largest sample size is about <100) [ns+20, ns+30, ns+40] is a good starting point.
@@ -305,14 +352,13 @@ for f in list_file:
     # First estimation with the initial starting point 
     popt, ll_model = dadi.Inference.opt(params, fs, demo_model_ex, pts_l,
     									lower_bound=lower_bound, upper_bound=upper_bound,
-    									fixed_params = [F1,F2,None,None,None],
-    									algorithm=nlopt.LN_BOBYQA, maxeval=20, verbose=1)
+    									fixed_params = [F1,F2,None,None,None], ftol_abs=FTOL, xtol_abs=XTOL,
+    									algorithm=nlopt.LN_BOBYQA, maxeval=MAXEVAL, verbose=1)
     ll_max = ll_model
     popt_max = popt
     
     # Optimization with iterative perturbation of the starting point
-    optim = perturbation(demo_model_ex, params, lower_bound, upper_bound, ll_max, popt_max,
-    					rep1=2,rep2=2,rep3=2,rep4=2,MAXEVAL=10)
+    optim = perturbation(demo_model_ex, params, lower_bound, upper_bound, ll_max, popt_max)
 
     # Data to be exported
     lnL_split = optim[0]
@@ -329,11 +375,12 @@ for f in list_file:
     output.close()
 
     # Saving plot
-    fs_opt = optim[4]
-    dadi.Plotting.plot_2d_comp_multinom(optim[4], fs,vmin=fs_opt.min()+ 0.01,vmax=fs_opt.max(),show = True)
-    plt.savefig(FILENAME+'_inbreeding_allo.png',dpi=200)
+    #fs_opt = optim[4]
+    #dadi.Plotting.plot_2d_comp_multinom(optim[4], fs,vmin=fs_opt.min()+ 0.01,vmax=fs_opt.max(),show = True)
+    #plt.savefig(FILENAME+'_inbreeding_allo.png',dpi=200)
     
     del(optim,theta,a,b,c)
+
 
     ###############################
     #### SYMMETRICAL MIGRATION ####
@@ -344,13 +391,16 @@ for f in list_file:
     demo_model_ex = dadi.Numerics.make_extrap_func(demo_model)
 
     # Starting parameters and boundaries
-    params = [F1,F2] + popt_split[0:2] + [2*popt_split[2]] + [1] # As a starting point: double divergence time and add migration
+    params = [F1,F2] + popt_split[0:2] + [min(2*popt_split[2],50)] + [1] # As a starting point: double divergence time and add migration
     #params = [1,1,1,1]
     lower_bound = [0,0,MIN,MIN,MIN,MIN]
     upper_bound = [1,1,MAX,MAX,MAX,MAX]
 
     # First estimation with the initial starting point
-    popt, ll_model = dadi.Inference.opt(params, fs, demo_model_ex, pts_l, lower_bound=lower_bound, upper_bound=upper_bound, algorithm=nlopt.LN_BOBYQA, maxeval=20, verbose=1)
+    popt, ll_model = dadi.Inference.opt(params, fs, demo_model_ex, pts_l,
+                                        lower_bound=lower_bound, upper_bound=upper_bound,
+                                        fixed_params = [F1,F2,None,None,None,None], ftol_abs=FTOL, xtol_abs=XTOL,
+    									algorithm=nlopt.LN_BOBYQA, maxeval=MAXEVAL, verbose=1)
     ll_max = ll_model
     popt_max = popt
 
@@ -372,9 +422,9 @@ for f in list_file:
     output.close()
 
     # Saving plot
-    fs_opt = optim[4]
-    dadi.Plotting.plot_2d_comp_multinom(optim[4], fs,vmin=fs_opt.min()+ 0.01,vmax=fs_opt.max(),show = False)
-    plt.savefig(FILENAME+'_inbreeding_splitmig.png',dpi=200)
+    # fs_opt = optim[4]
+    # dadi.Plotting.plot_2d_comp_multinom(optim[4], fs,vmin=fs_opt.min()+ 0.01,vmax=fs_opt.max(),show = False)
+    # plt.savefig(FILENAME+'_inbreeding_splitmig.png',dpi=200)
     
     del(optim,theta,a,b,c)
     
@@ -393,8 +443,10 @@ for f in list_file:
     upper_bound = [1,1,MAX,MAX,MAX,MAX,MAX]
 
     # First estimation with the initial starting point 
-    popt, ll_model = dadi.Inference.opt(params, fs, demo_model_ex, pts_l, lower_bound=lower_bound, upper_bound=upper_bound, algorithm=nlopt.LN_BOBYQA, maxeval=20, verbose=1)
-    ll_max = ll_model
+    popt, ll_model = dadi.Inference.opt(params, fs, demo_model_ex, pts_l,
+                                        lower_bound=lower_bound, upper_bound=upper_bound,
+                                        fixed_params = [F1,F2,None,None,None,None,None], ftol_abs=FTOL, xtol_abs=XTOL,
+    									algorithm=nlopt.LN_BOBYQA, maxeval=MAXEVAL, verbose=1)
     popt_max = popt
 
     # Optimization with iterative perturbation of the starting point
@@ -415,9 +467,9 @@ for f in list_file:
     output.close()
 
     # Saving plot
-    fs_opt = optim[4]
-    dadi.Plotting.plot_2d_comp_multinom(optim[4], fs,vmin=fs_opt.min()+ 0.01,vmax=fs_opt.max(),show = False)
-    plt.savefig(FILENAME+'_inbreeding_splitancmig.png',dpi=200)
+    # fs_opt = optim[4]
+    # dadi.Plotting.plot_2d_comp_multinom(optim[4], fs,vmin=fs_opt.min()+ 0.01,vmax=fs_opt.max(),show = False)
+    # plt.savefig(FILENAME+'_inbreeding_splitancmig.png',dpi=200)
     
     del(optim,theta,a,b,c)
 
@@ -435,8 +487,11 @@ for f in list_file:
     lower_bound = [0,0,MIN,MIN,MIN,MIN,MIN]
     upper_bound = [1,1,MAX,MAX,MAX,MAX,MAX]
 
-    # First estimation with the initial starting point 
-    popt, ll_model = dadi.Inference.opt(params, fs, demo_model_ex, pts_l, lower_bound=lower_bound, upper_bound=upper_bound, algorithm=nlopt.LN_BOBYQA, maxeval=20, verbose=1)
+    # First estimation with the initial starting point
+    popt, ll_model = dadi.Inference.opt(params, fs, demo_model_ex, pts_l,
+                                        lower_bound=lower_bound, upper_bound=upper_bound,
+                                        fixed_params = [F1,F2,None,None,None,None,None], ftol_abs=FTOL, xtol_abs=XTOL,
+    									algorithm=nlopt.LN_BOBYQA, maxeval=MAXEVAL, verbose=1)
     ll_max = ll_model
     popt_max = popt
 
@@ -458,9 +513,9 @@ for f in list_file:
     output.close()
 
     # Saving plot
-    fs_opt = optim[4]
-    dadi.Plotting.plot_2d_comp_multinom(optim[4], fs,vmin=fs_opt.min()+ 0.01,vmax=fs_opt.max(),show = False)
-    plt.savefig(FILENAME+'_inbreeding_seccontact.png',dpi=200)
+    # fs_opt = optim[4]
+    # dadi.Plotting.plot_2d_comp_multinom(optim[4], fs,vmin=fs_opt.min()+ 0.01,vmax=fs_opt.max(),show = False)
+    # plt.savefig(FILENAME+'_inbreeding_seccontact.png',dpi=200)
     
     del(optim,theta,a,b,c)
 
@@ -479,7 +534,10 @@ for f in list_file:
     upper_bound = [1,1,MAX,MAX,MAX,MAX,MAX,MAX]
 
     # First estimation with the initial starting point 
-    popt, ll_model = dadi.Inference.opt(params, fs, demo_model_ex, pts_l, lower_bound=lower_bound, upper_bound=upper_bound, algorithm=nlopt.LN_BOBYQA, maxeval=20, verbose=1)
+    popt, ll_model = dadi.Inference.opt(params, fs, demo_model_ex, pts_l,
+                                        lower_bound=lower_bound, upper_bound=upper_bound,
+                                        fixed_params = [F1,F2,None,None,None,None,None,None], ftol_abs=FTOL, xtol_abs=XTOL,
+    									algorithm=nlopt.LN_BOBYQA, maxeval=MAXEVAL, verbose=1)
     ll_max = ll_model
     popt_max = popt
 
@@ -501,14 +559,11 @@ for f in list_file:
     output.close()
 
     # Saving plot
-    fs_opt = optim[4]
-    dadi.Plotting.plot_2d_comp_multinom(optim[4], fs,vmin=fs_opt.min()+ 0.01,vmax=fs_opt.max(),show = False)
-    plt.savefig(FILENAME+'_inbreeding_twoepoch.png',dpi=200)
+    # fs_opt = optim[4]
+    # dadi.Plotting.plot_2d_comp_multinom(optim[4], fs,vmin=fs_opt.min()+ 0.01,vmax=fs_opt.max(),show = False)
+    # plt.savefig(FILENAME+'_inbreeding_twoepoch.png',dpi=200)
     
     del(optim,theta,a,b,c)
-
-
-
 
 exit(0)
 
