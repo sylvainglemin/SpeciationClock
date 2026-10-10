@@ -1,53 +1,339 @@
-Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) [
-glmerMod]
+Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) ['glmerMod']
  Family: binomial  ( logit )
-Formula: cbind(FertilePollen, UnFertilePollen) ~ (1 | Species) + Region +  
-    log10(MtotalAbs) + log10(TsplitAbs) + log10(AbsoluteRecentSize) +  
-    STDMeanSelfRate + STDMeanParentalFertility
+Formula: cbind(FertilePollen, UnFertilePollen) ~ (1 | Species) + (log10(Mtotal) +  
+    log10(TsplitAbs) + log10(AbsoluteRecentSize)) * STDMeanSelfRate +  
+    Region + STDMeanParentalFertility
    Data: HybData_dadi_average
+Control: glmerControl(optimizer = "bobyqa", autoscale = TRUE)
 
       AIC       BIC    logLik -2*log(L)  df.resid 
-  17304.3   17335.8   -8644.1   17288.3       374 
+  17301.0   17344.4   -8639.5   17279.0       371 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
--42.934  -2.976   0.400   2.439  26.373 
+-42.957  -2.977   0.396   2.442  26.373 
 
 Random effects:
  Groups  Name        Variance Std.Dev.
- Species (Intercept) 0.7132   0.8445  
+ Species (Intercept) 0.4655   0.6823  
 Number of obs: 382, groups:  Species, 20
 
 Fixed effects:
-                          Estimate Std. Error z value Pr(>|z|)    
-(Intercept)               -1.13890    1.76991  -0.643 0.519914    
-RegionMediterranean        1.22937    0.54498   2.256 0.024082 *  
-log10(MtotalAbs)          -0.05246    0.24206  -0.217 0.828423    
-log10(TsplitAbs)          -1.64973    0.46022  -3.585 0.000338 ***
-log10(AbsoluteRecentSize)  2.10524    0.63958   3.292 0.000996 ***
-STDMeanSelfRate           -0.35087    0.22986  -1.526 0.126900    
-STDMeanParentalFertility   0.43405    0.15432   2.813 0.004913 ** 
+                                          Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                                -2.4825     1.5145  -1.639 0.101178    
+log10(Mtotal)                               0.2215     0.2327   0.952 0.341219    
+log10(TsplitAbs)                           -1.4715     0.5765  -2.552 0.010698 *  
+log10(AbsoluteRecentSize)                   2.6534     0.7250   3.660 0.000252 ***
+STDMeanSelfRate                            -6.9843     2.2217  -3.144 0.001668 ** 
+RegionMediterranean                         1.8754     0.5056   3.709 0.000208 ***
+STDMeanParentalFertility                    0.4287     0.1264   3.391 0.000696 ***
+log10(Mtotal):STDMeanSelfRate               0.2133     0.2128   1.002 0.316135    
+log10(TsplitAbs):STDMeanSelfRate            0.5816     0.3383   1.719 0.085550 .  
+log10(AbsoluteRecentSize):STDMeanSelfRate   1.5643     0.7640   2.047 0.040611 *  
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-
-Correlation of Fixed Effects:
-            (Intr) RgnMdt l10(MA l10(TA l10(AR STDMSR
-RegnMdtrrnn  0.486                                   
-lg10(MttlA) -0.118  0.138                            
-lg10(TsplA) -0.539 -0.394  0.152                     
-lg10(AbsRS) -0.630 -0.235  0.534 -0.118              
-STDMenSlfRt -0.632 -0.250  0.319  0.288  0.607       
-STDMnPrntlF -0.073  0.105 -0.044 -0.031  0.028 -0.024
 Analysis of Deviance Table (Type III Wald chisquare tests)
 
 Response: cbind(FertilePollen, UnFertilePollen)
-                            Chisq Df Pr(>Chisq)    
-(Intercept)                0.4141  1  0.5199137    
-Region                     5.0887  1  0.0240820 *  
-log10(MtotalAbs)           0.0470  1  0.8284226    
-log10(TsplitAbs)          12.8498  1  0.0003375 ***
-log10(AbsoluteRecentSize) 10.8345  1  0.0009962 ***
-STDMeanSelfRate            2.3300  1  0.1269002    
-STDMeanParentalFertility   7.9113  1  0.0049126 ** 
+                                            Chisq Df Pr(>Chisq)    
+(Intercept)                                2.6869  1  0.1011779    
+log10(Mtotal)                              0.9058  1  0.3412191    
+log10(TsplitAbs)                           6.5148  1  0.0106981 *  
+log10(AbsoluteRecentSize)                 13.3941  1  0.0002524 ***
+STDMeanSelfRate                            9.8828  1  0.0016683 ** 
+Region                                    13.7564  1  0.0002081 ***
+STDMeanParentalFertility                  11.5012  1  0.0006955 ***
+log10(Mtotal):STDMeanSelfRate              1.0049  1  0.3161353    
+log10(TsplitAbs):STDMeanSelfRate           2.9562  1  0.0855496 .  
+log10(AbsoluteRecentSize):STDMeanSelfRate  4.1922  1  0.0406107 *  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+[1] 6
+[1] 5
+Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) ['glmerMod']
+ Family: binomial  ( logit )
+Formula: cbind(FertilePollen, UnFertilePollen) ~ log10(AbsoluteRecentSize) +  
+    log10(TsplitAbs) + Region + STDMeanParentalFertility + STDMeanSelfRate +  
+    (1 | Species) + log10(AbsoluteRecentSize):STDMeanSelfRate +      log10(TsplitAbs):STDMeanSelfRate
+   Data: HybData_dadi_average
+Control: glmerControl(optimizer = "bobyqa", autoscale = TRUE)
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+  17298.3   17333.8   -8640.1   17280.3       373 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-42.945  -2.976   0.391   2.442  26.368 
+
+Random effects:
+ Groups  Name        Variance Std.Dev.
+ Species (Intercept) 0.4967   0.7048  
+Number of obs: 382, groups:  Species, 20
+
+Fixed effects:
+                                          Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                                -2.0251     1.4996  -1.350 0.176876    
+log10(AbsoluteRecentSize)                   2.2298     0.6493   3.434 0.000595 ***
+log10(TsplitAbs)                           -1.3119     0.5776  -2.271 0.023131 *  
+RegionMediterranean                         1.6095     0.4673   3.444 0.000573 ***
+STDMeanParentalFertility                    0.4429     0.1297   3.414 0.000639 ***
+STDMeanSelfRate                            -5.3170     1.7582  -3.024 0.002494 ** 
+log10(AbsoluteRecentSize):STDMeanSelfRate   0.9806     0.6035   1.625 0.104229    
+log10(TsplitAbs):STDMeanSelfRate            0.5564     0.3427   1.623 0.104508    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+$`382`
+Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) ['glmerMod']
+ Family: binomial  ( logit )
+Formula: cbind(FertilePollen, UnFertilePollen) ~ log10(AbsoluteRecentSize) +  
+    log10(TsplitAbs) + Region + STDMeanParentalFertility + STDMeanSelfRate +  
+    (1 | Species) + log10(AbsoluteRecentSize):STDMeanSelfRate +      log10(TsplitAbs):STDMeanSelfRate
+   Data: HybData_dadi_average
+      AIC       BIC    logLik -2*log(L)  df.resid 
+17298.298 17333.806 -8640.149 17280.298       373 
+Random effects:
+ Groups  Name        Std.Dev.
+ Species (Intercept) 0.7048  
+Number of obs: 382, groups:  Species, 20
+Fixed Effects:
+                              (Intercept)                  log10(AbsoluteRecentSize)  
+                                  -2.0251                                     2.2298  
+                         log10(TsplitAbs)                        RegionMediterranean  
+                                  -1.3119                                     1.6095  
+                 STDMeanParentalFertility                            STDMeanSelfRate  
+                                   0.4429                                    -5.3170  
+log10(AbsoluteRecentSize):STDMeanSelfRate           log10(TsplitAbs):STDMeanSelfRate  
+                                   0.9806                                     0.5564  
+
+$`318`
+Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) ['glmerMod']
+ Family: binomial  ( logit )
+Formula: cbind(FertilePollen, UnFertilePollen) ~ log10(AbsoluteRecentSize) +  
+    log10(TsplitAbs) + Region + STDMeanParentalFertility + STDMeanSelfRate +  
+    (1 | Species) + log10(TsplitAbs):STDMeanSelfRate
+   Data: HybData_dadi_average
+      AIC       BIC    logLik -2*log(L)  df.resid 
+17298.768 17330.331 -8641.384 17282.768       374 
+Random effects:
+ Groups  Name        Std.Dev.
+ Species (Intercept) 0.745   
+Number of obs: 382, groups:  Species, 20
+Fixed Effects:
+                     (Intercept)         log10(AbsoluteRecentSize)                  log10(TsplitAbs)  
+                         -1.8484                            1.5704                           -0.8125  
+             RegionMediterranean          STDMeanParentalFertility                   STDMeanSelfRate  
+                          1.4561                            0.4182                           -3.0605  
+log10(TsplitAbs):STDMeanSelfRate  
+                          0.8053  
+
+$`126`
+Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) ['glmerMod']
+ Family: binomial  ( logit )
+Formula: cbind(FertilePollen, UnFertilePollen) ~ log10(AbsoluteRecentSize) +  
+    log10(TsplitAbs) + Region + STDMeanParentalFertility + STDMeanSelfRate +  
+    (1 | Species) + log10(AbsoluteRecentSize):STDMeanSelfRate
+   Data: HybData_dadi_average
+      AIC       BIC    logLik -2*log(L)  df.resid 
+17298.771 17330.334 -8641.385 17282.771       374 
+Random effects:
+ Groups  Name        Std.Dev.
+ Species (Intercept) 0.7485  
+Number of obs: 382, groups:  Species, 20
+Fixed Effects:
+                              (Intercept)                  log10(AbsoluteRecentSize)  
+                                   -1.780                                      2.865  
+                         log10(TsplitAbs)                        RegionMediterranean  
+                                   -1.980                                      1.563  
+                 STDMeanParentalFertility                            STDMeanSelfRate  
+                                    0.462                                     -4.828  
+log10(AbsoluteRecentSize):STDMeanSelfRate  
+                                    1.423  
+
+$`384`
+Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) ['glmerMod']
+ Family: binomial  ( logit )
+Formula: cbind(FertilePollen, UnFertilePollen) ~ log10(AbsoluteRecentSize) +  
+    log10(Mtotal) + log10(TsplitAbs) + Region + STDMeanParentalFertility +  
+    STDMeanSelfRate + (1 | Species) + log10(AbsoluteRecentSize):STDMeanSelfRate +  
+    log10(TsplitAbs):STDMeanSelfRate
+   Data: HybData_dadi_average
+      AIC       BIC    logLik -2*log(L)  df.resid 
+17299.949 17339.404 -8639.975 17279.949       372 
+Random effects:
+ Groups  Name        Std.Dev.
+ Species (Intercept) 0.6996  
+Number of obs: 382, groups:  Species, 20
+Fixed Effects:
+                              (Intercept)                  log10(AbsoluteRecentSize)  
+                                  -2.2413                                     2.3740  
+                            log10(Mtotal)                           log10(TsplitAbs)  
+                                   0.1304                                    -1.3402  
+                      RegionMediterranean                   STDMeanParentalFertility  
+                                   1.6789                                     0.4428  
+                          STDMeanSelfRate  log10(AbsoluteRecentSize):STDMeanSelfRate  
+                                  -5.6973                                     1.1362  
+         log10(TsplitAbs):STDMeanSelfRate  
+                                   0.5344  
+
+$`128`
+Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) ['glmerMod']
+ Family: binomial  ( logit )
+Formula: cbind(FertilePollen, UnFertilePollen) ~ log10(AbsoluteRecentSize) +  
+    log10(Mtotal) + log10(TsplitAbs) + Region + STDMeanParentalFertility +  
+    STDMeanSelfRate + (1 | Species) + log10(AbsoluteRecentSize):STDMeanSelfRate
+   Data: HybData_dadi_average
+      AIC       BIC    logLik -2*log(L)  df.resid 
+ 17300.24  17335.75  -8641.12  17282.24       373 
+Random effects:
+ Groups  Name        Std.Dev.
+ Species (Intercept) 0.7406  
+Number of obs: 382, groups:  Species, 20
+Fixed Effects:
+                              (Intercept)                  log10(AbsoluteRecentSize)  
+                                  -2.0803                                     3.0168  
+                            log10(Mtotal)                           log10(TsplitAbs)  
+                                   0.1687                                    -1.9783  
+                      RegionMediterranean                   STDMeanParentalFertility  
+                                   1.6540                                     0.4609  
+                          STDMeanSelfRate  log10(AbsoluteRecentSize):STDMeanSelfRate  
+                                  -5.3265                                     1.5966  
+
+attr(,"rank")
+function (x) 
+rank(x)
+<environment: 0x7fea48049790>
+attr(,"beta")
+[1] "none"
+Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) ['glmerMod']
+ Family: binomial  ( logit )
+Formula: cbind(FertilePollen, UnFertilePollen) ~ (1 | Species) + (log10(Mtotal) +  
+    log10(TsplitAbs) + log10(AbsoluteRecentSize)) * STDMeanSelfRate +  
+    Region + STDMeanParentalFertility
+   Data: HybData_dadi_average
+      AIC       BIC    logLik -2*log(L)  df.resid 
+ 17300.98  17344.38  -8639.49  17278.98       371 
+Random effects:
+ Groups  Name        Std.Dev.
+ Species (Intercept) 0.6823  
+Number of obs: 382, groups:  Species, 20
+Fixed Effects:
+                              (Intercept)                              log10(Mtotal)  
+                                  -2.4825                                     0.2215  
+                         log10(TsplitAbs)                  log10(AbsoluteRecentSize)  
+                                  -1.4715                                     2.6534  
+                          STDMeanSelfRate                        RegionMediterranean  
+                                  -6.9843                                     1.8754  
+                 STDMeanParentalFertility              log10(Mtotal):STDMeanSelfRate  
+                                   0.4287                                     0.2133  
+         log10(TsplitAbs):STDMeanSelfRate  log10(AbsoluteRecentSize):STDMeanSelfRate  
+                                   0.5816                                     1.5643  
+indexing SpArc_HybData.txt [======================================================] 2.70GB/s, eta:  0s                                                                                                      [1] 444
+[1] 30
+[1] 19
+                  Species NbPollen NbSeed     Fst
+1           Arabis_alpina       25     25 0.66800
+2       Arabis_auriculata       18      4 0.95100
+3          Arabis_turrita       22     22 0.94400
+4          Bunias_erucago        2      2 0.20800
+5         Cakile_maritima        6      6 0.24700
+6  Cardamine_bellidifolia       15      4 0.75938
+7       Cardamine_hirsuta       23      0 0.75500
+8      Draba_fladnizensis        1      1 0.30120
+9      Draba_fladnizensis        1      0 0.50010
+10     Draba_fladnizensis        7      2 0.60622
+11     Draba_fladnizensis        2      0 0.61839
+12     Draba_fladnizensis        8      0 0.69564
+13     Draba_fladnizensis        5      4 0.78599
+14          Draba_nivalis        1      0 0.33593
+15          Draba_nivalis       17      4 0.35648
+16          Draba_nivalis        8      6 0.48284
+17          Draba_nivalis        9      8 0.56554
+18        Eruca_vesicaria       40     40 0.25500
+19    Hirschfeldia_incana       17     17 0.65000
+20      Hornungia_petraea       14      0 0.80400
+21      Matthiola_sinuata       24     24 0.91700
+22 Matthiola_tricuspidata       26     26 0.67600
+23    Ranunculus_pygmaeus       23      8 0.59465
+24    Ranunculus_pygmaeus        8      3 0.59481
+25      Rapistrum_rugosum        6      6 0.08600
+26   Saxifraga_hyperborea       57      0 0.15062
+27         Silene_acaulis        1      1 0.14713
+28         Silene_acaulis        4      2 0.52595
+29         Silene_acaulis       14      7 0.57532
+30       Sinapis_arvensis       40     40 0.26900
+[1] 444
+   Length     Class      Mode 
+      410 character character 
+indexing SpArc_HybData_dadi.txt [================================================] 67.85GB/s, eta:  0s                                                                                                      indexing SpArc_Summary_HybData_dadi.txt [=========================================] 1.17GB/s, eta:  0s                                                                                                      [1] 764
+                   Species     Fst
+1            Arabis_alpina 0.66800
+51       Arabis_auriculata 0.95100
+87          Arabis_turrita 0.94400
+131         Bunias_erucago 0.20800
+135        Cakile_maritima 0.24700
+147 Cardamine_bellidifolia 0.75938
+177      Cardamine_hirsuta 0.75500
+223        Eruca_vesicaria 0.25500
+303    Hirschfeldia_incana 0.65000
+337      Hornungia_petraea 0.80400
+365      Matthiola_sinuata 0.91700
+413 Matthiola_tricuspidata 0.67600
+465 Ranunculus_pygmaeus_AN 0.59481
+481 Ranunculus_pygmaeus_AS 0.59465
+521      Rapistrum_rugosum 0.08600
+533   Saxifraga_hyperborea 0.15062
+647      Silene_acaulis_AN 0.52595
+655      Silene_acaulis_AS 0.57532
+683      Silene_acaulis_NS 0.14713
+685       Sinapis_arvensis 0.26900
+[1] 20
+Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) ['glmerMod']
+ Family: binomial  ( logit )
+Formula: cbind(FertilePollen, UnFertilePollen) ~ (1 | Species) + (log10(Mtotal) +  
+    log10(TsplitAbs) + log10(AbsoluteRecentSize)) * STDMeanSelfRate +  
+    Region + STDMeanParentalFertility
+   Data: HybData_dadi_average
+Control: glmerControl(optimizer = "bobyqa", autoscale = TRUE)
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+  17301.0   17344.4   -8639.5   17279.0       371 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-42.957  -2.977   0.396   2.442  26.373 
+
+Random effects:
+ Groups  Name        Variance Std.Dev.
+ Species (Intercept) 0.4655   0.6823  
+Number of obs: 382, groups:  Species, 20
+
+Fixed effects:
+                                          Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                                -2.4825     1.5145  -1.639 0.101178    
+log10(Mtotal)                               0.2215     0.2327   0.952 0.341219    
+log10(TsplitAbs)                           -1.4715     0.5765  -2.552 0.010698 *  
+log10(AbsoluteRecentSize)                   2.6534     0.7250   3.660 0.000252 ***
+STDMeanSelfRate                            -6.9843     2.2217  -3.144 0.001668 ** 
+RegionMediterranean                         1.8754     0.5056   3.709 0.000208 ***
+STDMeanParentalFertility                    0.4287     0.1264   3.391 0.000696 ***
+log10(Mtotal):STDMeanSelfRate               0.2133     0.2128   1.002 0.316135    
+log10(TsplitAbs):STDMeanSelfRate            0.5816     0.3383   1.719 0.085550 .  
+log10(AbsoluteRecentSize):STDMeanSelfRate   1.5643     0.7640   2.047 0.040611 *  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Analysis of Deviance Table (Type III Wald chisquare tests)
+
+Response: cbind(FertilePollen, UnFertilePollen)
+                                            Chisq Df Pr(>Chisq)    
+(Intercept)                                2.6869  1  0.1011779    
+log10(Mtotal)                              0.9058  1  0.3412191    
+log10(TsplitAbs)                           6.5148  1  0.0106981 *  
+log10(AbsoluteRecentSize)                 13.3941  1  0.0002524 ***
+STDMeanSelfRate                            9.8828  1  0.0016683 ** 
+Region                                    13.7564  1  0.0002081 ***
+STDMeanParentalFertility                  11.5012  1  0.0006955 ***
+log10(Mtotal):STDMeanSelfRate              1.0049  1  0.3161353    
+log10(TsplitAbs):STDMeanSelfRate           2.9562  1  0.0855496 .  
+log10(AbsoluteRecentSize):STDMeanSelfRate  4.1922  1  0.0406107 *  
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1

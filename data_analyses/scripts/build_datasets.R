@@ -246,16 +246,19 @@ write.table(HybData, file="outputs/synthetized_data/SpArc_HybData.txt", row.name
 write.table(Summary_HybData, file="outputs/synthetized_data/SpArc_Summary_HybData.txt", row.names = FALSE)
 
 
-################### #
-## DADI DATASET ####
-################# #
+#################### #
+## DADI DATASETS ####
+################## #
 
-list.results <- list.files(path = "outputs/dadi_results/", pattern = ".out$")
+
+# Standard ∂a∂i analysis - no inbreeding ####
+
+list.results <- list.files(path = "outputs/dadi_results/standard/", pattern = ".out$")
 
 dadi <- data.frame()
 
 for (input in list.results) {
-  df <- read.table(paste("outputs/dadi_results/",input,sep=""),header = T)
+  df <- read.table(paste("outputs/dadi_results/standard/",input,sep=""),header = T)
   df$dof <- c(0,1,2,2,3) 
   df$aic <- 2*df$dof-2*df$lnL
   df$Daic <- df$aic - min(df$aic)
@@ -277,7 +280,7 @@ for (input in list.results) {
 
 # dataset with average parameters (model averaging procedure based on AIC)
 # including also the pure allopatry model as a control
-dadi_average <- dadi[dadi$model=="average" | dadi$model=="split",]
+dadi_average <- dadi[dadi$model=="average" | dadi$model=="split_mig",]
 
 
 # Add the variable species to the dadi datasets
@@ -291,6 +294,7 @@ colnames(dadi_average)[colnames(dadi_average) == 'Total_length'] <- 'TotalLength
 mu <- 0.59*10^(-8) # From Ossowski et al. 2010 in Arabidopsis thaliana
 #dadi_average$K <- dadi_average$theta / (4*dadi_average$TotalLength*mu)
 p_snp <- dadi_average$Nsnp/dadi_average$Ntot
+dadi_average$meanPi <- (dadi_average$pi0+dadi_average$pi1)/(2*dadi_average$Ntot*dadi_average$Lcontig)
 dadi_average$Nref <- dadi_average$theta/(4*mu*dadi_average$Ntot*dadi_average$Lcontig)
 dadi_average$Nrefalt <- dadi_average$theta* (-log(1-p_snp)/p_snp)/(4*mu*dadi_average$Ntot*dadi_average$Lcontig)
 # Remove pairs of populations not used in the rest of the analysis
@@ -333,6 +337,7 @@ Summary_HybData_dadi <- HybData_dadi %>%
     SeedGerm=mean(SeedGerm,na.rm=T),
     MeanParentalGermination=mean(MeanParentalGermination,na.rm=T),
     STDMeanParentalGermination=mean(STDMeanParentalGermination,na.rm=T),
+    meanPi=mean(meanPi),
     Nref=mean(Nref),
     Nrefalt=mean(Nrefalt),
     Mtotal=mean(Mtotal),
@@ -346,3 +351,369 @@ Summary_HybData_dadi <- HybData_dadi %>%
 write.table(HybData_dadi, file="outputs/synthetized_data/SpArc_HybData_dadi.txt", row.names = FALSE)
 write.table(Summary_HybData_dadi, file="outputs/synthetized_data/SpArc_Summary_HybData_dadi.txt", row.names = FALSE)
 
+
+
+
+# ∂a∂i analysis with fixed inbreeding ####
+
+# We extract only the split_mig model
+
+list.results <- list.files(path = "outputs/dadi_results/fixed_inbreeding/", pattern = ".out$")
+
+# List with one fixed F coefficient for the two populations
+list_fix1 <- list.results[grep("single",list.results)]
+# List with two fixed F coefficients, one per population
+list_fix2 <- list.results[grep("single",list.results,invert = T)]
+
+# One F for the two populations ####
+dadi_fix1 <- data.frame()
+for (input in list_fix1) {
+  df <- read.table(paste("outputs/dadi_results/fixed_inbreeding/",input,sep=""),header = T)
+  dadi_fix1 <- rbind(dadi_fix1,df[df$model=="split_mig",])
+  rm(df)
+}
+names(dadi_fix1)[which(names(dadi_fix1)=="N1")] <- "N0"
+names(dadi_fix1)[which(names(dadi_fix1)=="N2")] <- "N1"
+names(dadi_fix1)[which(names(dadi_fix1)=="sN1")] <- "sN0"
+names(dadi_fix1)[which(names(dadi_fix1)=="sN2")] <- "sN1"
+# Add the variable species to the dadi datasets
+for (i in 1:nrow(dadi_fix1)) (dadi_fix1$Species[i] <- cortable[match(strsplit(dadi_fix1$dataset[i],"_")[[1]][1],cortable[,1]),2])
+for (i in 1:nrow(dadi_fix1)) (dadi_fix1$Dataset[i] <- cortable[match(strsplit(dadi_fix1$dataset[i],"_")[[1]][1],cortable[,1]),3])
+
+# Add theta and TotalLength (ie, nb of total SNP) from the CorrectingFactorGBS.txt file, and compute K, the correcting factor
+CorrectingFactorGBS <- read.table("outputs/gbs_results/CorrectingFactorGBS.txt",header = T)
+dadi_fix1 <- inner_join(dadi_fix1,CorrectingFactorGBS,by="Species")
+colnames(dadi_fix1)[colnames(dadi_fix1) == 'Total_length'] <- 'TotalLength'
+mu <- 0.59*10^(-8) # From Ossowski et al. 2010 in Arabidopsis thaliana
+#dadi_free_average$K <- dadi_free_average$theta / (4*dadi_free_average$TotalLength*mu)
+p_snp <- dadi_fix1$Nsnp/dadi_fix1$Ntot
+dadi_fix1$Nref <- dadi_fix1$theta/(4*mu*dadi_fix1$Ntot*dadi_fix1$Lcontig)
+dadi_fix1$Nrefalt <- dadi_fix1$theta* (-log(1-p_snp)/p_snp)/(4*mu*dadi_fix1$Ntot*dadi_fix1$Lcontig)
+# Remove pairs of populations not used in the rest of the analysis
+dadi_fix1 <- dadi_fix1[dadi_fix1$dataset!="CB_Oppdal-Norway",]
+dadi_fix1 <- dadi_fix1[dadi_fix1$dataset!="CB_Oppdal-Svalbard",]
+dadi_fix1 <- dadi_fix1[dadi_fix1$dataset!="RP_Svalbard-Norway",]
+dadi_fix1 <- dadi_fix1[dadi_fix1$dataset!="SAC_Svalbard_Lovisa-Alaska",]
+dadi_fix1 <- dadi_fix1[dadi_fix1$dataset!="SAC_Svalbard_Lovisa-Oppdal",]
+dadi_fix1 <- dadi_fix1[dadi_fix1$dataset!="SAC_Svalbard_Lovisa-Svalbard_Pernille",]
+dadi_fix1 <- dadi_fix1[dadi_fix1$dataset!="SU_Svalbard_Lovisa-Svalbard_Pernille",]
+dadi_fix1 <- dadi_fix1[dadi_fix1$dataset!="DN_Dovre-Svalbard_Pernille",]
+
+# Create new species*pop index for RP and SAC where two and three pairs are used
+dadi_fix1$Species <- ifelse(dadi_fix1$dataset=="RP_Alaska-Norway","Ranunculus_pygmaeus_AN",dadi_fix1$Species)
+dadi_fix1$Species <- ifelse(dadi_fix1$dataset=="RP_Svalbard-Alaska","Ranunculus_pygmaeus_AS",dadi_fix1$Species)
+dadi_fix1$Species <- ifelse(dadi_fix1$dataset=="SAC_Alaska-Oppdal","Silene_acaulis_AN",dadi_fix1$Species)
+dadi_fix1$Species <- ifelse(dadi_fix1$dataset=="SAC_Alaska-Svalbard_Pernille","Silene_acaulis_AS",dadi_fix1$Species)
+dadi_fix1$Species <- ifelse(dadi_fix1$dataset=="SAC_Oppdal-Svalbard_Pernille","Silene_acaulis_NS",dadi_fix1$Species)
+HybData$Species <- ifelse(HybData$Species=="Ranunculus_pygmaeus" & HybData$MatPop=="A" & HybData$PatPop=="N","Ranunculus_pygmaeus_AN",HybData$Species)
+HybData$Species <- ifelse(HybData$Species=="Ranunculus_pygmaeus" & HybData$MatPop=="N" & HybData$PatPop=="A","Ranunculus_pygmaeus_AN",HybData$Species)
+HybData$Species <- ifelse(HybData$Species=="Ranunculus_pygmaeus" & HybData$MatPop=="A" & HybData$PatPop=="S","Ranunculus_pygmaeus_AS",HybData$Species)
+HybData$Species <- ifelse(HybData$Species=="Ranunculus_pygmaeus" & HybData$MatPop=="S" & HybData$PatPop=="S","Ranunculus_pygmaeus_AS",HybData$Species)
+HybData$Species <- ifelse(HybData$Species=="Silene_acaulis" & HybData$MatPop=="A" & HybData$PatPop=="N","Silene_acaulis_AN",HybData$Species)
+HybData$Species <- ifelse(HybData$Species=="Silene_acaulis" & HybData$MatPop=="N" & HybData$PatPop=="A","Silene_acaulis_AN",HybData$Species)
+HybData$Species <- ifelse(HybData$Species=="Silene_acaulis" & HybData$MatPop=="A" & HybData$PatPop=="S","Silene_acaulis_AS",HybData$Species)
+HybData$Species <- ifelse(HybData$Species=="Silene_acaulis" & HybData$MatPop=="S" & HybData$PatPop=="A","Silene_acaulis_AS",HybData$Species)
+HybData$Species <- ifelse(HybData$Species=="Silene_acaulis" & HybData$MatPop=="N" & HybData$PatPop=="S","Silene_acaulis_NS",HybData$Species)
+HybData$Species <- ifelse(HybData$Species=="Silene_acaulis" & HybData$MatPop=="S" & HybData$PatPop=="N","Silene_acaulis_NS",HybData$Species)
+
+HybData_dadi_fix1 <- merge(HybData,dadi_fix1,by="Species")
+HybData_dadi_fix1 <- subset(HybData_dadi_fix1,!is.na(Fst)&!is.na(PollenFert)&!is.na(MeanSelfRate)) #remove rows with missing data
+
+Summary_HybData_dadi_fix1 <- HybData_dadi_fix1 %>% 
+  dplyr::group_by(Dataset.y,Species,Fst,model) %>% 
+  dplyr::summarise(
+    PollenFert=mean(PollenFert, na.rm=T),
+    nPollenFert=mean(nPollenFert, na.rm=T),
+    MeanParentalFertility=mean(MeanParentalFertility, na.rm=T),
+    MeanSelfRate=mean(MeanSelfRate, na.rm=T),
+    SeedGerm=mean(SeedGerm,na.rm=T),
+    MeanParentalGermination=mean(MeanParentalGermination,na.rm=T),
+    STDMeanParentalGermination=mean(STDMeanParentalGermination,na.rm=T),
+    Mean_Dxy=mean(Mean_Dxy),
+    Fst=mean(Fst),
+    F1=mean(F1),
+    F2=mean(F2),
+    Self1=mean(2*F1/(1+F1)),
+    Self2=mean(2*F2/(1+F2)),
+    Self=mean(F1/(1+F1)+F2/(1+F2)),
+    Nref=mean(Nref),
+    Nrefalt=mean(Nrefalt),
+    Mtotal=mean(Manc),  # Only split_mig model so Manc = Mrec = Mtot
+    Tsplit=mean(Tsplit),
+    N0=mean(N0),
+    N1=mean(N1),
+
+  )
+
+# Save dadi datasets
+write.table(HybData_dadi_fix1, file="outputs/synthetized_data/SpArc_HybData_dadi_fix1.txt", row.names = FALSE)
+write.table(Summary_HybData_dadi_fix1, file="outputs/synthetized_data/SpArc_Summary_HybData_dadi_fix1.txt", row.names = FALSE)
+
+
+# One F per population ####
+dadi_fix2 <- data.frame()
+for (input in list_fix2) {
+  df <- read.table(paste("outputs/dadi_results/fixed_inbreeding/",input,sep=""),header = T)
+  dadi_fix2 <- rbind(dadi_fix2,df[df$model=="split_mig",])
+  rm(df)
+}
+names(dadi_fix2)[which(names(dadi_fix2)=="N1")] <- "N0"
+names(dadi_fix2)[which(names(dadi_fix2)=="N2")] <- "N1"
+names(dadi_fix2)[which(names(dadi_fix2)=="sN1")] <- "sN0"
+names(dadi_fix2)[which(names(dadi_fix2)=="sN2")] <- "sN1"
+# Add the variable species to the dadi datasets
+for (i in 1:nrow(dadi_fix2)) (dadi_fix2$Species[i] <- cortable[match(strsplit(dadi_fix2$dataset[i],"_")[[1]][1],cortable[,1]),2])
+for (i in 1:nrow(dadi_fix2)) (dadi_fix2$Dataset[i] <- cortable[match(strsplit(dadi_fix2$dataset[i],"_")[[1]][1],cortable[,1]),3])
+
+# Add theta and TotalLength (ie, nb of total SNP) from the CorrectingFactorGBS.txt file, and compute K, the correcting factor
+CorrectingFactorGBS <- read.table("outputs/gbs_results/CorrectingFactorGBS.txt",header = T)
+dadi_fix2 <- inner_join(dadi_fix2,CorrectingFactorGBS,by="Species")
+colnames(dadi_fix2)[colnames(dadi_fix2) == 'Total_length'] <- 'TotalLength'
+mu <- 0.59*10^(-8) # From Ossowski et al. 2010 in Arabidopsis thaliana
+#dadi_free_average$K <- dadi_free_average$theta / (4*dadi_free_average$TotalLength*mu)
+p_snp <- dadi_fix2$Nsnp/dadi_fix2$Ntot
+dadi_fix2$Nref <- dadi_fix2$theta/(4*mu*dadi_fix2$Ntot*dadi_fix2$Lcontig)
+dadi_fix2$Nrefalt <- dadi_fix2$theta* (-log(1-p_snp)/p_snp)/(4*mu*dadi_fix2$Ntot*dadi_fix2$Lcontig)
+# Remove pairs of populations not used in the rest of the analysis
+dadi_fix2 <- dadi_fix2[dadi_fix2$dataset!="CB_Oppdal-Norway",]
+dadi_fix2 <- dadi_fix2[dadi_fix2$dataset!="CB_Oppdal-Svalbard",]
+dadi_fix2 <- dadi_fix2[dadi_fix2$dataset!="RP_Svalbard-Norway",]
+dadi_fix2 <- dadi_fix2[dadi_fix2$dataset!="SAC_Svalbard_Lovisa-Alaska",]
+dadi_fix2 <- dadi_fix2[dadi_fix2$dataset!="SAC_Svalbard_Lovisa-Oppdal",]
+dadi_fix2 <- dadi_fix2[dadi_fix2$dataset!="SAC_Svalbard_Lovisa-Svalbard_Pernille",]
+dadi_fix2 <- dadi_fix2[dadi_fix2$dataset!="SU_Svalbard_Lovisa-Svalbard_Pernille",]
+dadi_fix2 <- dadi_fix2[dadi_fix2$dataset!="DN_Dovre-Svalbard_Pernille",]
+
+# Create new species*pop index for RP and SAC where two and three pairs are used
+dadi_fix2$Species <- ifelse(dadi_fix2$dataset=="RP_Alaska-Norway","Ranunculus_pygmaeus_AN",dadi_fix2$Species)
+dadi_fix2$Species <- ifelse(dadi_fix2$dataset=="RP_Svalbard-Alaska","Ranunculus_pygmaeus_AS",dadi_fix2$Species)
+dadi_fix2$Species <- ifelse(dadi_fix2$dataset=="SAC_Alaska-Oppdal","Silene_acaulis_AN",dadi_fix2$Species)
+dadi_fix2$Species <- ifelse(dadi_fix2$dataset=="SAC_Alaska-Svalbard_Pernille","Silene_acaulis_AS",dadi_fix2$Species)
+dadi_fix2$Species <- ifelse(dadi_fix2$dataset=="SAC_Oppdal-Svalbard_Pernille","Silene_acaulis_NS",dadi_fix2$Species)
+HybData$Species <- ifelse(HybData$Species=="Ranunculus_pygmaeus" & HybData$MatPop=="A" & HybData$PatPop=="N","Ranunculus_pygmaeus_AN",HybData$Species)
+HybData$Species <- ifelse(HybData$Species=="Ranunculus_pygmaeus" & HybData$MatPop=="N" & HybData$PatPop=="A","Ranunculus_pygmaeus_AN",HybData$Species)
+HybData$Species <- ifelse(HybData$Species=="Ranunculus_pygmaeus" & HybData$MatPop=="A" & HybData$PatPop=="S","Ranunculus_pygmaeus_AS",HybData$Species)
+HybData$Species <- ifelse(HybData$Species=="Ranunculus_pygmaeus" & HybData$MatPop=="S" & HybData$PatPop=="S","Ranunculus_pygmaeus_AS",HybData$Species)
+HybData$Species <- ifelse(HybData$Species=="Silene_acaulis" & HybData$MatPop=="A" & HybData$PatPop=="N","Silene_acaulis_AN",HybData$Species)
+HybData$Species <- ifelse(HybData$Species=="Silene_acaulis" & HybData$MatPop=="N" & HybData$PatPop=="A","Silene_acaulis_AN",HybData$Species)
+HybData$Species <- ifelse(HybData$Species=="Silene_acaulis" & HybData$MatPop=="A" & HybData$PatPop=="S","Silene_acaulis_AS",HybData$Species)
+HybData$Species <- ifelse(HybData$Species=="Silene_acaulis" & HybData$MatPop=="S" & HybData$PatPop=="A","Silene_acaulis_AS",HybData$Species)
+HybData$Species <- ifelse(HybData$Species=="Silene_acaulis" & HybData$MatPop=="N" & HybData$PatPop=="S","Silene_acaulis_NS",HybData$Species)
+HybData$Species <- ifelse(HybData$Species=="Silene_acaulis" & HybData$MatPop=="S" & HybData$PatPop=="N","Silene_acaulis_NS",HybData$Species)
+
+HybData_dadi_fix2 <- merge(HybData,dadi_fix2,by="Species")
+HybData_dadi_fix2 <- subset(HybData_dadi_fix2,!is.na(Fst)&!is.na(PollenFert)&!is.na(MeanSelfRate)) #remove rows with missing data
+
+Summary_HybData_dadi_fix2 <- HybData_dadi_fix2 %>% 
+  dplyr::group_by(Dataset.y,Species,Fst,model) %>% 
+  dplyr::summarise(
+    PollenFert=mean(PollenFert, na.rm=T),
+    nPollenFert=mean(nPollenFert, na.rm=T),
+    MeanParentalFertility=mean(MeanParentalFertility, na.rm=T),
+    MeanSelfRate=mean(MeanSelfRate, na.rm=T),
+    SeedGerm=mean(SeedGerm,na.rm=T),
+    MeanParentalGermination=mean(MeanParentalGermination,na.rm=T),
+    STDMeanParentalGermination=mean(STDMeanParentalGermination,na.rm=T),
+    Mean_Dxy=mean(Mean_Dxy),
+    Fst=mean(Fst),
+    F1=mean(F1),
+    F2=mean(F2),
+    Self1=mean(2*F1/(1+F1)),
+    Self2=mean(2*F2/(1+F2)),
+    Self=mean(F1/(1+F1)+F2/(1+F2)),
+    Nref=mean(Nref),
+    Nrefalt=mean(Nrefalt),
+    Mtotal=mean(Manc),  # Only split_mig model so Manc = Mrec = Mtot
+    Tsplit=mean(Tsplit),
+    N0=mean(N0),
+    N1=mean(N1),
+    
+  )
+
+# Save dadi datasets
+write.table(HybData_dadi_fix2, file="outputs/synthetized_data/SpArc_HybData_dadi_fix2.txt", row.names = FALSE)
+write.table(Summary_HybData_dadi_fix2, file="outputs/synthetized_data/SpArc_Summary_HybData_dadi_fix2.txt", row.names = FALSE)
+
+
+
+
+
+# ∂a∂i analysis with free inbreeding ####
+
+# We extract only the split_mig model
+
+list.results <- list.files(path = "outputs/dadi_results/free_inbreeding/", pattern = ".out$")
+
+# List with one free F coefficient for the two populations
+list_free1 <- list.results[grep("single",list.results)]
+# List with two free F coefficients, one per population
+list_free2 <- list.results[grep("single",list.results,invert = T)]
+
+# One F for the two populations ####
+dadi_free1 <- data.frame()
+for (input in list_free1) {
+  df <- read.table(paste("outputs/dadi_results/free_inbreeding/",input,sep=""),header = T)
+  dadi_free1 <- rbind(dadi_free1,df[df$model=="split_mig",])
+  rm(df)
+}
+names(dadi_free1)[which(names(dadi_free1)=="N1")] <- "N0"
+names(dadi_free1)[which(names(dadi_free1)=="N2")] <- "N1"
+names(dadi_free1)[which(names(dadi_free1)=="sN1")] <- "sN0"
+names(dadi_free1)[which(names(dadi_free1)=="sN2")] <- "sN1"
+# Add the variable species to the dadi datasets
+for (i in 1:nrow(dadi_free1)) (dadi_free1$Species[i] <- cortable[match(strsplit(dadi_free1$dataset[i],"_")[[1]][1],cortable[,1]),2])
+for (i in 1:nrow(dadi_free1)) (dadi_free1$Dataset[i] <- cortable[match(strsplit(dadi_free1$dataset[i],"_")[[1]][1],cortable[,1]),3])
+
+# Add theta and TotalLength (ie, nb of total SNP) from the CorrectingFactorGBS.txt file, and compute K, the correcting factor
+CorrectingFactorGBS <- read.table("outputs/gbs_results/CorrectingFactorGBS.txt",header = T)
+dadi_free1 <- inner_join(dadi_free1,CorrectingFactorGBS,by="Species")
+colnames(dadi_free1)[colnames(dadi_free1) == 'Total_length'] <- 'TotalLength'
+mu <- 0.59*10^(-8) # From Ossowski et al. 2010 in Arabidopsis thaliana
+#dadi_free_average$K <- dadi_free_average$theta / (4*dadi_free_average$TotalLength*mu)
+p_snp <- dadi_free1$Nsnp/dadi_free1$Ntot
+dadi_free1$Nref <- dadi_free1$theta/(4*mu*dadi_free1$Ntot*dadi_free1$Lcontig)
+dadi_free1$Nrefalt <- dadi_free1$theta* (-log(1-p_snp)/p_snp)/(4*mu*dadi_free1$Ntot*dadi_free1$Lcontig)
+# Remove pairs of populations not used in the rest of the analysis
+dadi_free1 <- dadi_free1[dadi_free1$dataset!="CB_Oppdal-Norway",]
+dadi_free1 <- dadi_free1[dadi_free1$dataset!="CB_Oppdal-Svalbard",]
+dadi_free1 <- dadi_free1[dadi_free1$dataset!="RP_Svalbard-Norway",]
+dadi_free1 <- dadi_free1[dadi_free1$dataset!="SAC_Svalbard_Lovisa-Alaska",]
+dadi_free1 <- dadi_free1[dadi_free1$dataset!="SAC_Svalbard_Lovisa-Oppdal",]
+dadi_free1 <- dadi_free1[dadi_free1$dataset!="SAC_Svalbard_Lovisa-Svalbard_Pernille",]
+dadi_free1 <- dadi_free1[dadi_free1$dataset!="SU_Svalbard_Lovisa-Svalbard_Pernille",]
+dadi_free1 <- dadi_free1[dadi_free1$dataset!="DN_Dovre-Svalbard_Pernille",]
+
+# Create new species*pop index for RP and SAC where two and three pairs are used
+dadi_free1$Species <- ifelse(dadi_free1$dataset=="RP_Alaska-Norway","Ranunculus_pygmaeus_AN",dadi_free1$Species)
+dadi_free1$Species <- ifelse(dadi_free1$dataset=="RP_Svalbard-Alaska","Ranunculus_pygmaeus_AS",dadi_free1$Species)
+dadi_free1$Species <- ifelse(dadi_free1$dataset=="SAC_Alaska-Oppdal","Silene_acaulis_AN",dadi_free1$Species)
+dadi_free1$Species <- ifelse(dadi_free1$dataset=="SAC_Alaska-Svalbard_Pernille","Silene_acaulis_AS",dadi_free1$Species)
+dadi_free1$Species <- ifelse(dadi_free1$dataset=="SAC_Oppdal-Svalbard_Pernille","Silene_acaulis_NS",dadi_free1$Species)
+HybData$Species <- ifelse(HybData$Species=="Ranunculus_pygmaeus" & HybData$MatPop=="A" & HybData$PatPop=="N","Ranunculus_pygmaeus_AN",HybData$Species)
+HybData$Species <- ifelse(HybData$Species=="Ranunculus_pygmaeus" & HybData$MatPop=="N" & HybData$PatPop=="A","Ranunculus_pygmaeus_AN",HybData$Species)
+HybData$Species <- ifelse(HybData$Species=="Ranunculus_pygmaeus" & HybData$MatPop=="A" & HybData$PatPop=="S","Ranunculus_pygmaeus_AS",HybData$Species)
+HybData$Species <- ifelse(HybData$Species=="Ranunculus_pygmaeus" & HybData$MatPop=="S" & HybData$PatPop=="S","Ranunculus_pygmaeus_AS",HybData$Species)
+HybData$Species <- ifelse(HybData$Species=="Silene_acaulis" & HybData$MatPop=="A" & HybData$PatPop=="N","Silene_acaulis_AN",HybData$Species)
+HybData$Species <- ifelse(HybData$Species=="Silene_acaulis" & HybData$MatPop=="N" & HybData$PatPop=="A","Silene_acaulis_AN",HybData$Species)
+HybData$Species <- ifelse(HybData$Species=="Silene_acaulis" & HybData$MatPop=="A" & HybData$PatPop=="S","Silene_acaulis_AS",HybData$Species)
+HybData$Species <- ifelse(HybData$Species=="Silene_acaulis" & HybData$MatPop=="S" & HybData$PatPop=="A","Silene_acaulis_AS",HybData$Species)
+HybData$Species <- ifelse(HybData$Species=="Silene_acaulis" & HybData$MatPop=="N" & HybData$PatPop=="S","Silene_acaulis_NS",HybData$Species)
+HybData$Species <- ifelse(HybData$Species=="Silene_acaulis" & HybData$MatPop=="S" & HybData$PatPop=="N","Silene_acaulis_NS",HybData$Species)
+
+HybData_dadi_free1 <- merge(HybData,dadi_free1,by="Species")
+HybData_dadi_free1 <- subset(HybData_dadi_free1,!is.na(Fst)&!is.na(PollenFert)&!is.na(MeanSelfRate)) #remove rows with missing data
+
+Summary_HybData_dadi_free1 <- HybData_dadi_free1 %>% 
+  dplyr::group_by(Dataset.y,Species,Fst,model) %>% 
+  dplyr::summarise(
+    PollenFert=mean(PollenFert, na.rm=T),
+    nPollenFert=mean(nPollenFert, na.rm=T),
+    MeanParentalFertility=mean(MeanParentalFertility, na.rm=T),
+    MeanSelfRate=mean(MeanSelfRate, na.rm=T),
+    SeedGerm=mean(SeedGerm,na.rm=T),
+    MeanParentalGermination=mean(MeanParentalGermination,na.rm=T),
+    STDMeanParentalGermination=mean(STDMeanParentalGermination,na.rm=T),
+    Mean_Dxy=mean(Mean_Dxy),
+    Fst=mean(Fst),
+    F1=mean(F1),
+    F2=mean(F2),
+    Self1=mean(2*F1/(1+F1)),
+    Self2=mean(2*F2/(1+F2)),
+    Self=mean(F1/(1+F1)+F2/(1+F2)),
+    Nref=mean(Nref),
+    Nrefalt=mean(Nrefalt),
+    Mtotal=mean(Manc),  # Only split_mig model so Manc = Mrec = Mtot
+    Tsplit=mean(Tsplit),
+    N0=mean(N0),
+    N1=mean(N1),
+    
+  )
+
+# Save dadi datasets
+write.table(HybData_dadi_free1, file="outputs/synthetized_data/SpArc_HybData_dadi_free1.txt", row.names = FALSE)
+write.table(Summary_HybData_dadi_free1, file="outputs/synthetized_data/SpArc_Summary_HybData_dadi_free1.txt", row.names = FALSE)
+
+
+# One F per population ####
+dadi_free2 <- data.frame()
+for (input in list_free2) {
+  df <- read.table(paste("outputs/dadi_results/free_inbreeding/",input,sep=""),header = T)
+  dadi_free2 <- rbind(dadi_free2,df[df$model=="split_mig",])
+  rm(df)
+}
+names(dadi_free2)[which(names(dadi_free2)=="N1")] <- "N0"
+names(dadi_free2)[which(names(dadi_free2)=="N2")] <- "N1"
+names(dadi_free2)[which(names(dadi_free2)=="sN1")] <- "sN0"
+names(dadi_free2)[which(names(dadi_free2)=="sN2")] <- "sN1"
+# Add the variable species to the dadi datasets
+for (i in 1:nrow(dadi_free2)) (dadi_free2$Species[i] <- cortable[match(strsplit(dadi_free2$dataset[i],"_")[[1]][1],cortable[,1]),2])
+for (i in 1:nrow(dadi_free2)) (dadi_free2$Dataset[i] <- cortable[match(strsplit(dadi_free2$dataset[i],"_")[[1]][1],cortable[,1]),3])
+
+# Add theta and TotalLength (ie, nb of total SNP) from the CorrectingFactorGBS.txt file, and compute K, the correcting factor
+CorrectingFactorGBS <- read.table("outputs/gbs_results/CorrectingFactorGBS.txt",header = T)
+dadi_free2 <- inner_join(dadi_free2,CorrectingFactorGBS,by="Species")
+colnames(dadi_free2)[colnames(dadi_free2) == 'Total_length'] <- 'TotalLength'
+mu <- 0.59*10^(-8) # From Ossowski et al. 2010 in Arabidopsis thaliana
+#dadi_free_average$K <- dadi_free_average$theta / (4*dadi_free_average$TotalLength*mu)
+p_snp <- dadi_free2$Nsnp/dadi_free2$Ntot
+dadi_free2$Nref <- dadi_free2$theta/(4*mu*dadi_free2$Ntot*dadi_free2$Lcontig)
+dadi_free2$Nrefalt <- dadi_free2$theta* (-log(1-p_snp)/p_snp)/(4*mu*dadi_free2$Ntot*dadi_free2$Lcontig)
+# Remove pairs of populations not used in the rest of the analysis
+dadi_free2 <- dadi_free2[dadi_free2$dataset!="CB_Oppdal-Norway",]
+dadi_free2 <- dadi_free2[dadi_free2$dataset!="CB_Oppdal-Svalbard",]
+dadi_free2 <- dadi_free2[dadi_free2$dataset!="RP_Svalbard-Norway",]
+dadi_free2 <- dadi_free2[dadi_free2$dataset!="SAC_Svalbard_Lovisa-Alaska",]
+dadi_free2 <- dadi_free2[dadi_free2$dataset!="SAC_Svalbard_Lovisa-Oppdal",]
+dadi_free2 <- dadi_free2[dadi_free2$dataset!="SAC_Svalbard_Lovisa-Svalbard_Pernille",]
+dadi_free2 <- dadi_free2[dadi_free2$dataset!="SU_Svalbard_Lovisa-Svalbard_Pernille",]
+dadi_free2 <- dadi_free2[dadi_free2$dataset!="DN_Dovre-Svalbard_Pernille",]
+
+# Create new species*pop index for RP and SAC where two and three pairs are used
+dadi_free2$Species <- ifelse(dadi_free2$dataset=="RP_Alaska-Norway","Ranunculus_pygmaeus_AN",dadi_free2$Species)
+dadi_free2$Species <- ifelse(dadi_free2$dataset=="RP_Svalbard-Alaska","Ranunculus_pygmaeus_AS",dadi_free2$Species)
+dadi_free2$Species <- ifelse(dadi_free2$dataset=="SAC_Alaska-Oppdal","Silene_acaulis_AN",dadi_free2$Species)
+dadi_free2$Species <- ifelse(dadi_free2$dataset=="SAC_Alaska-Svalbard_Pernille","Silene_acaulis_AS",dadi_free2$Species)
+dadi_free2$Species <- ifelse(dadi_free2$dataset=="SAC_Oppdal-Svalbard_Pernille","Silene_acaulis_NS",dadi_free2$Species)
+HybData$Species <- ifelse(HybData$Species=="Ranunculus_pygmaeus" & HybData$MatPop=="A" & HybData$PatPop=="N","Ranunculus_pygmaeus_AN",HybData$Species)
+HybData$Species <- ifelse(HybData$Species=="Ranunculus_pygmaeus" & HybData$MatPop=="N" & HybData$PatPop=="A","Ranunculus_pygmaeus_AN",HybData$Species)
+HybData$Species <- ifelse(HybData$Species=="Ranunculus_pygmaeus" & HybData$MatPop=="A" & HybData$PatPop=="S","Ranunculus_pygmaeus_AS",HybData$Species)
+HybData$Species <- ifelse(HybData$Species=="Ranunculus_pygmaeus" & HybData$MatPop=="S" & HybData$PatPop=="S","Ranunculus_pygmaeus_AS",HybData$Species)
+HybData$Species <- ifelse(HybData$Species=="Silene_acaulis" & HybData$MatPop=="A" & HybData$PatPop=="N","Silene_acaulis_AN",HybData$Species)
+HybData$Species <- ifelse(HybData$Species=="Silene_acaulis" & HybData$MatPop=="N" & HybData$PatPop=="A","Silene_acaulis_AN",HybData$Species)
+HybData$Species <- ifelse(HybData$Species=="Silene_acaulis" & HybData$MatPop=="A" & HybData$PatPop=="S","Silene_acaulis_AS",HybData$Species)
+HybData$Species <- ifelse(HybData$Species=="Silene_acaulis" & HybData$MatPop=="S" & HybData$PatPop=="A","Silene_acaulis_AS",HybData$Species)
+HybData$Species <- ifelse(HybData$Species=="Silene_acaulis" & HybData$MatPop=="N" & HybData$PatPop=="S","Silene_acaulis_NS",HybData$Species)
+HybData$Species <- ifelse(HybData$Species=="Silene_acaulis" & HybData$MatPop=="S" & HybData$PatPop=="N","Silene_acaulis_NS",HybData$Species)
+
+HybData_dadi_free2 <- merge(HybData,dadi_free2,by="Species")
+HybData_dadi_free2 <- subset(HybData_dadi_free2,!is.na(Fst)&!is.na(PollenFert)&!is.na(MeanSelfRate)) #remove rows with missing data
+
+Summary_HybData_dadi_free2 <- HybData_dadi_free2 %>% 
+  dplyr::group_by(Dataset.y,Species,Fst,model) %>% 
+  dplyr::summarise(
+    PollenFert=mean(PollenFert, na.rm=T),
+    nPollenFert=mean(nPollenFert, na.rm=T),
+    MeanParentalFertility=mean(MeanParentalFertility, na.rm=T),
+    MeanSelfRate=mean(MeanSelfRate, na.rm=T),
+    SeedGerm=mean(SeedGerm,na.rm=T),
+    MeanParentalGermination=mean(MeanParentalGermination,na.rm=T),
+    STDMeanParentalGermination=mean(STDMeanParentalGermination,na.rm=T),
+    Mean_Dxy=mean(Mean_Dxy),
+    Fst=mean(Fst),
+    F1=mean(F1),
+    F2=mean(F2),
+    Self1=mean(2*F1/(1+F1)),
+    Self2=mean(2*F2/(1+F2)),
+    Self=mean(F1/(1+F1)+F2/(1+F2)),
+    Nref=mean(Nref),
+    Nrefalt=mean(Nrefalt),
+    Mtotal=mean(Manc),  # Only split_mig model so Manc = Mrec = Mtot
+    Tsplit=mean(Tsplit),
+    N0=mean(N0),
+    N1=mean(N1),
+    
+  )
+
+# Save dadi datasets
+write.table(HybData_dadi_free2, file="outputs/synthetized_data/SpArc_HybData_dadi_free2.txt", row.names = FALSE)
+write.table(Summary_HybData_dadi_free2, file="outputs/synthetized_data/SpArc_Summary_HybData_dadi_free2.txt", row.names = FALSE)

@@ -1,0 +1,92 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) ['glmerMod']
+ Family: binomial  ( logit )
+Formula: cbind(FertilePollen, UnFertilePollen) ~ (1 | Species) + Region +  
+    (meanPi + Fst + Mean_Dxy) * STDMeanSelfRate + STDMeanParentalFertility
+   Data: HybData_dadi_average
+Control: glmerControl(optimizer = "bobyqa", autoscale = TRUE)
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+  17302.5   17345.9   -8640.3   17280.5       371 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-42.895  -2.969   0.406   2.436  26.386 
+
+Random effects:
+ Groups  Name        Variance Std.Dev.
+ Species (Intercept) 0.4856   0.6968  
+Number of obs: 382, groups:  Species, 20
+
+Fixed effects:
+                         Estimate Std. Error z value Pr(>|z|)   
+(Intercept)                0.4318     0.4360   0.990  0.32197   
+RegionMediterranean        0.9058     0.5581   1.623  0.10459   
+meanPi                     0.8789     0.3539   2.483  0.01302 * 
+Fst                        0.2492     0.6510   0.383  0.70189   
+Mean_Dxy                  -0.2077     0.6396  -0.325  0.74543   
+STDMeanSelfRate           -0.4298     0.1816  -2.367  0.01795 * 
+STDMeanParentalFertility   0.4234     0.1387   3.051  0.00228 **
+meanPi:STDMeanSelfRate     0.6941     0.2437   2.848  0.00441 **
+Fst:STDMeanSelfRate        0.1911     0.4523   0.422  0.67266   
+Mean_Dxy:STDMeanSelfRate   0.8061     0.3911   2.061  0.03926 * 
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Analysis of Deviance Table (Type III Wald chisquare tests)
+
+Response: cbind(FertilePollen, UnFertilePollen)
+                          Chisq Df Pr(>Chisq)   
+(Intercept)              0.9809  1   0.321969   
+Region                   2.6342  1   0.104587   
+meanPi                   6.1668  1   0.013017 * 
+Fst                      0.1465  1   0.701892   
+Mean_Dxy                 0.1054  1   0.745433   
+STDMeanSelfRate          5.6006  1   0.017954 * 
+STDMeanParentalFertility 9.3113  1   0.002277 **
+meanPi:STDMeanSelfRate   8.1086  1   0.004406 **
+Fst:STDMeanSelfRate      0.1785  1   0.672661   
+Mean_Dxy:STDMeanSelfRate 4.2495  1   0.039263 * 
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) ['glmerMod']
+ Family: binomial  ( logit )
+Formula: cbind(FertilePollen, UnFertilePollen) ~ (1 | Species) + Region +  
+    meanPi + Fst + Mean_Dxy + STDMeanSelfRate + STDMeanParentalFertility
+   Data: HybData_dadi_average
+Control: glmerControl(optimizer = "bobyqa", autoscale = TRUE)
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+  17311.3   17342.9   -8647.7   17295.3       374 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-42.926  -2.969   0.400   2.433  26.378 
+
+Random effects:
+ Groups  Name        Variance Std.Dev.
+ Species (Intercept) 1.001    1.001   
+Number of obs: 382, groups:  Species, 20
+
+Fixed effects:
+                         Estimate Std. Error z value Pr(>|z|)  
+(Intercept)                0.4594     0.5166   0.889   0.3739  
+RegionMediterranean        0.9964     0.7546   1.320   0.1867  
+meanPi                     0.9751     0.4162   2.343   0.0191 *
+Fst                        0.7706     0.7899   0.976   0.3293  
+Mean_Dxy                  -0.5225     0.8165  -0.640   0.5222  
+STDMeanSelfRate           -0.2231     0.2372  -0.940   0.3470  
+STDMeanParentalFertility   0.3961     0.1925   2.057   0.0396 *
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Analysis of Deviance Table (Type III Wald chisquare tests)
+
+Response: cbind(FertilePollen, UnFertilePollen)
+                          Chisq Df Pr(>Chisq)  
+(Intercept)              0.7907  1    0.37388  
+Region                   1.7436  1    0.18668  
+meanPi                   5.4900  1    0.01913 *
+Fst                      0.9517  1    0.32928  
+Mean_Dxy                 0.4096  1    0.52219  
+STDMeanSelfRate          0.8844  1    0.34701  
+STDMeanParentalFertility 4.2333  1    0.03964 *
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1

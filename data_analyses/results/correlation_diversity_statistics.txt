@@ -1,0 +1,15 @@
+             Selfing rate    Pi   Fst   Dxy
+Selfing rate         1.00 -0.47  0.36  0.42
+Pi                  -0.47  1.00 -0.79 -0.68
+Fst                  0.36 -0.79  1.00  0.92
+Dxy                  0.42 -0.68  0.92  1.00
+
+n= 20 
+
+
+P
+             Selfing rate Pi     Fst    Dxy   
+Selfing rate              0.0366 0.1148 0.0634
+Pi           0.0366              0.0000 0.0011
+Fst          0.1148       0.0000        0.0000
+Dxy          0.0634       0.0011 0.0000       
