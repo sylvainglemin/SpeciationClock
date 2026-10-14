@@ -1,0 +1,204 @@
+
+Structural Equation Model of m7 
+
+Call:
+  PollenFertBino ~ log10(Mtotal) + log10(AbsoluteRecentSize) + log10(TsplitAbs) + STDMeanSelfRate + STDMeanParentalFertility
+  log10(Mtotal) ~ STDMeanSelfRate
+  log10(AbsoluteRecentSize) ~ STDMeanSelfRate
+  log10(TsplitAbs) ~ STDMeanSelfRate
+
+    AIC
+ 112610.527
+
+---
+Tests of directed separation:
+
+                                              Independ.Claim Test.Type DF Crit.Value
+              log10(Mtotal) ~ STDMeanParentalFertility + ...      coef 17     0.8653
+  log10(AbsoluteRecentSize) ~ STDMeanParentalFertility + ...      coef 17    -0.4614
+           log10(TsplitAbs) ~ STDMeanParentalFertility + ...      coef 17    -0.3654
+             log10(AbsoluteRecentSize) ~ log10(Mtotal) + ...      coef 17    -1.3747
+                      log10(TsplitAbs) ~ log10(Mtotal) + ...      coef 17    -2.2228
+          log10(TsplitAbs) ~ log10(AbsoluteRecentSize) + ...      coef 17     2.7464
+  P.Value  
+   0.3989  
+   0.6504  
+   0.7193  
+   0.1871  
+   0.0401 *
+   0.0138 *
+
+--
+Global goodness-of-fit:
+
+Chi-Squared = 13.496 with P-value = 0.036 and on 6 degrees of freedom
+Fisher's C = 21.714 with P-value = 0.041 and on 12 degrees of freedom
+
+---
+Coefficients:
+
+                   Response                 Predictor Estimate Std.Error     DF
+             PollenFertBino             log10(Mtotal)   0.5370    0.4224 158131
+             PollenFertBino log10(AbsoluteRecentSize)   2.8881    0.6417 158131
+             PollenFertBino          log10(TsplitAbs)  -0.2481    0.5427 158131
+             PollenFertBino           STDMeanSelfRate  -0.1717    0.2269 158131
+             PollenFertBino  STDMeanParentalFertility   0.4346    0.1893 158131
+              log10(Mtotal)           STDMeanSelfRate  -0.0713    0.1224     18
+  log10(AbsoluteRecentSize)           STDMeanSelfRate  -0.1678    0.0857     18
+           log10(TsplitAbs)           STDMeanSelfRate   0.0122    0.1124     18
+  Crit.Value P.Value Std.Estimate    
+      1.2712  0.2037       0.1179    
+      4.5007  0.0000       0.4422 ***
+     -0.4571  0.6476      -0.0394    
+     -0.7567  0.4492      -0.0686    
+      2.2963  0.0217       0.2119   *
+     -0.5826  0.5674      -0.1297    
+     -1.9593  0.0658      -0.4378    
+      0.1087  0.9147       0.0307    
+
+  Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05
+
+---
+Individual R-squared:
+
+            Response method Marginal Conditional
+      PollenFertBino   none     0.27        0.58
+              Mtotal   none     0.02          NA
+  AbsoluteRecentSize   none     0.18          NA
+           TsplitAbs   none     0.00          NA
+
+Structural Equation Model of m7Med 
+
+Call:
+  PollenFertBino ~ log10(Mtotal) + log10(AbsoluteRecentSize) + log10(TsplitAbs) + STDMeanSelfRate + STDMeanParentalFertility
+  log10(Mtotal) ~ STDMeanSelfRate
+  log10(AbsoluteRecentSize) ~ STDMeanSelfRate
+  log10(TsplitAbs) ~ STDMeanSelfRate
+
+    AIC
+ 88250.813
+
+---
+Tests of directed separation:
+
+                                              Independ.Claim Test.Type DF Crit.Value
+              log10(Mtotal) ~ STDMeanParentalFertility + ...      coef 10     0.2319
+  log10(AbsoluteRecentSize) ~ STDMeanParentalFertility + ...      coef 10     0.3407
+           log10(TsplitAbs) ~ STDMeanParentalFertility + ...      coef 10     0.5639
+             log10(AbsoluteRecentSize) ~ log10(Mtotal) + ...      coef 10     1.5534
+                      log10(TsplitAbs) ~ log10(Mtotal) + ...      coef 10    -0.5090
+          log10(TsplitAbs) ~ log10(AbsoluteRecentSize) + ...      coef 10    -1.2938
+  P.Value 
+   0.8213 
+   0.7404 
+   0.5852 
+   0.1514 
+   0.6218 
+   0.2248 
+
+--
+Global goodness-of-fit:
+
+Chi-Squared = 5.721 with P-value = 0.455 and on 6 degrees of freedom
+Fisher's C = 9.778 with P-value = 0.635 and on 12 degrees of freedom
+
+---
+Coefficients:
+
+                   Response                 Predictor Estimate Std.Error     DF
+             PollenFertBino             log10(Mtotal)  -0.6815    0.3893 130384
+             PollenFertBino log10(AbsoluteRecentSize)   3.6410    0.6829 130384
+             PollenFertBino          log10(TsplitAbs)  -1.1117    0.6216 130384
+             PollenFertBino           STDMeanSelfRate   0.3431    0.1646 130384
+             PollenFertBino  STDMeanParentalFertility   0.5063    0.1199 130384
+              log10(Mtotal)           STDMeanSelfRate  -0.0380    0.1261     11
+  log10(AbsoluteRecentSize)           STDMeanSelfRate  -0.1252    0.0793     11
+           log10(TsplitAbs)           STDMeanSelfRate   0.1299    0.0806     11
+  Crit.Value P.Value Std.Estimate    
+     -1.7507  0.0800      -0.1316    
+      5.3318  0.0000       0.5025 ***
+     -1.7883  0.0737      -0.1728    
+      2.0844  0.0371       0.1384   *
+      4.2222  0.0000       0.2953 ***
+     -0.3016  0.7686      -0.0795    
+     -1.5787  0.1427      -0.3660    
+      1.6118  0.1353       0.3369    
+
+  Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05
+
+---
+Individual R-squared:
+
+            Response method Marginal Conditional
+      PollenFertBino   none     0.36        0.53
+              Mtotal   none     0.01          NA
+  AbsoluteRecentSize   none     0.18          NA
+           TsplitAbs   none     0.19          NA
+
+Structural Equation Model of m7Arc 
+
+Call:
+  PollenFertBino ~ log10(Mtotal) + log10(AbsoluteRecentSize) + log10(TsplitAbs) + STDMeanSelfRate + STDMeanParentalFertility
+  log10(Mtotal) ~ STDMeanSelfRate
+  log10(AbsoluteRecentSize) ~ STDMeanSelfRate
+  log10(TsplitAbs) ~ STDMeanSelfRate
+
+    AIC
+ 24296.875
+
+---
+Tests of directed separation:
+
+                                              Independ.Claim Test.Type DF Crit.Value
+              log10(Mtotal) ~ STDMeanParentalFertility + ...      coef  4     1.6294
+  log10(AbsoluteRecentSize) ~ STDMeanParentalFertility + ...      coef  4    -0.9989
+           log10(TsplitAbs) ~ STDMeanParentalFertility + ...      coef  4    -0.5279
+             log10(AbsoluteRecentSize) ~ log10(Mtotal) + ...      coef  4    -2.4077
+                      log10(TsplitAbs) ~ log10(Mtotal) + ...      coef  4    -1.8102
+          log10(TsplitAbs) ~ log10(AbsoluteRecentSize) + ...      coef  4     2.1474
+  P.Value 
+   0.1786 
+   0.3744 
+   0.6255 
+   0.0737 
+   0.1445 
+   0.0983 
+
+--
+Global goodness-of-fit:
+
+Chi-Squared = 16.306 with P-value = 0.012 and on 6 degrees of freedom
+Fisher's C = 20.072 with P-value = 0.066 and on 12 degrees of freedom
+
+---
+Coefficients:
+
+                   Response                 Predictor Estimate Std.Error    DF Crit.Value
+             PollenFertBino             log10(Mtotal)   0.9414    0.4541 27747     2.0732
+             PollenFertBino log10(AbsoluteRecentSize)   2.2567    0.7136 27747     3.1625
+             PollenFertBino          log10(TsplitAbs)  -1.4893    1.0366 27747    -1.4366
+             PollenFertBino           STDMeanSelfRate  -0.8810    0.2293 27747    -3.8417
+             PollenFertBino  STDMeanParentalFertility  -0.2073    0.5426 27747    -0.3820
+              log10(Mtotal)           STDMeanSelfRate  -0.1984    0.2730     5    -0.7269
+  log10(AbsoluteRecentSize)           STDMeanSelfRate  -0.1391    0.1502     5    -0.9263
+           log10(TsplitAbs)           STDMeanSelfRate  -0.0337    0.1859     5    -0.1814
+  P.Value Std.Estimate    
+   0.0382       0.3674   *
+   0.0016       0.4152  **
+   0.1508      -0.1881    
+   0.0001      -0.3144 ***
+   0.7025      -0.0514    
+   0.4999      -0.1815    
+   0.3968      -0.2700    
+   0.8631      -0.0953    
+
+  Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05
+
+---
+Individual R-squared:
+
+            Response method Marginal Conditional
+      PollenFertBino   none     0.32          NA
+              Mtotal   none     0.10          NA
+  AbsoluteRecentSize   none     0.15          NA
+           TsplitAbs   none     0.01          NA

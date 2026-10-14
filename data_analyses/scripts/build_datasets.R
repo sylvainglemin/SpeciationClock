@@ -278,6 +278,10 @@ for (input in list.results) {
   rm(df)
 }
 
+# Exporting all dadi's results
+write.table(dadi, file="outputs/synthetized_data/dadi_models.txt", row.names = FALSE)
+
+
 # dataset with average parameters (model averaging procedure based on AIC)
 # including also the pure allopatry model as a control
 dadi_average <- dadi[dadi$model=="average" | dadi$model=="split_mig",]

@@ -1,0 +1,94 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) [
+glmerMod]
+ Family: binomial  ( logit )
+Formula: 
+cbind(FertilePollen, UnFertilePollen) ~ (1 | Species) + STDMeanParentalFertility +  
+    Region + (log10(AbsoluteRecentSize) + log10(TsplitAbs) +  
+    log10(MtotalAbs)) * Classification
+   Data: HybData_dadi
+Control: glmerControl(optimizer = "bobyqa", autoscale = TRUE)
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+  17308.8   17352.2   -8643.4   17286.8       371 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-42.899  -2.979   0.400   2.441  26.374 
+
+Random effects:
+ Groups  Name        Variance Std.Dev.
+ Species (Intercept) 0.6832   0.8266  
+Number of obs: 382, groups:  Species, 20
+
+Fixed effects:
+                                                 Estimate Std. Error z value Pr(>|z|)   
+(Intercept)                                      4.320067   3.052385   1.415  0.15698   
+STDMeanParentalFertility                         0.455556   0.166247   2.740  0.00614 **
+RegionMediterranean                              0.859949   0.713966   1.204  0.22841   
+log10(AbsoluteRecentSize)                        1.050483   0.811242   1.295  0.19535   
+log10(TsplitAbs)                                -1.729125   0.588429  -2.939  0.00330 **
+log10(MtotalAbs)                                -0.008783   0.354971  -0.025  0.98026   
+Classificationselfing                           -7.743932   3.552849  -2.180  0.02928 * 
+log10(AbsoluteRecentSize):Classificationselfing -2.432020   2.133324  -1.140  0.25428   
+log10(TsplitAbs):Classificationselfing           3.371364   1.616890   2.085  0.03706 * 
+log10(MtotalAbs):Classificationselfing          -0.370467   0.535818  -0.691  0.48931   
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Analysis of Deviance Table (Type III Wald chisquare tests)
+
+Response: cbind(FertilePollen, UnFertilePollen)
+                                          Chisq Df Pr(>Chisq)   
+(Intercept)                              2.0031  1   0.156978   
+STDMeanParentalFertility                 7.5089  1   0.006139 **
+Region                                   1.4507  1   0.228409   
+log10(AbsoluteRecentSize)                1.6768  1   0.195352   
+log10(TsplitAbs)                         8.6351  1   0.003298 **
+log10(MtotalAbs)                         0.0006  1   0.980260   
+Classification                           4.7508  1   0.029284 * 
+log10(AbsoluteRecentSize):Classification 1.2996  1   0.254280   
+log10(TsplitAbs):Classification          4.3476  1   0.037061 * 
+log10(MtotalAbs):Classification          0.4780  1   0.489311   
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) [
+glmerMod]
+ Family: binomial  ( logit )
+Formula: cbind(FertilePollen, UnFertilePollen) ~ Classification + log10(TsplitAbs) +  
+    Region + STDMeanParentalFertility + (1 | Species) + Classification:log10(TsplitAbs)
+   Data: HybData_dadi
+Control: glmerControl(optimizer = "bobyqa", autoscale = TRUE)
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+  17303.8   17331.4   -8644.9   17289.8       375 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-42.908  -2.975   0.392   2.443  26.378 
+
+Random effects:
+ Groups  Name        Variance Std.Dev.
+ Species (Intercept) 0.8051   0.8973  
+Number of obs: 382, groups:  Species, 20
+
+Fixed effects:
+                                       Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                              7.9152     1.8760   4.219 2.45e-05 ***
+Classificationselfing                  -11.0475     2.8575  -3.866 0.000111 ***
+log10(TsplitAbs)                        -1.7927     0.5195  -3.451 0.000559 ***
+RegionMediterranean                      1.5274     0.5592   2.731 0.006307 ** 
+STDMeanParentalFertility                 0.4763     0.1684   2.829 0.004671 ** 
+Classificationselfing:log10(TsplitAbs)   2.5166     0.7805   3.224 0.001262 ** 
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Analysis of Deviance Table (Type III Wald chisquare tests)
+
+Response: cbind(FertilePollen, UnFertilePollen)
+                                  Chisq Df Pr(>Chisq)    
+(Intercept)                     17.8020  1  2.451e-05 ***
+Classification                  14.9471  1  0.0001106 ***
+log10(TsplitAbs)                11.9070  1  0.0005592 ***
+Region                           7.4605  1  0.0063067 ** 
+STDMeanParentalFertility         8.0026  1  0.0046711 ** 
+Classification:log10(TsplitAbs) 10.3968  1  0.0012624 ** 
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1

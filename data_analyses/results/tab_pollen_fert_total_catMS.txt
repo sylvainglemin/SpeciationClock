@@ -1,63 +1,49 @@
-Generalized linear mixed model fit by maximum likelihood (Laplace
-  Approximation) [glmerMod]
+Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) [
+glmerMod]
  Family: binomial  ( logit )
-Formula: 
-cbind(FertilePollen, UnFertilePollen) ~ (1 | Species_Fst) + Region +  
+Formula: cbind(FertilePollen, UnFertilePollen) ~ (1 | Species_Fst) + Region +  
     (STDFst * Classification) + STDMeanParentalFertility
    Data: HybData
 
       AIC       BIC    logLik -2*log(L)  df.resid 
-  20626.9   20663.8  -10304.5   20608.9       435 
+  20624.1   20652.8  -10305.1   20610.1       437 
 
 Scaled residuals: 
     Min      1Q  Median      3Q     Max 
--42.938  -3.668  -0.096   2.359  33.155 
+-42.944  -3.667  -0.092   2.359  33.144 
 
 Random effects:
  Groups      Name        Variance Std.Dev.
- Species_Fst (Intercept) 2.34     1.53    
+ Species_Fst (Intercept) 2.445    1.564   
 Number of obs: 444, groups:  Species_Fst, 30
 
 Fixed effects:
-                                             Estimate Std. Error
-(Intercept)                                    0.5821     0.7729
-RegionMediterranean                            1.9716     0.7558
-STDFst                                        -0.7025     0.4912
-Classification2_Mixed                         -2.1853     0.9556
-Classification3_Predominantly_selfing         -2.7315     0.8404
-STDMeanParentalFertility                       0.3742     0.2992
-STDFst:Classification2_Mixed                   2.8355     1.4688
-STDFst:Classification3_Predominantly_selfing   1.0223     0.7450
-                                             z value Pr(>|z|)   
-(Intercept)                                    0.753  0.45136   
-RegionMediterranean                            2.609  0.00909 **
-STDFst                                        -1.430  0.15269   
-Classification2_Mixed                         -2.287  0.02221 * 
-Classification3_Predominantly_selfing         -3.250  0.00115 **
-STDMeanParentalFertility                       1.251  0.21099   
-STDFst:Classification2_Mixed                   1.930  0.05355 . 
-STDFst:Classification3_Predominantly_selfing   1.372  0.16998   
+                             Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                    0.5010     0.7733   0.648 0.517041    
+RegionMediterranean            1.8586     0.7982   2.328 0.019889 *  
+STDFst                        -0.8100     0.4574  -1.771 0.076552 .  
+Classificationselfing         -2.6835     0.7985  -3.361 0.000778 ***
+STDMeanParentalFertility       0.4256     0.2732   1.558 0.119245    
+STDFst:Classificationselfing   1.2420     0.6940   1.790 0.073527 .  
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 Correlation of Fixed Effects:
-            (Intr) RgnMdt STDFst Cls2_M Cl3_P_ STDMPF STDF:C2
-RegnMdtrrnn -0.692                                           
-STDFst       0.318  0.035                                    
-Clssfctn2_M -0.665  0.301 -0.301                             
-Clssfct3_P_ -0.797  0.495 -0.273  0.503                      
-STDMnPrntlF -0.234  0.143 -0.126  0.412  0.017               
-STDFst:C2_M  0.149 -0.392 -0.356  0.058 -0.101  0.050        
-STDFs:C3_P_  0.033 -0.370 -0.670  0.088 -0.179  0.020  0.370 
+            (Intr) RgnMdt STDFst Clssfc STDMPF
+RegnMdtrrnn -0.784                            
+STDFst       0.222 -0.023                     
+Clssfctnslf -0.859  0.620 -0.211              
+STDMnPrntlF -0.125  0.161  0.004  0.038       
+STDFst:Clss  0.163 -0.379 -0.651 -0.208 -0.168
 Analysis of Deviance Table (Type III Wald chisquare tests)
 
 Response: cbind(FertilePollen, UnFertilePollen)
-                           Chisq Df Pr(>Chisq)   
-(Intercept)               0.5672  1   0.451363   
-Region                    6.8058  1   0.009086 **
-STDFst                    2.0452  1   0.152686   
-Classification           11.1336  2   0.003823 **
-STDMeanParentalFertility  1.5646  1   0.210992   
-STDFst:Classification     4.2290  2   0.120696   
+                           Chisq Df Pr(>Chisq)    
+(Intercept)               0.4198  1  0.5170410    
+Region                    5.4216  1  0.0198888 *  
+STDFst                    3.1366  1  0.0765516 .  
+Classification           11.2936  1  0.0007778 ***
+STDMeanParentalFertility  2.4272  1  0.1192453    
+STDFst:Classification     3.2025  1  0.0735266 .  
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1

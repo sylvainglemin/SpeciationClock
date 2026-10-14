@@ -1,0 +1,25 @@
+                    Selfing rate Mean effective size Divergence time
+Selfing rate                1.00               -0.45           -0.36
+Mean effective size        -0.45                1.00            0.35
+Divergence time            -0.36                0.35            1.00
+Migration rate              0.00               -0.22           -0.15
+                    Migration rate
+Selfing rate                  0.00
+Mean effective size          -0.22
+Divergence time              -0.15
+Migration rate                1.00
+
+n= 20 
+
+
+P
+                    Selfing rate Mean effective size Divergence time
+Selfing rate                     0.0470              0.1231         
+Mean effective size 0.0470                           0.1258         
+Divergence time     0.1231       0.1258                             
+Migration rate      0.9843       0.3466              0.5289         
+                    Migration rate
+Selfing rate        0.9843        
+Mean effective size 0.3466        
+Divergence time     0.5289        
+Migration rate                    

@@ -124,22 +124,20 @@ length(unique(HybData_dadi$Species)) # N species
 
 
 # 1) Seed Germination
-m1 <- glmer(cbind(GerminatedSeed, NonGerminatedSeed) ~ (1|Species_Fst) + Region + (STDFst * STDMeanSelfRate) + STDMeanParentalGermination, data=HybData, family=binomial)
-m1fix <- glm(cbind(GerminatedSeed, NonGerminatedSeed) ~  Region + (STDFst * STDMeanSelfRate) + STDMeanParentalGermination, data=HybData, family=binomial)
+m1 <- lm(asin(sqrt(SeedGerm)) ~ STDMeanParentalGermination + Region + STDFst*STDMeanSelfRate, data=Summary_HybData)
 summary(m1)
 Anova(m1, type=3)
-plot(m1)
-# Random effect is highly significant
-summary(m1)$AICtab[[1]]
-summary(m1fix)$aic
 sink("results/tab_seed_germ_total.txt")
 summary(m1)
 Anova(m1, type=3)
 sink()
 
-
 # 2) Pollen Fertility
-m2 <- glmer(cbind(FertilePollen, UnFertilePollen) ~ (1|Species_Fst) + Region + (STDFst * STDMeanSelfRate) + STDMeanParentalFertility, data=HybData, family=binomial)
+m2 <- glmer(cbind(FertilePollen, UnFertilePollen) ~ (1|Species_Fst) + Region + STDFst*STDMeanSelfRate + STDMeanParentalFertility,
+            data=HybData,
+            family=binomial,
+            control = glmerControl(optimizer = "bobyqa",autoscale = TRUE)
+            )
 m2fix <- glm(cbind(FertilePollen, UnFertilePollen) ~  Region + (STDFst * STDMeanSelfRate) + STDMeanParentalGermination, data=HybData, family=binomial)
 summary(m2)
 Anova(m2, type=3)
@@ -155,7 +153,7 @@ sink()
               # Equivalent analyses using three MS categories 
 
 # 3) Seed Germination
-m1cat <- glmer(cbind(GerminatedSeed, NonGerminatedSeed) ~ (1|Species_Fst) + Region + (STDFst * Classification) + STDMeanParentalGermination, data=HybData, family=binomial)
+m1cat <- lm(asin(sqrt(SeedGerm)) ~  STDMeanParentalGermination + Region + STDFst*Classification, data=Summary_HybData)
 summary(m1cat)
 Anova(m1cat, type=3)
 plot(m1cat)
@@ -165,7 +163,7 @@ Anova(m1cat, type=3)
 sink()
 
 # 4) Pollen Fertility 3 MS categories
-m2cat <- glmer(cbind(FertilePollen, UnFertilePollen) ~ (1|Species_Fst) + Region + (STDFst * Classification) + STDMeanParentalFertility, data=HybData, family=binomial)
+m2cat <- glmer(cbind(FertilePollen, UnFertilePollen) ~ (1|Species_Fst) + STDMeanParentalFertility + Region + STDFst*Classification, data=HybData, family=binomial)
 summary(m2cat)
 Anova(m2cat, type=3)
 plot(m2cat)
@@ -196,7 +194,6 @@ Summary_HybData_dadi_average$meanPi <- scale(Summary_HybData_dadi_average$meanPi
 Summary_HybData_dadi_average$Fst <- scale(Summary_HybData_dadi_average$Fst)[,1]
 Summary_HybData_dadi_average$Mean_Dxy <- scale(Summary_HybData_dadi_average$Mean_Dxy)[,1]
 
-
 # 1) Correlation between pop gen variables
 
 mat <- as.matrix(Summary_HybData_dadi_average[,c("MeanSelfRate","meanPi","Fst","Mean_Dxy")])
@@ -209,18 +206,23 @@ sink("results/correlation_diversity_statistics.txt")
 corr_mat
 sink()
 
-
-# 2) Global analysis with interactions
+# 2) Global analysis 
 m3 <- glmer(
-  cbind(FertilePollen, UnFertilePollen) ~ (1|Species) + Region + (meanPi + Fst + Mean_Dxy)*STDMeanSelfRate +  STDMeanParentalFertility, 
+  cbind(FertilePollen, UnFertilePollen) ~ (1|Species) + STDMeanParentalFertility + Region + (meanPi + Fst + Mean_Dxy) * STDMeanSelfRate,
   data=HybData_dadi_average,
   family=binomial,
   na.action = "na.fail",
   control = glmerControl(optimizer = "bobyqa",autoscale = TRUE)
-  )
+)
 summary(m3)
 Anova(m3, type=3)
 plot(m3)
+m3fix <- glm(cbind(FertilePollen, UnFertilePollen) ~  STDMeanParentalFertility + Region + (meanPi + Fst + Mean_Dxy) * STDMeanSelfRate,
+                data=HybData_dadi_average,
+                family=binomial)
+# Random effect is highly significant
+summary(m3)$AICtab[[1]]
+summary(m3fix)$aic
 
 modelselection3 <- dredge(
   m3,
@@ -230,93 +232,48 @@ bestmodels3 <- get.models(modelselection3,subset = delta < 2)
 length(bestmodels3)
 summary(bestmodels3[[1]])
 
+sink("results/tab_pollen_fert_dadi_divstat.txt")
+summary(m3)
+Anova(m3, type=3)
+summary(bestmodels3[[1]])
+Anova(bestmodels3[[1]], type=3)
+sink()
 
-# 3) Global analysis without interactions
-m3simple <- glmer(
-  cbind(FertilePollen, UnFertilePollen) ~ (1|Species) + Region + meanPi + Fst + Mean_Dxy + STDMeanSelfRate +  STDMeanParentalFertility, 
+# 3) Same analysis with three MS categories
+
+HybData_dadi_average$Classification2 <- ifelse(HybData_dadi_average$MeanSelfRate<0.5,"out","self")
+
+m3cat <- glmer(
+  cbind(FertilePollen, UnFertilePollen) ~ (1|Species) + STDMeanParentalFertility + Region + (meanPi + Fst + Mean_Dxy) * Classification, 
   data=HybData_dadi_average,
   family=binomial,
   na.action = "na.fail",
   control = glmerControl(optimizer = "bobyqa",autoscale = TRUE)
 )
-summary(m3simple)
-Anova(m3simple, type=3)
-plot(m3simple)
+summary(m3cat)
+Anova(m3cat, type=3)
+plot(m3cat)
+m3catfix <- glm(cbind(FertilePollen, UnFertilePollen) ~  STDMeanParentalFertility + Region + (meanPi + Fst + Mean_Dxy) * Classification,
+             data=HybData_dadi_average,
+             family=binomial)
+# Random effect is highly significant
+summary(m3cat)$AICtab[[1]]
+summary(m3catfix)$aic
 
-modelselection3simple <- dredge(
-  m3simple,
+modelselection3cat <- dredge(
+  m3cat,
   rank="AICc"
 )
-bestmodels3simple <- get.models(modelselection3simple,subset = delta < 1)
-length(bestmodels3simple)
-summary(bestmodels3simple[[1]])
+bestmodels3cat <- get.models(modelselection3cat,subset = delta < 1)
+length(bestmodels3cat)
+summary(bestmodels3cat[[1]])
 
-sink("results/tab_pollen_fert_dadi_divstat.txt")
-summary(m3)
-Anova(m3, type=3)
-summary(m3simple)
-Anova(m3simple, type=3)
+sink("results/tab_pollen_fert_dadi_divstat_catMS.txt")
+summary(m3cat)
+Anova(m3cat, type=3)
+summary(bestmodels3cat[[1]])
+Anova(bestmodels3cat[[1]], type=3)
 sink()
-
-
-# 4) Path analysis
-
-          # Formating the dataset
-HybData_dadi_Bino <- HybData_dadi_average[rep(seq_len(nrow(HybData_dadi_average)), HybData_dadi_average$FertilePollen + HybData_dadi_average$UnFertilePollen), ]
-HybData_dadi_Bino$Replicate <- rep(seq_len(nrow(HybData_dadi_average)), HybData_dadi_average$FertilePollen + HybData_dadi_average$UnFertilePollen)
-HybData_dadi_Bino$PollenFertBino <- rep( rep(c(0,1),nrow(HybData_dadi_average)), c(rbind(HybData_dadi_average$UnFertilePollen, HybData_dadi_average$FertilePollen)))
-HybData_dadi_Bino$Species <- as.factor(HybData_dadi_Bino$Species)
-sp <- levels(HybData_dadi_Bino$Species)
-HybData_dadi_Bino$weight  <- unlist(sapply(sp,function(x){
-  c(1,rep(0,length(which(HybData_dadi_Bino$Species==x))-1))
-  }))
-Summary_HybData_dadi$STDMeanSelfRate = (Summary_HybData_dadi$MeanSelfRate - mean(Summary_HybData_dadi$MeanSelfRate)) / sd(Summary_HybData_dadi$MeanSelfRate)
-Summary_HybData_dadi$STDMeanParentalFertility = (Summary_HybData_dadi$MeanParentalFertility - mean(Summary_HybData_dadi$MeanParentalFertility)) / sd(Summary_HybData_dadi$MeanParentalFertility)
-Summary_HybData_dadi_average$STDMeanSelfRate = (Summary_HybData_dadi_average$MeanSelfRate - mean(Summary_HybData_dadi_average$MeanSelfRate)) / sd(Summary_HybData_dadi_average$MeanSelfRate)
-Summary_HybData_dadi_average$STDMeanParentalFertility = (Summary_HybData_dadi_average$MeanParentalFertility - mean(Summary_HybData_dadi_average$MeanParentalFertility)) / sd(Summary_HybData_dadi_average$MeanParentalFertility)
-          
-            # As the three variables are highly correlated we only keep meaPi which is the better predictor
-
-# 4.1) All species
-m4 <- psem(
-  glmmTMB(
-    PollenFertBino ~ meanPi +  STDMeanSelfRate +
-      STDMeanParentalFertility + (1|Species/Replicate), data=HybData_dadi_Bino,
-    family=binomial(link = "logit")),
-  lm(meanPi ~ STDMeanSelfRate,weights = weight,data=HybData_dadi_Bino)
-)
-m4_sum <- summary(m4)
-plot(m4)
-
-# 4.2) Mediterranean species
-m4med <- psem(
-  glmmTMB(
-    PollenFertBino ~ meanPi + STDMeanSelfRate + 
-      STDMeanParentalFertility + (1|Species/Replicate), data=HybData_dadi_Bino[HybData_dadi_Bino$Dataset.x=="Med",],
-    family=binomial(link = "logit")),
-  lm(meanPi ~ STDMeanSelfRate,weights = weight,data=HybData_dadi_Bino[HybData_dadi_Bino$Dataset.x=="Med",])
-)
-m4med_sum <- summary(m4med)
-plot(m4med)
-
-# 4.3) Arctic species
-m4arc <- psem(
-  glmmTMB(
-    PollenFertBino ~ meanPi +  STDMeanSelfRate +
-      STDMeanParentalFertility + (1|Species/Replicate), data=HybData_dadi_Bino[HybData_dadi_Bino$Dataset.x=="Arc",],
-    family=binomial(link = "logit")),
-  lm(meanPi ~ STDMeanSelfRate,weights = weight,data=HybData_dadi_Bino[HybData_dadi_Bino$Dataset.x=="Arc",])
-)
-m4arc_sum <- summary(m4arc)
-
-
-sink("results/tab_pollen_fert_dadi_divstat.txt")
-m4_sum
-m4med_sum
-m4arc_sum
-sink()
-
-
 
 
 
@@ -324,15 +281,14 @@ sink()
 
 
 ############################################## #
-## ANALYSING DATA - SUBSET WITH DADI DATA ####
+# ANALYSING DATA - SUBSET WITH DADI DATA ####
 ############################################ #
 
 
 # Only pollen fertility is analysed in the following steps
 
 
-# Main analysis using the averaged parameters  ####
-
+## Main analysis using the averaged parameters  ####
 
 HybData_dadi_average <- HybData_dadi[HybData_dadi$model=="average",]
 Summary_HybData_dadi_average <- Summary_HybData_dadi[Summary_HybData_dadi$model=="average",]
@@ -345,28 +301,61 @@ corr_mat <- rcorr(mat)
 corrplot(corr_mat$r, type = "upper", p.mat = corr_mat$P,sig.level = 0.05, diag = F,insig = "label_sig",
          tl.col = "black", tl.srt = 45,)
 
+sink("results/correlation_genpop_param.txt")
+corr_mat
+sink()
 
 
 #Pollen Fertility - Analysis using pop gene parameters as explanatory variables
-m3 <- glmer(cbind(FertilePollen, UnFertilePollen) ~ (1|Species) + (log10(Mtotal) + log10(TsplitAbs) + log10(AbsoluteRecentSize))*STDMeanSelfRate + Region  + STDMeanParentalFertility, 
+m4 <- glmer(cbind(FertilePollen, UnFertilePollen) ~ (1|Species) +  STDMeanParentalFertility + Region + (log10(AbsoluteRecentSize) + log10(TsplitAbs) + log10(Mtotal) )* STDMeanSelfRate , 
             data=HybData_dadi_average,
             family=binomial,
             na.action = "na.fail",
-            control = glmerControl(optimizer = "bobyqa",autoscale = TRUE))
-summary(m3)
-Anova(m3, type=3)
-plot(m3)
+            control = glmerControl(optimizer = "bobyqa",autoscale = TRUE)
+            )
+summary(m4)
+Anova(m4, type=3)
+plot(m4)
+
+modelselection4 <- dredge(
+  m4,
+  rank="AIC"
+)
+bestmodels4 <- get.models(modelselection4,subset = delta < 1)
+length(bestmodels4)
+summary(bestmodels4[[1]])
+
 sink("results/tab_pollen_fert_dadi.txt")
+summary(m4)
+Anova(m4, type=3)
+summary(bestmodels4[[1]])
+Anova(bestmodels4[[1]], type=3)
+sink()
 
 
-# Equivalent analysis using three MS categories 
-m3cat <- glmer(cbind(FertilePollen, UnFertilePollen) ~ (1|Species) + Region + log10(Mtotal) + log10(TsplitAbs) + log10(AbsoluteRecentSize) + Classification + STDMeanParentalFertility, 
-            data=HybData_dadi_average, family=binomial)
-summary(m3cat)
-Anova(m3cat, type=3)
+# Equivalent analysis using three MS categories but without interactions (matrix rank deficient no convergence)
+m4cat <- glmer(cbind(FertilePollen, UnFertilePollen) ~ (1|Species) + STDMeanParentalFertility + Region + (log10(AbsoluteRecentSize) + log10(TsplitAbs) + log10(Mtotal)) * Classification, 
+            data=HybData_dadi_average,
+            family=binomial,
+            na.action = "na.fail",
+            control = glmerControl(optimizer = "bobyqa",autoscale = TRUE)
+)
+summary(m4cat)
+Anova(m4cat, type=3)
+
+modelselection4cat <- dredge(
+  m4cat,
+  rank="AICc"
+)
+bestmodels4cat <- get.models(modelselection4cat,subset = delta < 1)
+length(bestmodels4cat)
+summary(bestmodels4cat[[1]])
+
 sink("results/tab_pollen_fert_dadi_catMS.txt")
-summary(m3cat)
-Anova(m3cat, type=3)
+summary(m4cat)
+Anova(m4cat, type=3)
+summary(bestmodels4cat[[1]])
+Anova(bestmodels4cat[[1]], type=3)
 sink()
 
 
@@ -399,7 +388,7 @@ Summary_HybData_dadi_average$STDMeanParentalFertility = (Summary_HybData_dadi_av
 # glmmTMB is faster than glmer and seems to be more robust
 
 
-m4 <- psem(
+m5 <- psem(
   glmmTMB(
     PollenFertBino ~ log10(Mtotal) +  log10(AbsoluteRecentSize) + log10(TsplitAbs) + STDMeanSelfRate +
       STDMeanParentalFertility + (1|Species/Replicate), data=HybData_dadi_Bino,
@@ -408,12 +397,10 @@ m4 <- psem(
   lm(log10(AbsoluteRecentSize) ~ STDMeanSelfRate ,weights = weight,data=HybData_dadi_Bino),
   lm(log10(TsplitAbs) ~ STDMeanSelfRate,weights = weight,data=HybData_dadi_Bino)
 )
-m4_sum <- summary(m4)
-pTot <- plot(m4,return = T)
-render_graph(pTot)
+m5_sum <- summary(m5)
 
 # Same analysis for Mediterranean species only
-m4Med <- psem(
+m5Med <- psem(
   glmmTMB(
     PollenFertBino ~ log10(Mtotal) +  log10(AbsoluteRecentSize) + log10(TsplitAbs) + STDMeanSelfRate +
       STDMeanParentalFertility + (1|Species/Replicate), data=subset(HybData_dadi_Bino,Dataset.x=="Med"),
@@ -422,10 +409,10 @@ m4Med <- psem(
   lm(log10(AbsoluteRecentSize) ~ STDMeanSelfRate ,weights = weight,data=subset(HybData_dadi_Bino,Dataset.x=="Med")),
   lm(log10(TsplitAbs) ~ STDMeanSelfRate,weights = weight,data=subset(HybData_dadi_Bino,Dataset.x=="Med"))
 )
-m4Med_sum <- summary(m4Med)
+m5Med_sum <- summary(m5Med)
 
 # Same analysis for Arctic species only
-m4Arc <- psem(
+m5Arc <- psem(
   glmmTMB(
     PollenFertBino ~ log10(Mtotal) +  log10(AbsoluteRecentSize) + log10(TsplitAbs) + STDMeanSelfRate +
       STDMeanParentalFertility + (1|Species/Replicate), data=subset(HybData_dadi_Bino,Dataset.x=="Arc"),
@@ -434,16 +421,22 @@ m4Arc <- psem(
   lm(log10(AbsoluteRecentSize) ~ STDMeanSelfRate ,weights = weight,data=subset(HybData_dadi_Bino,Dataset.x=="Arc")),
   lm(log10(TsplitAbs) ~ STDMeanSelfRate,weights = weight,data=subset(HybData_dadi_Bino,Dataset.x=="Arc"))
 )
-m4Arc_sum <- summary(m4Arc)
+m5Arc_sum <- summary(m5Arc)
 
 # to retreive paths with coefficients
-plot(m4)
-plot(m4Med)
-plot(m4Arc)
+plot(m5)
+plot(m5Med)
+plot(m5Arc)
+
+sink("results/tab_pollen_fert_dadi_SEM.txt")
+m5_sum
+m5Med_sum
+m5Arc_sum
+sink()
 
 
 
-# Analysis with the parameter estimated in the split_mig model
+## Analysis with the parameter estimated in the split_mig model ####
 
 HybData_dadi_split_mig <- HybData_dadi[HybData_dadi$model=="split_mig",]
 Summary_HybData_dadi_split_mig <- Summary_HybData_dadi[Summary_HybData_dadi$model=="split_mig",]
@@ -459,25 +452,55 @@ corrplot(corr_mat$r, type = "upper", p.mat = corr_mat$P,sig.level = 0.05, diag =
 
 
 #Pollen Fertility - Analysis using pop gene parameters as explanatory variables
-m3 <- glmer(cbind(FertilePollen, UnFertilePollen) ~ (1|Species) + (log10(Mtotal) + log10(TsplitAbs) + log10(AbsoluteRecentSize))*STDMeanSelfRate + Region  + STDMeanParentalFertility, 
+m6 <- glmer(cbind(FertilePollen, UnFertilePollen) ~ (1|Species)  + STDMeanParentalFertility + Region + ( log10(AbsoluteRecentSize) + log10(TsplitAbs) + log10(Mtotal))*STDMeanSelfRate , 
             data=HybData_dadi_split_mig,
             family=binomial,
             na.action = "na.fail",
             control = glmerControl(optimizer = "bobyqa",autoscale = TRUE))
-summary(m3)
-Anova(m3, type=3)
-plot(m3)
-sink("results/tab_pollen_fert_dadi.txt")
+summary(m6)
+Anova(m6, type=3)
+
+modelselection6 <- dredge(
+  m6,
+  rank="AIC"
+)
+bestmodels6 <- get.models(modelselection6,subset = delta < 2)
+length(bestmodels6)
+summary(bestmodels6[[1]])
 
 
-# Equivalent analysis using three MS categories 
-m3cat <- glmer(cbind(FertilePollen, UnFertilePollen) ~ (1|Species) + Region + log10(Mtotal) + log10(TsplitAbs) + log10(AbsoluteRecentSize) + Classification + STDMeanParentalFertility, 
-               data=HybData_dadi_average, family=binomial)
-summary(m3cat)
-Anova(m3cat, type=3)
-sink("results/tab_pollen_fert_dadi_catMS.txt")
-summary(m3cat)
-Anova(m3cat, type=3)
+sink("results/tab_pollen_fert_dadi_split_mig.txt")
+summary(m6)
+Anova(m6, type=3)
+summary(bestmodels6[[1]])
+Anova(bestmodels6[[1]], type=3)
+sink()
+
+
+# Equivalent analysis using three MS categories
+m6cat <- glmer(cbind(FertilePollen, UnFertilePollen) ~ (1|Species) + STDMeanParentalFertility + Region + (log10(AbsoluteRecentSize) + log10(TsplitAbs) + log10(Mtotal)) * Classification,
+               data=HybData_dadi_split_mig,
+               family=binomial,
+               na.action = "na.fail",
+               control = glmerControl(optimizer = "bobyqa",autoscale = TRUE)
+               )
+summary(m6cat)
+Anova(m6cat, type=3)
+
+modelselection6cat <- dredge(
+  m6cat,
+  rank="AIC"
+)
+bestmodels6cat <- get.models(modelselection6cat,subset = delta < 2)
+length(bestmodels6cat)
+summary(bestmodels6cat[[1]])
+
+
+sink("results/tab_pollen_fert_dadi_catMS_split_mig.txt")
+summary(m6cat)
+Anova(m6cat, type=3)
+summary(bestmodels6cat[[1]])
+Anova(bestmodels6cat[[1]], type=3)
 sink()
 
 
@@ -510,7 +533,7 @@ Summary_HybData_dadi_split_mig$STDMeanParentalFertility = (Summary_HybData_dadi_
 # glmmTMB is faster than glmer and seems to be more robust
 
 
-m4 <- psem(
+m7 <- psem(
   glmmTMB(
     PollenFertBino ~ log10(Mtotal) +  log10(AbsoluteRecentSize) + log10(TsplitAbs) + STDMeanSelfRate +
       STDMeanParentalFertility + (1|Species/Replicate), data=HybData_dadi_Bino,
@@ -519,11 +542,11 @@ m4 <- psem(
   lm(log10(AbsoluteRecentSize) ~ STDMeanSelfRate ,weights = weight,data=HybData_dadi_Bino),
   lm(log10(TsplitAbs) ~ STDMeanSelfRate,weights = weight,data=HybData_dadi_Bino)
 )
-m4_sum <- summary(m4)
-plot(m4)
+m7_sum <- summary(m7)
+
 
 # Same analysis for Mediterranean species only
-m4Med <- psem(
+m7Med <- psem(
   glmmTMB(
     PollenFertBino ~ log10(Mtotal) +  log10(AbsoluteRecentSize) + log10(TsplitAbs) + STDMeanSelfRate +
       STDMeanParentalFertility + (1|Species/Replicate), data=subset(HybData_dadi_Bino,Dataset.x=="Med"),
@@ -532,10 +555,10 @@ m4Med <- psem(
   lm(log10(AbsoluteRecentSize) ~ STDMeanSelfRate ,weights = weight,data=subset(HybData_dadi_Bino,Dataset.x=="Med")),
   lm(log10(TsplitAbs) ~ STDMeanSelfRate,weights = weight,data=subset(HybData_dadi_Bino,Dataset.x=="Med"))
 )
-m4Med_sum <- summary(m4Med)
+m7Med_sum <- summary(m7Med)
 
 # Same analysis for Arctic species only
-m4Arc <- psem(
+m7Arc <- psem(
   glmmTMB(
     PollenFertBino ~ log10(Mtotal) +  log10(AbsoluteRecentSize) + log10(TsplitAbs) + STDMeanSelfRate +
       STDMeanParentalFertility + (1|Species/Replicate), data=subset(HybData_dadi_Bino,Dataset.x=="Arc"),
@@ -544,19 +567,23 @@ m4Arc <- psem(
   lm(log10(AbsoluteRecentSize) ~ STDMeanSelfRate ,weights = weight,data=subset(HybData_dadi_Bino,Dataset.x=="Arc")),
   lm(log10(TsplitAbs) ~ STDMeanSelfRate,weights = weight,data=subset(HybData_dadi_Bino,Dataset.x=="Arc"))
 )
-m4Arc_sum <- summary(m4Arc)
+m7Arc_sum <- summary(m7Arc)
 
 # to retreive paths with coefficients
 plot(m4)
 plot(m4Med)
 plot(m4Arc)
 
+sink("results/tab_pollen_fert_dadi_SEM_sup_splitmig.txt")
+m7_sum
+m7Med_sum
+m7Arc_sum
+sink()
 
 
 
 
-
-  ############### #
+############### #
 ## GRAPHICS ####
 ############# #
 
@@ -610,7 +637,7 @@ ggsave("figures/Figure1_WithSpeciesName.pdf",fig1,width = 14,height = 6)
 # FIGURE 2
 
 # Correlation between pop gen variables
-mat <- as.matrix(Summary_HybData_dadi[,c("MeanSelfRate","AbsoluteRecentSize","Tsplit","Mtotal")])
+mat <- as.matrix(Summary_HybData_dadi_average[,c("MeanSelfRate","AbsoluteRecentSize","Tsplit","Mtotal")])
 colnames(mat) <- c("Selfing rate","Mean effective size","Divergence time","Migration rate")
 corr_mat <- rcorr(mat)
 
@@ -625,7 +652,8 @@ fig2a <- ggcorrplot(corr = corr_mat$r,type = "upper",ggtheme = theme_classic(),m
           outline.color ="black",lab = T,lab_size = 4,tl.cex = 12,
           colors = c("darkblue","white","darkred"),title = "A")
 
-fig2b <- ggplot(Summary_HybData_dadi, aes(x=AbsoluteRecentSize, y=PollenFert/MeanParentalFertility, colour=MeanSelfRate,shape=Region)) +
+
+fig2b <- ggplot(Summary_HybData_dadi_average, aes(x=AbsoluteRecentSize, y=PollenFert/MeanParentalFertility, colour=MeanSelfRate,shape=Region)) +
   theme_classic(base_size=17) +
   stat_summary(fun = mean, geom="point", aes(size=nPollenFert)) +
   #stat_summary(fun = mean, geom="text", size=3, aes(label=Species, vjust=1.5)) +
@@ -634,7 +662,7 @@ fig2b <- ggplot(Summary_HybData_dadi, aes(x=AbsoluteRecentSize, y=PollenFert/Mea
   scale_colour_gradient(low="#1965B0", high="#DC050C", limits=c(0,1)) +
   theme(aspect.ratio=1)
 
-fig2c <- ggplot(Summary_HybData_dadi, aes(x=TsplitAbs, y=PollenFert/MeanParentalFertility, colour=MeanSelfRate,shape=Region)) +
+fig2c <- ggplot(Summary_HybData_dadi_average, aes(x=TsplitAbs, y=PollenFert/MeanParentalFertility, colour=MeanSelfRate,shape=Region)) +
   theme_classic(base_size=17) +
   stat_summary(fun = mean, geom="point", aes(size=nPollenFert)) +
   #stat_summary(fun = mean, geom="text", size=3, aes(label=Species, vjust=1.5)) +
@@ -643,7 +671,7 @@ fig2c <- ggplot(Summary_HybData_dadi, aes(x=TsplitAbs, y=PollenFert/MeanParental
   scale_colour_gradient(low="#1965B0", high="#DC050C", limits=c(0,1)) +
   theme(aspect.ratio=1)
 
-fig2d <- ggplot(Summary_HybData_dadi, aes(x=Mtotal, y=PollenFert/MeanParentalFertility, colour=MeanSelfRate,shape=Region)) +
+fig2d <- ggplot(Summary_HybData_dadi_average, aes(x=Mtotal, y=PollenFert/MeanParentalFertility, colour=MeanSelfRate,shape=Region)) +
   theme_classic(base_size=17) +
   stat_summary(fun = mean, geom="point", aes(size=nPollenFert)) +
   #stat_summary(fun = mean, geom="text", size=3, aes(label=Species, vjust=1.5)) +
@@ -658,7 +686,7 @@ ggsave("figures/Figure2.pdf",fig2,width = 14,height = 10)
 
 
 # Additional figures
-figsup1 <- ggplot(Summary_HybData_dadi, aes(x=TsplitAbs*Lifespan1, y=PollenFert/MeanParentalFertility, colour=MeanSelfRate,shape=Region)) +
+figsup1 <- ggplot(Summary_HybData_dadi_average, aes(x=TsplitAbs*Lifespan1, y=PollenFert/MeanParentalFertility, colour=MeanSelfRate,shape=Region)) +
   theme_classic(base_size=17) +
   stat_summary(fun = mean, geom="point", aes(size=nPollenFert)) +
   #stat_summary(fun = mean, geom="text", size=3, aes(label=Species, vjust=1.5)) +
@@ -667,7 +695,7 @@ figsup1 <- ggplot(Summary_HybData_dadi, aes(x=TsplitAbs*Lifespan1, y=PollenFert/
   scale_colour_gradient(low="#1965B0", high="#DC050C", limits=c(0,1)) +
   theme(aspect.ratio=1)
 
-figsup2 <- ggplot(Summary_HybData_dadi, aes(x=TsplitAbs*Lifespan2, y=PollenFert/MeanParentalFertility, colour=MeanSelfRate,shape=Region)) +
+figsup2 <- ggplot(Summary_HybData_dadi_average, aes(x=TsplitAbs*Lifespan2, y=PollenFert/MeanParentalFertility, colour=MeanSelfRate,shape=Region)) +
   theme_classic(base_size=17) +
   stat_summary(fun = mean, geom="point", aes(size=nPollenFert)) +
   #stat_summary(fun = mean, geom="text", size=3, aes(label=Species, vjust=1.5)) +
@@ -684,7 +712,7 @@ ggsave("figures/FigureSup.pdf",figSup,width = 14,height = 8)
 # FIGURE 2 - SAME BUT WITH SPECIES NAMES
 
 # Correlation between pop gen variables
-mat <- as.matrix(Summary_HybData_dadi[,c("MeanSelfRate","AbsoluteRecentSize","Tsplit","Mtotal")])
+mat <- as.matrix(Summary_HybData_dadi_average[,c("MeanSelfRate","AbsoluteRecentSize","Tsplit","Mtotal")])
 colnames(mat) <- c("Selfing rate","Mean effective size","Divergence time","Migration rate")
 corr_mat <- rcorr(mat)
 
@@ -699,16 +727,18 @@ fig2a <- ggcorrplot(corr = corr_mat$r,type = "upper",ggtheme = theme_classic(),m
                     outline.color = "black",lab = T,lab_size = 4,tl.cex = 12,
                     colors = c("darkblue","white","darkred"),title = "A")
 
-fig2b <- ggplot(Summary_HybData_dadi, aes(x=AbsoluteRecentSize, y=PollenFert/MeanParentalFertility, colour=MeanSelfRate,shape=Region)) +
+fig2b <- ggplot(Summary_HybData_dadi_average, aes(x=AbsoluteRecentSize, y=PollenFert/MeanParentalFertility, colour=MeanSelfRate,shape=Region)) +
   theme_classic(base_size=17) +
   stat_summary(fun = mean, geom="point", aes(size=nPollenFert)) +
   geom_text_repel(aes(label=Short_name),col="black",fontface="italic",max.overlaps=20) +
   labs(x="Mean effective size", y="Pollen fertility", size="n", colour="Selfing rate") +
   ylim(0,1.3) + scale_x_log10() + ggtitle("B") +
   scale_colour_gradient(low="#1965B0", high="#DC050C", limits=c(0,1)) +
-  theme(aspect.ratio=1)
+  theme(aspect.ratio=1) +
+  geom_abline(intercept = -0.31,slope = 0.15)
 
-fig2c <- ggplot(Summary_HybData_dadi, aes(x=TsplitAbs, y=PollenFert/MeanParentalFertility, colour=MeanSelfRate,shape=Region)) +
+
+fig2c <- ggplot(Summary_HybData_dadi_average, aes(x=TsplitAbs, y=PollenFert/MeanParentalFertility, colour=MeanSelfRate,shape=Region)) +
   theme_classic(base_size=17) +
   stat_summary(fun = mean, geom="point", aes(size=nPollenFert)) +
   geom_text_repel(aes(label=Short_name),col="black",fontface="italic") +
@@ -717,7 +747,7 @@ fig2c <- ggplot(Summary_HybData_dadi, aes(x=TsplitAbs, y=PollenFert/MeanParental
   scale_colour_gradient(low="#1965B0", high="#DC050C", limits=c(0,1)) +
   theme(aspect.ratio=1)
 
-fig2d <- ggplot(Summary_HybData_dadi, aes(x=Mtotal, y=PollenFert/MeanParentalFertility, colour=MeanSelfRate,shape=Region)) +
+fig2d <- ggplot(Summary_HybData_dadi_average, aes(x=Mtotal, y=PollenFert/MeanParentalFertility, colour=MeanSelfRate,shape=Region)) +
   theme_classic(base_size=17) +
   stat_summary(fun = mean, geom="point", aes(size=nPollenFert)) +
   geom_text_repel(aes(label=Short_name),col="black",fontface="italic") +
@@ -756,122 +786,4 @@ ggsave("figures/FigureSup_WithSpeciesName.pdf",figSup,width = 14,height = 8)
 
 
 
-########################### #
-# COMPLEMENTARY ANALYSES ####
-########################### #
 
-# Additional analysis using the pure allopatry model ####
-HybData_dadi_allo <- HybData_dadi[HybData_dadi$model=="split",]
-Summary_HybData_dadi_allo <- Summary_HybData_dadi[Summary_HybData_dadi$model=="split",]
-
-# Correlation between pop gen variables
-mat <- as.matrix(HybData_dadi_allo[,c("MeanSelfRate","AbsoluteRecentSize","Tsplit","Mtotal")])
-colnames(mat) <- c("Selfing rate","Mean effective size","Divergence time","Migration rate")
-corr_mat <- rcorr(mat)
-
-corrplot(corr_mat$r, type = "upper", p.mat = corr_mat$P,sig.level = 0.05, diag = F,insig = "label_sig",
-         tl.col = "black", tl.srt = 45,)
-
-
-#Pollen Fertility - Analysis using raw statistics as explanatory variable
-m3allo <- glmer(cbind(FertilePollen, UnFertilePollen) ~ (1|Species) + Region + log10(TsplitAbs) + log10(AbsoluteRecentSize) + STDMeanSelfRate + STDMeanParentalFertility, 
-            data=HybData_dadi_allo, family=binomial)
-summary(m3allo)
-Anova(m3allo, type=3)
-
-#Path Analysis on Pollen Fertility
-
-HybData_dadi_Bino <- HybData_dadi_allo[rep(seq_len(nrow(HybData_dadi_allo)), HybData_dadi_allo$FertilePollen + HybData_dadi_allo$UnFertilePollen), ]
-HybData_dadi_Bino$Replicate <- rep(seq_len(nrow(HybData_dadi_allo)), HybData_dadi_allo$FertilePollen + HybData_dadi_allo$UnFertilePollen)
-HybData_dadi_Bino$PollenFertBino <- rep( rep(c(0,1),nrow(HybData_dadi_allo)), c(rbind(HybData_dadi_allo$UnFertilePollen, HybData_dadi_allo$FertilePollen)))
-HybData_dadi_Bino$Species <- as.factor(HybData_dadi_Bino$Species)
-
-sp <- levels(HybData_dadi_Bino$Species)
-HybData_dadi_Bino$weight  <- unlist(sapply(sp,function(x){
-  c(1,rep(0,length(which(HybData_dadi_Bino$Species==x))-1))
-}))
-
-
-# Good model to keep
-# Check Tests of directed separation: what is suppose to be independent: it's OK, nothing is correlated
-# Then predicted path analysis
-# To use the same dataset but not inflate the number of parameters for species level analyses:
-# weight 1 for the first replicate and 0 for all others: so just one point per species
-# glmmTMB is faster than glmer and seems to be more robust
-
-# Two different ways to code the model
-m4allo <- psem(
-  glmmTMB(
-    PollenFertBino ~ log10(AbsoluteRecentSize) + log10(TsplitAbs) + STDMeanSelfRate +
-      STDMeanParentalFertility + (1|Species/Replicate), data=HybData_dadi_Bino,
-    family=binomial(link = "logit")),
-  lm(log10(AbsoluteRecentSize) ~ STDMeanSelfRate ,weights = weight,data=HybData_dadi_Bino),
-  lm(log10(TsplitAbs) ~ STDMeanSelfRate,weights = weight,data=HybData_dadi_Bino)
-)
-m4allo_sum <- summary(m4allo)
-
-
-# Same analysis for Mediterranean species only
-
-m4alloMed <- psem(
-  glmmTMB(
-    PollenFertBino ~ log10(AbsoluteRecentSize) + log10(TsplitAbs) + STDMeanSelfRate +
-      STDMeanParentalFertility + (1|Species/Replicate), data=subset(HybData_dadi_Bino,Dataset.x=="Med"),
-    family=binomial(link = "logit")),
-  lm(log10(AbsoluteRecentSize) ~ STDMeanSelfRate ,weights = weight,data=subset(HybData_dadi_Bino,Dataset.x=="Med")),
-  lm(log10(TsplitAbs) ~ STDMeanSelfRate,weights = weight,data=subset(HybData_dadi_Bino,Dataset.x=="Med"))
-)
-m4alloMed_sum <- summary(m4alloMed)
-
-m4alloMed <- psem(
-  glmmTMB(
-    PollenFertBino ~ log10(AbsoluteRecentSize) + log10(TsplitAbs) + STDMeanSelfRate +
-      STDMeanParentalFertility + (1|Species/Replicate), data=subset(HybData_dadi_Bino,Dataset.x=="Arc"),
-    family=binomial(link = "logit")),
-  lm(log10(AbsoluteRecentSize) ~ STDMeanSelfRate ,weights = weight,data=subset(HybData_dadi_Bino,Dataset.x=="Arc")),
-  lm(log10(TsplitAbs) ~ STDMeanSelfRate,weights = weight,data=subset(HybData_dadi_Bino,Dataset.x=="Arc"))
-)
-m4alloMed_sum <- summary(m4alloMed)
-
-pTot <- plot(m6,return = T)
-pMed <- plot(m6Med,return = T)
-pArc <- plot(m6Arc,return = T)
-
-pTot$nodes_df$label
-pTot$edges_df$from
-pTot$edges_df$to
-pTot$edges_df$label
-
-pMed$nodes_df$label
-pMed$edges_df$from
-pMed$edges_df$to
-pMed$edges_df$label
-
-pArc$nodes_df$label
-pArc$edges_df$from
-pArc$edges_df$to
-pArc$edges_df$label
-
-m6_sum$coefficients$Predictor
-m6_sum$coefficients$P.Value
-m6Med_sum$coefficients$P.Value
-m6Arc_sum$coefficients$P.Value
-
-m6_sum$coefficients$Estimate
-m6Med_sum$coefficients$Estimate
-m6Arc_sum$coefficients$Estimate
-
-
-# Re-sampling analysis ####
-
-df_resampled <- HybData_dadi[HybData_dadi$model=="average",]
-
-#Pollen Fertility - Analysis using pop gene parameters as explanatory variables
-
-df_resampled$TsplitAbs <- 
-  mapply(function(x,y) rnorm(1,x,y), df_resampled$TsplitAbs,0.00001)
-
-m3 <- glmer(cbind(FertilePollen, UnFertilePollen) ~ (1|Species) + Region + log10(MtotalAbs) + log10(TsplitAbs) + log10(AbsoluteRecentSize) + STDMeanSelfRate + STDMeanParentalFertility, 
-            data=HybData_dadi_average, family=binomial)
-summary(m3)
-Anova(m3, type=3)

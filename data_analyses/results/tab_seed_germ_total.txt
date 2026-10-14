@@ -1,88 +1,38 @@
-Generalized linear mixed model fit by maximum likelihood (Laplace
-  Approximation) [glmerMod]
- Family: binomial  ( logit )
-Formula: 
-cbind(GerminatedSeed, NonGerminatedSeed) ~ (1 | Species_Fst) +  
-    Region + (STDFst * STDMeanSelfRate) + STDMeanParentalGermination
-   Data: HybData
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-   1821.5    1847.0    -903.8    1807.5       274 
+Call:
+lm(formula = asin(sqrt(SeedGerm)) ~ STDMeanParentalGermination + 
+    Region + STDFst * STDMeanSelfRate, data = Summary_HybData)
 
-Scaled residuals: 
-    Min      1Q  Median      3Q     Max 
--5.9160 -0.0344  0.0113  0.2311  2.9972 
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.38727 -0.10184  0.04169  0.17574  0.23779 
 
-Random effects:
- Groups      Name        Variance Std.Dev.
- Species_Fst (Intercept) 0.6858   0.8282  
-Number of obs: 281, groups:  Species_Fst, 24
-
-Fixed effects:
-                           Estimate Std. Error z value Pr(>|z|)   
-(Intercept)                 0.10910    0.34988   0.312  0.75518   
-RegionMediterranean        -0.06636    0.51504  -0.129  0.89749   
-STDFst                     -0.49413    0.26325  -1.877  0.06051 . 
-STDMeanSelfRate            -0.32436    0.23661  -1.371  0.17041   
-STDMeanParentalGermination  0.64763    0.21628   2.994  0.00275 **
-STDFst:STDMeanSelfRate     -0.21485    0.19460  -1.104  0.26957   
+Coefficients:
+                           Estimate Std. Error t value Pr(>|t|)    
+(Intercept)                 0.83086    0.09272   8.961 3.57e-07 ***
+STDMeanParentalGermination  0.14259    0.05832   2.445   0.0283 *  
+RegionMediterranean        -0.04921    0.13494  -0.365   0.7208    
+STDFst                     -0.10164    0.06787  -1.498   0.1565    
+STDMeanSelfRate            -0.07687    0.05886  -1.306   0.2127    
+STDFst:STDMeanSelfRate     -0.04202    0.04871  -0.863   0.4028    
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
-Correlation of Fixed Effects:
-            (Intr) RgnMdt STDFst STDMSR STDMPG
-RegnMdtrrnn -0.632                            
-STDFst      -0.172 -0.251                     
-STDMenSlfRt  0.237  0.376 -0.574              
-STDMnPrntlG -0.490  0.420  0.205 -0.206       
-STDF:STDMSR -0.204 -0.270  0.607 -0.525  0.124
-Generalized linear mixed model fit by maximum likelihood (Laplace
-  Approximation) [glmerMod]
- Family: binomial  ( logit )
-Formula: 
-cbind(FertilePollen, UnFertilePollen) ~ (1 | Species_Fst) + Region +  
-    (STDFst * STDMeanSelfRate) + STDMeanParentalFertility
-   Data: HybData
+Residual standard error: 0.2308 on 14 degrees of freedom
+  (10 observations deleted due to missingness)
+Multiple R-squared:  0.5683,	Adjusted R-squared:  0.4141 
+F-statistic: 3.686 on 5 and 14 DF,  p-value: 0.02447
 
-      AIC       BIC    logLik -2*log(L)  df.resid 
-  20624.8   20653.5  -10305.4   20610.8       437 
+Anova Table (Type III tests)
 
-Scaled residuals: 
-    Min      1Q  Median      3Q     Max 
--42.939  -3.673  -0.059   2.360  33.122 
-
-Random effects:
- Groups      Name        Variance Std.Dev.
- Species_Fst (Intercept) 2.543    1.595   
-Number of obs: 444, groups:  Species_Fst, 30
-
-Fixed effects:
-                         Estimate Std. Error z value Pr(>|z|)    
-(Intercept)               -1.5290     0.4102  -3.727 0.000194 ***
-RegionMediterranean        2.4188     0.7221   3.349 0.000810 ***
-STDFst                    -0.1315     0.3697  -0.356 0.722060    
-STDMeanSelfRate           -1.0226     0.3112  -3.286 0.001017 ** 
-STDMeanParentalFertility   0.5099     0.2758   1.849 0.064530 .  
-STDFst:STDMeanSelfRate     0.5011     0.2843   1.762 0.078033 .  
----
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-
-Correlation of Fixed Effects:
-            (Intr) RgnMdt STDFst STDMSR STDMPF
-RegnMdtrrnn -0.621                            
-STDFst       0.123 -0.394                     
-STDMenSlfRt -0.164  0.517 -0.468              
-STDMnPrntlF -0.173  0.113 -0.145 -0.023       
-STDF:STDMSR -0.035 -0.336  0.386 -0.308 -0.080
-Analysis of Deviance Table (Type III Wald chisquare tests)
-
-Response: cbind(FertilePollen, UnFertilePollen)
-                           Chisq Df Pr(>Chisq)    
-(Intercept)              13.8920  1  0.0001936 ***
-Region                   11.2191  1  0.0008096 ***
-STDFst                    0.1265  1  0.7220598    
-STDMeanSelfRate          10.7961  1  0.0010171 ** 
-STDMeanParentalFertility  3.4170  1  0.0645298 .  
-STDFst:STDMeanSelfRate    3.1054  1  0.0780333 .  
+Response: asin(sqrt(SeedGerm))
+                           Sum Sq Df F value   Pr(>F)    
+(Intercept)                4.2792  1 80.3004 3.57e-07 ***
+STDMeanParentalGermination 0.3185  1  5.9772  0.02832 *  
+Region                     0.0071  1  0.1330  0.72079    
+STDFst                     0.1195  1  2.2425  0.15647    
+STDMeanSelfRate            0.0909  1  1.7052  0.21266    
+STDFst:STDMeanSelfRate     0.0397  1  0.7443  0.40283    
+Residuals                  0.7461 14                     
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1

@@ -1,0 +1,96 @@
+Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) [
+glmerMod]
+ Family: binomial  ( logit )
+Formula: 
+cbind(FertilePollen, UnFertilePollen) ~ (1 | Species) + STDMeanParentalFertility +  
+    Region + (meanPi + Fst + Mean_Dxy) * Classification
+   Data: HybData_dadi_average
+Control: glmerControl(optimizer = "bobyqa", autoscale = TRUE)
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+  17307.0   17350.4   -8642.5   17285.0       371 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-42.911  -2.969   0.406   2.438  26.385 
+
+Random effects:
+ Groups  Name        Variance Std.Dev.
+ Species (Intercept) 0.6059   0.7784  
+Number of obs: 382, groups:  Species, 20
+
+Fixed effects:
+                               Estimate Std. Error z value Pr(>|z|)   
+(Intercept)                     1.20920    0.62957   1.921  0.05477 . 
+STDMeanParentalFertility        0.40403    0.15403   2.623  0.00872 **
+RegionMediterranean             0.59462    0.65234   0.912  0.36201   
+meanPi                          0.09921    0.44422   0.223  0.82328   
+Fst                             0.15718    0.85542   0.184  0.85421   
+Mean_Dxy                       -1.21722    0.87921  -1.384  0.16622   
+Classificationselfing          -0.99629    0.57065  -1.746  0.08083 . 
+meanPi:Classificationselfing    1.27293    0.66151   1.924  0.05432 . 
+Fst:Classificationselfing       0.65424    1.30064   0.503  0.61496   
+Mean_Dxy:Classificationselfing  1.43577    1.10166   1.303  0.19248   
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Analysis of Deviance Table (Type III Wald chisquare tests)
+
+Response: cbind(FertilePollen, UnFertilePollen)
+                          Chisq Df Pr(>Chisq)   
+(Intercept)              3.6890  1   0.054773 . 
+STDMeanParentalFertility 6.8801  1   0.008716 **
+Region                   0.8309  1   0.362015   
+meanPi                   0.0499  1   0.823283   
+Fst                      0.0338  1   0.854214   
+Mean_Dxy                 1.9167  1   0.166223   
+Classification           3.0481  1   0.080832 . 
+meanPi:Classification    3.7028  1   0.054322 . 
+Fst:Classification       0.2530  1   0.614956   
+Mean_Dxy:Classification  1.6985  1   0.192480   
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Generalized linear mixed model fit by maximum likelihood (Laplace Approximation) [
+glmerMod]
+ Family: binomial  ( logit )
+Formula: cbind(FertilePollen, UnFertilePollen) ~ Classification + Mean_Dxy +  
+    meanPi + STDMeanParentalFertility + (1 | Species) + Classification:Mean_Dxy +  
+    Classification:meanPi
+   Data: HybData_dadi_average
+Control: glmerControl(optimizer = "bobyqa", autoscale = TRUE)
+
+      AIC       BIC    logLik -2*log(L)  df.resid 
+  17302.4   17334.0   -8643.2   17286.4       374 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-42.904  -2.970   0.405   2.436  26.382 
+
+Random effects:
+ Groups  Name        Variance Std.Dev.
+ Species (Intercept) 0.6634   0.8145  
+Number of obs: 382, groups:  Species, 20
+
+Fixed effects:
+                               Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                      1.6961     0.2779   6.104 1.03e-09 ***
+Classificationselfing           -1.2634     0.5073  -2.491 0.012756 *  
+Mean_Dxy                        -0.8412     0.4950  -1.699 0.089233 .  
+meanPi                           0.2056     0.3375   0.609 0.542273    
+STDMeanParentalFertility         0.3753     0.1493   2.513 0.011960 *  
+Classificationselfing:Mean_Dxy   1.9857     0.5849   3.395 0.000686 ***
+Classificationselfing:meanPi     1.1567     0.5558   2.081 0.037433 *  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Analysis of Deviance Table (Type III Wald chisquare tests)
+
+Response: cbind(FertilePollen, UnFertilePollen)
+                           Chisq Df Pr(>Chisq)    
+(Intercept)              37.2638  1  1.032e-09 ***
+Classification            6.2027  1  0.0127557 *  
+Mean_Dxy                  2.8881  1  0.0892334 .  
+meanPi                    0.3713  1  0.5422727    
+STDMeanParentalFertility  6.3168  1  0.0119601 *  
+Classification:Mean_Dxy  11.5261  1  0.0006862 ***
+Classification:meanPi     4.3306  1  0.0374330 *  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
