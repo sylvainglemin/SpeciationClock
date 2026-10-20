@@ -609,7 +609,7 @@ fig1b <- ggplot(Summary_HybData, aes(x=Fst, y=PollenFert/MeanParentalFertility, 
   theme(aspect.ratio=1)
 
 fig1 <- grid.arrange(fig1a,fig1b,ncol=2)
-ggsave("figures/Figure1.pdf",fig1,width = 14,height = 6)
+ggsave("figures/FigureS1.pdf",fig1,width = 14,height = 6)
 
 # FIGURE 1 - SAME BUT WITH SPECIES NAMES
 
@@ -632,7 +632,7 @@ fig1b <- ggplot(Summary_HybData, aes(x=Fst, y=PollenFert/MeanParentalFertility, 
   theme(aspect.ratio=1)
 
 fig1 <- grid.arrange(fig1a,fig1b,ncol=2)
-ggsave("figures/Figure1_WithSpeciesName.pdf",fig1,width = 14,height = 6)
+ggsave("figures/FigureS1_WithSpeciesName.pdf",fig1,width = 14,height = 6)
 
 # FIGURE 2
 
